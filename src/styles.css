@@ -46,7 +46,9 @@ body {
 }
 
 a { color: var(--accent); }
-h1, h2, h3 { line-height: 1.2; }
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; }
+/* Sin palabras sueltas al final de párrafos y listas */
+p, li, dd, figcaption { text-wrap: pretty; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
@@ -162,21 +164,116 @@ select, input { padding: 8px 10px; }
 .camera { position: relative; aspect-ratio: 4 / 3; background: #000; border-radius: 8px; overflow: hidden; }
 .camera video, .camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
 .camera-overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; color: #fff; text-align: center; padding: 16px; }
-.camera { border: 4px solid transparent; transition: border-color 0.15s; }
+/* background-clip: el borde neutro transparente deja ver el fondo exterior, no un marco negro */
+.camera { border: 4px solid transparent; background-clip: padding-box; transition: border-color 0.15s; }
 .camera.flash-ok, .camera.flash-saved { border-color: var(--ok); }
 .camera.flash-skip { border-color: var(--warn); }
-/* Textos grandes: se leen a un metro de distancia mientras signas */
+/* Lo que hay sobre la imagen se lee a un metro: letra pedida arriba, una sola banda de estado abajo.
+   Ambas sobre la misma placa oscura, que no depende de lo que haya detrás (pared clara, ropa…). */
 .camera-target {
-  position: absolute; top: 12px; left: 12px; min-width: 72px; padding: 4px 16px; border-radius: 12px;
-  background: rgba(0, 0, 0, 0.65); color: #fff; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; text-align: center; line-height: 1.1;
+  position: absolute; top: 12px; left: 12px; min-width: 1.4em; padding: 2px 16px; border-radius: 12px;
+  background: rgba(11, 15, 20, 0.82); color: #fff; text-align: center; line-height: 1.1;
+  font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800;
 }
-.camera-hint, .camera-flash {
-  position: absolute; left: 0; right: 0; bottom: 28px; text-align: center; color: #fff;
-  font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 700; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+.is-focus .camera-target { font-size: clamp(3rem, 9vw, 6rem); }
+
+.camera-band {
+  position: absolute; left: 12px; right: 12px; bottom: 12px; overflow: hidden;
+  display: grid; place-items: center; min-height: 2.4em; padding: 6px 16px; border-radius: 12px;
+  background: rgba(11, 15, 20, 0.82); color: #fff; text-align: center; line-height: 1.2;
+  font-size: clamp(1.15rem, 2.8vw, 1.9rem); font-weight: 700;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
-.camera-flash { font-size: clamp(1.8rem, 6vw, 3rem); }
-.camera-progress { position: absolute; left: 12px; right: 12px; bottom: 10px; height: 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.3); overflow: hidden; }
-.camera-progress span { display: block; height: 100%; background: #3fb950; transition: width 0.08s linear; }
+/* El relleno es la barra de mantener: #1a7f37 (--ok del sistema) deja el texto blanco a 5,1:1 */
+.camera-band-fill {
+  position: absolute; inset: 0; background: #1a7f37;
+  transform-origin: left center; transition: transform 0.1s linear;
+}
+.camera-band.is-skip .camera-band-fill { background: #9a6700; } /* --warn: texto blanco a 4,9:1 */
+.camera-band-text { position: relative; display: inline-flex; align-items: center; gap: 0.35em; }
+.band-icon { width: 1.1em; height: 1.1em; flex: none; }
+@media (prefers-reduced-motion: reduce) {
+  .camera-band-fill, .camera { transition: none; }
+}
+
+.practice > p { max-width: 68ch; }
+.stage-status { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+
+/* ── Modo práctica: la sesión ocupa la pantalla y todo se lee a ~1 m ──────────────────────────
+   Fondo oscuro fijo en ambos temas: la imagen de la cámara es el contenido y debe destacar. */
+:root {
+  --stage-bg: #0b0f14;
+  --stage-surface: #161b22;
+  --stage-line: #3d444d;
+  --stage-text: #f0f6fc;
+  --stage-muted: #b7c0ca;
+}
+html.practice-focus, html.practice-focus body { overflow: hidden; }
+
+.stage.is-focus {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 12px;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
+  background: var(--stage-bg); color: var(--stage-text);
+}
+.stage.is-focus:focus { outline: none; }
+.stage-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.stage-count { font-size: clamp(1.1rem, 2.6vw, 1.5rem); color: var(--stage-muted); font-variant-numeric: tabular-nums; }
+.stage-count strong { color: var(--stage-text); font-weight: 800; }
+.stage-exit {
+  min-height: 48px; padding: 8px 16px; font-size: 1.05rem;
+  background: var(--stage-surface); color: var(--stage-text); border-color: var(--stage-line);
+}
+.stage-exit:hover:not(:disabled) { border-color: var(--stage-text); }
+.stage-exit kbd {
+  margin-left: 8px; padding: 0 6px; font: inherit; font-size: 0.8em; color: var(--stage-muted);
+  border: 1px solid var(--stage-line); border-radius: 4px;
+}
+
+/* Cámara y modelo, dimensionados contra el espacio disponible (container query units) */
+.is-focus .stage-main {
+  container-type: size; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+}
+.is-focus .camera { width: min(100cqw, 62cqh * 4 / 3); flex: none; }
+.stage-model { position: relative; margin: 0; flex: none; width: min(100cqw, 38cqh - 16px); }
+.stage-model img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; }
+.stage-model figcaption {
+  position: absolute; top: 8px; left: 8px; padding: 2px 10px; border-radius: 999px;
+  background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 0.9rem; font-weight: 700;
+}
+@media (orientation: landscape) {
+  .is-focus .stage-main { flex-direction: row; }
+  .is-focus .camera { width: min(64cqw, 100cqh * 4 / 3); }
+  .stage-model { width: min(100cqw - min(64cqw, 100cqh * 4 / 3) - 16px, 100cqh); max-width: 42cqw; }
+}
+.is-focus .stage-status {
+  justify-content: center; margin: 0; text-align: center;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+/* Al saltar, la foto modelo se resalta (mismo ámbar que la banda) para comparar */
+.stage-model img { outline: 0 solid transparent; outline-offset: 3px; transition: outline-width 0.15s; }
+.stage-model.is-highlight img { outline: 4px solid #9a6700; }
+.stage-model.is-highlight figcaption { background: #9a6700; font-size: clamp(1rem, 2.2vw, 1.4rem); }
+
+/* Final de ronda: resumen y siguiente paso, sobre la imagen oscurecida */
+.round-end { background: rgba(11, 15, 20, 0.88); gap: 12px; }
+.round-end h2 { margin: 0; font-size: clamp(1.6rem, 4vw, 2.6rem); }
+.round-end p { margin: 0; max-width: 40ch; font-size: clamp(1rem, 2.2vw, 1.3rem); }
+.round-end-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+.round-end-actions .button { min-height: 48px; font-size: 1.05rem; }
+.round-end .round-end-note { color: var(--stage-muted); font-size: 0.95rem; }
+
+/* Estado inicial de la cámara: cómo colocarse, en lugar de una caja negra */
+/* En reposo no hay vídeo: la caja crece con las indicaciones en vez de recortarlas (móvil) */
+.camera:has(.camera-setup) { aspect-ratio: auto; min-height: 240px; }
+.camera:has(.camera-setup) .camera-overlay { position: relative; inset: auto; }
+.camera-setup { display: grid; justify-items: center; gap: 12px; max-width: 46ch; text-align: left; }
+.camera-setup-title { margin: 0; font-weight: 700; font-size: 1.1rem; }
+.camera-setup ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--stage-muted); }
+
+.stage-foot { margin: 0; text-align: center; font-size: 0.85rem; color: var(--stage-muted); }
+.is-focus .camera-overlay .button { margin-top: 8px; }
 
 .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; padding: 12px; }
 .toolbar label { display: flex; gap: 6px; align-items: center; }

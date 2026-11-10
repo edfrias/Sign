@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { averageVectors, normalizeHand, type Landmark } from './features';
-import { evaluate, landmarkDistance, rankSigns } from './classifier';
+import { evaluate, landmarkDistance, proximity, rankSigns } from './classifier';
 
 /** Mano sintética: los puntos se separan de la muñeca según `spread`. */
 function fakeHand(spread: number, offset = { x: 0.5, y: 0.5 }, size = 0.2): Landmark[] {
@@ -54,6 +54,16 @@ describe('clasificador', () => {
 
   it('sin plantillas del objetivo no hay puntuación', () => {
     expect(evaluate(A, templates, 'C').target).toBeUndefined();
+  });
+});
+
+describe('proximity', () => {
+  it('tres niveles respecto a la tolerancia', () => {
+    expect(proximity(0.2, 0.35)).toBe('muy-cerca');
+    expect(proximity(0.35, 0.35)).toBe('muy-cerca');
+    expect(proximity(0.5, 0.35)).toBe('cerca');
+    expect(proximity(0.7, 0.35)).toBe('lejos');
+    expect(proximity(undefined, 0.35)).toBe('lejos');
   });
 });
 

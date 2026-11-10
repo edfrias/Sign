@@ -14,11 +14,22 @@ export interface PracticeOptions {
   graceMs: number;
   /** Tiempo con la mano visible antes de saltar el signo */
   timeoutMs: number;
-  /** Duración del mensaje de acierto/salto antes de pasar al siguiente */
+  /** Duración del mensaje de acierto antes de pasar al siguiente */
   feedbackMs: number;
+  /**
+   * Duración del mensaje de salto. Más larga que la de acierto: es el momento de comparar
+   * tu mano con la foto modelo, que se resalta mientras dura.
+   */
+  skipFeedbackMs?: number;
 }
 
-export const PRACTICE_DEFAULTS: PracticeOptions = { holdMs: 1000, graceMs: 300, timeoutMs: 20000, feedbackMs: 1500 };
+export const PRACTICE_DEFAULTS: PracticeOptions = {
+  holdMs: 1000,
+  graceMs: 300,
+  timeoutMs: 20000,
+  feedbackMs: 1500,
+  skipFeedbackMs: 3000,
+};
 
 export type PracticePhase = 'signing' | 'success' | 'skipped' | 'finished';
 export type PracticeEvent = 'success' | 'skipped' | 'next' | 'finished';
@@ -96,7 +107,8 @@ export class PracticeSession {
   private finishCurrent(outcome: Outcome, now: number): PracticeEvent {
     this.results.set(this.signIds[this.index]!, outcome);
     this.phase = outcome === 'ok' ? 'success' : 'skipped';
-    this.phaseUntil = now + this.opts.feedbackMs;
+    this.phaseUntil =
+      now + (outcome === 'skipped' ? (this.opts.skipFeedbackMs ?? this.opts.feedbackMs) : this.opts.feedbackMs);
     return outcome === 'ok' ? 'success' : 'skipped';
   }
 

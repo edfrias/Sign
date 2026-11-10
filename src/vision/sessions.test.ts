@@ -51,6 +51,16 @@ describe('PracticeSession', () => {
     expect(s.snapshot().results.get('a')).toBe('skipped');
   });
 
+  it('tras un salto, deja más tiempo para comparar con la foto antes de seguir', () => {
+    const s = new PracticeSession(['a', 'b'], { ...P, skipFeedbackMs: 2000 });
+    let r = run(s, 0, 5100, true, false);
+    expect(r.events).toEqual(['skipped']);
+    r = run(s, r.t, 1000, true, false); // más que feedbackMs (500), menos que skipFeedbackMs
+    expect(s.snapshot().phase).toBe('skipped');
+    r = run(s, r.t, 1100, true, false);
+    expect(r.events).toEqual(['next']);
+  });
+
   it('el tiempo no corre mientras no hay mano', () => {
     const s = new PracticeSession(['a'], P);
     const r = run(s, 0, 10_000, false, false);

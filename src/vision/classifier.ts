@@ -76,6 +76,19 @@ export function evaluate(
   return { target, best, correct };
 }
 
+export type Proximity = 'muy-cerca' | 'cerca' | 'lejos';
+
+/**
+ * Cercanía al signo objetivo en tres niveles, en lugar de un porcentaje: el clasificador no es tan
+ * preciso como para que "58 %" signifique algo. "Muy cerca" = dentro de la tolerancia elegida.
+ */
+export function proximity(distance: number | undefined, maxDistance: number): Proximity {
+  if (distance === undefined) return 'lejos';
+  if (distance <= maxDistance) return 'muy-cerca';
+  if (distance <= maxDistance * 1.6) return 'cerca';
+  return 'lejos';
+}
+
 /** Dispersión media de una ventana de vectores respecto a su media (mano quieta → valor bajo). */
 export function jitter(vectors: number[][]): number {
   const n = vectors.length;

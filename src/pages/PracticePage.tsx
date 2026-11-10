@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { DrawingUtils, HandLandmarker } from '@mediapipe/tasks-vision';
@@ -7,7 +7,7 @@ import { clearTemplates, replaceTemplates } from '../db/actions';
 import { getHandLandmarker } from '../vision/handLandmarker';
 import { getReferenceTemplates, type ReferenceResult } from '../vision/referenceTemplates';
 import { averageVectors, normalizeHand, type Handedness } from '../vision/features';
-import { TOLERANCE, evaluate, rankSigns, type Evaluation, type Tolerance } from '../vision/classifier';
+import { TOLERANCE, evaluate, proximity, rankSigns, type Evaluation, type Proximity, type Tolerance } from '../vision/classifier';
 import {
   CalibrationSession,
   PracticeSession,
@@ -20,7 +20,34 @@ import { SignDescriptionList, SignMedia } from '../components/SignCard';
 
 const SMOOTHING_FRAMES = 8;
 const TOLERANCE_KEY = 'sign.tolerance';
-const TOLERANCE_LABELS: Record<Tolerance, string> = { estricta: 'Estricta', normal: 'Normal', flexible: 'Flexible' };
+/** Cuánto se parece tu mano antes de darla por buena (internamente, la tolerancia del clasificador). */
+const TOLERANCE_LABELS: Record<Tolerance, string> = { estricta: 'Alta', normal: 'Normal', flexible: 'Baja' };
+const PROXIMITY_LABELS: Record<Proximity, string> = { 'muy-cerca': 'Muy cerca', cerca: 'Cerca', lejos: 'Lejos' };
+/** «¡Así!» solo cuando ya llevas este tramo de la barra: antes sería un elogio sin resultado. */
+const HOLD_PRAISE = 0.2;
+
+/** Icono de acierto (trazo único, hereda el color del texto). */
+function CheckIcon() {
+  return (
+    <svg className="band-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4.5 12.5l5 5L19.5 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function cameraError(e: unknown): string {
+  const name = e instanceof DOMException ? e.name : '';
+  if (name === 'NotAllowedError') {
+    return 'La cámara está bloqueada para esta página. Permite el acceso desde el icono de la cámara en la barra de direcciones y vuelve a intentarlo.';
+  }
+  if (name === 'NotFoundError' || name === 'OverconstrainedError') {
+    return 'No se encuentra ninguna cámara. Conecta una webcam y vuelve a intentarlo.';
+  }
+  if (name === 'NotReadableError') {
+    return 'Otra aplicación está usando la cámara. Ciérrala y vuelve a intentarlo.';
+  }
+  return `No se pudo iniciar la cámara: ${(e as Error)?.message ?? 'error desconocido'}. Vuelve a intentarlo.`;
+}
 
 type Status = 'idle' | 'loading' | 'running' | 'error';
 type Session = { kind: 'practice'; s: PracticeSession } | { kind: 'calibrate'; s: CalibrationSession };
@@ -82,6 +109,7 @@ export function PracticePage() {
   const [guess, setGuess] = useState<string | undefined>();
   const [practice, setPractice] = useState<PracticeSnapshot | null>(null);
   const [calibration, setCalibration] = useState<CalibrationSnapshot | null>(null);
+  const [sessionTotal, setSessionTotal] = useState(0);
 
   const session = useRef<Session | null>(null);
   // Lo que lee el bucle de la cámara sin reiniciarse
@@ -90,9 +118,11 @@ export function PracticePage() {
 
   const play = (tone: Parameters<typeof beep>[0]) => live.current.sound && beep(tone);
 
-  function startSession(kind: Session['kind'], fromId = startId) {
+  /** `ids`: una ronda con solo esas letras (p. ej. repetir las saltadas). Si no, todas desde `fromId`. */
+  function startSession(kind: Session['kind'], fromId = startId, ids?: string[]) {
     unlockAudio(); // este clic es el último gesto necesario
-    const order = rotate(staticIds, fromId);
+    const order = ids?.length ? ids : rotate(staticIds, fromId);
+    setSessionTotal(order.length);
     session.current =
       kind === 'practice' ? { kind, s: new PracticeSession(order) } : { kind, s: new CalibrationSession(order) };
     setPractice(kind === 'practice' ? session.current.s.snapshot() as PracticeSnapshot : null);
@@ -112,10 +142,55 @@ export function PracticePage() {
     setCalibration(null);
   }
 
-  // Barra espaciadora: saltar el signo (por si tienes una mano libre)
+  /** Terminar: cierra la sesión y la cámara y devuelve el foco al botón de empezar. */
+  function endSession() {
+    stopSession();
+    setStatus('idle');
+    requestAnimationFrame(() => startButtonRef.current?.focus());
+  }
+  const endSessionRef = useRef(endSession);
+  endSessionRef.current = endSession;
+
+  // Modo práctica: la sesión ocupa la pantalla. Se bloquea el scroll de la página y el foco
+  // pasa al propio panel (no a un botón, para que Espacio siga sirviendo para saltar).
+  const focusMode = !!(practice || calibration);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!focusMode) return;
+    document.documentElement.classList.add('practice-focus');
+    stageRef.current?.focus();
+    return () => document.documentElement.classList.remove('practice-focus');
+  }, [focusMode]);
+
+  /** Mantiene Tab dentro del panel mientras está a pantalla completa. */
+  function trapFocus(e: ReactKeyboardEvent<HTMLDivElement>) {
+    if (e.key !== 'Tab') return;
+    const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]')];
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (!first || !last) return;
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === e.currentTarget)) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  // Teclado durante la sesión: Esc termina; Espacio salta la letra (salvo sobre un botón o control,
+  // donde Espacio conserva su función normal).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && session.current) {
+        e.preventDefault();
+        endSessionRef.current();
+        return;
+      }
       if (e.code !== 'Space' || session.current?.kind !== 'practice') return;
+      const el = e.target as HTMLElement | null;
+      if (el?.closest('button, a, input, select, textarea, [contenteditable="true"]')) return;
       e.preventDefault();
       if (session.current.s.skip(performance.now())) play('skip');
     };
@@ -151,11 +226,7 @@ export function PracticePage() {
         loop(landmarker, video);
       } catch (e) {
         if (stopped) return;
-        setError(
-          e instanceof DOMException && e.name === 'NotAllowedError'
-            ? 'Has denegado el permiso de la cámara.'
-            : `No se pudo iniciar la cámara o el detector: ${(e as Error).message}`,
-        );
+        setError(cameraError(e));
         setStatus('error');
       }
     })();
@@ -241,8 +312,12 @@ export function PracticePage() {
   const target = targetId ? content.signById.get(targetId) : undefined;
   const refsReady = !!refs;
 
-  // Texto y barra del panel de la cámara
+  // Texto y barra del panel de la cámara. Un solo mensaje cada vez, coherente con lo que mide la app.
+  const letter = `«${gloss(targetId)}»`;
+  const near: Proximity | null =
+    practice?.phase === 'signing' && handVisible ? proximity(evaluation?.target?.distance, TOLERANCE[tolerance]) : null;
   let headline = '';
+  let flashText = '';
   let progress = 0;
   let flash: 'ok' | 'skip' | 'saved' | null = null;
   if (practice) {
@@ -250,52 +325,78 @@ export function PracticePage() {
       const lookalike = evaluation?.best && evaluation.best.signId !== practice.signId ? gloss(evaluation.best.signId) : '';
       headline = !handVisible
         ? 'Pon la mano delante de la cámara'
-        : evaluation?.correct ? '¡Así! Mantenla…'
+        : evaluation?.correct && practice.hold >= HOLD_PRAISE ? '¡Así! Mantenla…'
+        : evaluation?.correct ? 'Casi: mantén la forma'
         : lookalike ? `Parece una «${lookalike}»`
-        : 'Casi: ajusta la forma de la mano';
+        : near === 'cerca' ? 'Cerca: ajusta la forma de la mano'
+        : 'Fíjate en la foto y vuelve a probar';
       progress = practice.hold;
-    } else if (practice.phase === 'success') flash = 'ok';
-    else if (practice.phase === 'skipped') flash = 'skip';
+    } else if (practice.phase === 'success') {
+      flash = 'ok';
+      flashText = `${letter} ¡bien hecha!`;
+    } else if (practice.phase === 'skipped') {
+      flash = 'skip';
+      flashText = `Saltada: ${letter}`;
+    }
   } else if (calibration) {
     const p = calibration.phase;
     headline =
-      p === 'preparing' ? 'Prepárate…'
-      : p === 'waiting' ? (handVisible ? 'Mantén la mano quieta' : 'Pon la mano delante de la cámara')
-      : p === 'capturing' ? 'Grabando…'
+      p === 'preparing' ? `Calibración: prepárate para la ${letter}`
+      : p === 'waiting' ? (handVisible ? `Mantén la ${letter} quieta` : 'Pon la mano delante de la cámara')
+      : p === 'capturing' ? `Grabando tu ${letter}…`
       : '';
     progress = calibration.progress;
-    if (p === 'saved') flash = 'saved';
+    if (p === 'saved') {
+      flash = 'saved';
+      flashText = `${letter} guardada`;
+    }
   }
 
   const finished = active?.phase === 'finished';
   const okCount = practice ? [...practice.results.values()].filter((r) => r === 'ok').length : 0;
+  const skippedIds = practice ? [...practice.results].filter(([, r]) => r === 'skipped').map(([id]) => id) : [];
+  const skippedGlosses = skippedIds.map((id) => gloss(id));
+
+  // Línea de estado bajo la cámara
+  const statusLine =
+    calibration && !finished
+      ? `Calibrando ${calibration.index + 1} de ${sessionTotal}${handVisible ? '' : ' · sin mano a la vista'}`
+      : !handVisible
+        ? 'Sin mano a la vista'
+        : practice?.phase === 'signing'
+          ? `${PROXIMITY_LABELS[near ?? 'lejos']} · se salta en ${Math.ceil(practice.remainingMs / 1000)} s`
+          : guess ? `Parece una «${gloss(guess)}»` : 'Mano detectada';
 
   return (
     <section className="practice">
       <h1>Práctica con cámara</h1>
       <p className="muted">
-        Manos libres: pulsa un botón, colócate y signa. La app valida sola cada letra al mantenerla
-        un segundo y pasa a la siguiente. La imagen se procesa en tu dispositivo y no se guarda.
+        Pulsa «Empezar práctica», colócate a un metro y signa la letra que aparece. Si la mantienes bien
+        un segundo, se valida sola y pasa a la siguiente: no hace falta tocar nada. La imagen se procesa en
+        tu dispositivo y no se guarda.
       </p>
 
       <div className="toolbar card">
-        <button type="button" className="button primary" disabled={!refsReady} onClick={() => startSession('practice')}>
-          {practice ? 'Reiniciar práctica' : 'Empezar práctica'}
+        <button
+          ref={startButtonRef}
+          type="button"
+          className="button primary"
+          disabled={!refsReady}
+          onClick={() => startSession('practice')}
+        >
+          Empezar práctica
         </button>
         <button type="button" className="button" disabled={!refsReady} onClick={() => startSession('calibrate')}>
-          Calibración guiada
+          Calibrar con mi mano
         </button>
-        {active && (
-          <button type="button" className="button" onClick={stopSession}>Parar</button>
-        )}
         <label>
           Empezar en
           <select value={startId} onChange={(e) => selectSign(e.target.value)}>
             {staticSigns.map((s) => <option key={s.id} value={s.id}>{s.gloss}</option>)}
           </select>
         </label>
-        <label>
-          Tolerancia
+        <label title="Cuánto debe parecerse tu mano a la referencia para dar la letra por buena">
+          Exigencia
           <select value={tolerance} onChange={(e) => setTolerance(e.target.value as Tolerance)}>
             {Object.keys(TOLERANCE).map((t) => <option key={t} value={t}>{TOLERANCE_LABELS[t as Tolerance]}</option>)}
           </select>
@@ -304,11 +405,37 @@ export function PracticePage() {
           <input type="checkbox" checked={sound} onChange={(e) => setSound(e.target.checked)} /> Sonido
         </label>
       </div>
-      {!refsReady && !refsError && <p className="muted" role="status">Preparando las referencias a partir de las fotos…</p>}
-      {refsError && <p role="alert">No se pudieron preparar las referencias: {refsError}</p>}
+      {!refsReady && !refsError && <p className="muted" role="status">Preparando las letras de referencia…</p>}
+      {refsError && (
+        <p role="alert">
+          No se pudieron preparar las letras de referencia ({refsError}). Comprueba la conexión y recarga la página.
+        </p>
+      )}
 
       <div className="practice-grid">
-        <div className="card">
+        {/* El mismo contenedor pasa a pantalla completa durante una sesión: así el <video> no se desmonta
+            y no se pierde la imagen de la cámara. */}
+        <div
+          ref={stageRef}
+          className={focusMode ? 'stage is-focus' : 'card stage'}
+          role={focusMode ? 'dialog' : undefined}
+          aria-modal={focusMode || undefined}
+          aria-label={focusMode ? (practice ? 'Práctica en curso' : 'Calibración en curso') : undefined}
+          tabIndex={focusMode ? -1 : undefined}
+          onKeyDown={focusMode ? trapFocus : undefined}
+        >
+          {focusMode && (
+            <div className="stage-bar">
+              <span className="stage-count">
+                {practice ? 'Práctica' : 'Calibración'}
+                {!finished && active && <> · <strong>{active.index + 1}</strong> de {sessionTotal}</>}
+              </span>
+              <button type="button" className="button stage-exit" onClick={endSession}>
+                Terminar <kbd>Esc</kbd>
+              </button>
+            </div>
+          )}
+          <div className="stage-main">
           <div className={`camera ${flash ? `flash-${flash}` : ''}`}>
             <video ref={videoRef} playsInline muted />
             <canvas ref={canvasRef} />
@@ -316,23 +443,56 @@ export function PracticePage() {
             {status === 'running' && active && !finished && (
               <>
                 <div className="camera-target" aria-live="polite">{gloss(targetId)}</div>
-                {flash ? (
-                  <div className="camera-flash" aria-live="assertive">
-                    {flash === 'ok' ? '✓ ¡Bien!' : flash === 'saved' ? '✓ Guardado' : 'Siguiente…'}
-                  </div>
-                ) : (
-                  <div className="camera-hint">{headline}</div>
-                )}
-                <div className="camera-progress"><span style={{ width: `${Math.round(progress * 100)}%` }} /></div>
+                {/* Mensaje y barra de mantener en una sola banda: se llena de verde mientras mantienes el
+                    signo, queda verde al acertar y ámbar al saltar. Es una sola región anunciada que no se
+                    desmonta, para que los lectores de pantalla oigan cada cambio. */}
+                <div className={`camera-band ${flash ? `is-${flash}` : ''}`} aria-live="polite" aria-atomic="true">
+                  <span className="camera-band-fill" style={{ transform: `scaleX(${flash ? 1 : progress})` }} aria-hidden="true" />
+                  <span className="camera-band-text">
+                    {(flash === 'ok' || flash === 'saved') && <CheckIcon />}
+                    {flash ? flashText : headline}
+                  </span>
+                </div>
               </>
             )}
 
             {status === 'running' && finished && (
-              <div className="camera-overlay">
+              <div className="camera-overlay round-end" role="status">
                 {practice ? (
-                  <p><strong>¡Ronda terminada!</strong><br />{okCount} de {practice.results.size} letras validadas.</p>
+                  <>
+                    <h2>{skippedIds.length === 0 ? '¡Todas validadas!' : 'Ronda terminada'}</h2>
+                    <p>
+                      Has validado <strong>{okCount}</strong> de {practice.results.size}{' '}
+                      {practice.results.size === 1 ? 'letra' : 'letras'}.
+                      {skippedIds.length > 0 && <> Te han costado: {skippedGlosses.join(', ')}.</>}
+                    </p>
+                    <div className="round-end-actions">
+                      {skippedIds.length > 0 ? (
+                        <button type="button" className="button primary" onClick={() => startSession('practice', undefined, skippedIds)}>
+                          Repetir las saltadas ({skippedIds.length})
+                        </button>
+                      ) : (
+                        <button type="button" className="button primary" onClick={() => startSession('practice')}>
+                          Otra ronda
+                        </button>
+                      )}
+                      <button type="button" className="button stage-exit" onClick={endSession}>Volver</button>
+                    </div>
+                    <p className="round-end-note">Unos minutos cada día fijan mejor el alfabeto que una sesión larga.</p>
+                  </>
                 ) : (
-                  <p><strong>Calibración terminada.</strong><br />{calibration?.saved.size} letras grabadas con tu mano.</p>
+                  <>
+                    <h2>Calibración terminada</h2>
+                    <p>
+                      {calibration?.saved.size === 1 ? 'Se ha guardado 1 letra' : `Se han guardado ${calibration?.saved.size ?? 0} letras`} con tu mano.
+                    </p>
+                    <div className="round-end-actions">
+                      <button type="button" className="button primary" onClick={() => startSession('practice')}>
+                        Empezar práctica
+                      </button>
+                      <button type="button" className="button stage-exit" onClick={endSession}>Volver</button>
+                    </div>
+                  </>
                 )}
               </div>
             )}
@@ -342,32 +502,52 @@ export function PracticePage() {
                 {status === 'loading' ? (
                   <p>Cargando detector y cámara…</p>
                 ) : status === 'error' ? (
-                  <p role="alert">{error}</p>
+                  <>
+                    <p role="alert">{error}</p>
+                    <button type="button" className="button" onClick={() => setStatus('loading')}>
+                      Reintentar
+                    </button>
+                  </>
                 ) : (
-                  <button type="button" className="button" onClick={() => { unlockAudio(); setStatus('loading'); }}>
-                    Solo activar la cámara
-                  </button>
+                  <div className="camera-setup">
+                    <p className="camera-setup-title">Antes de empezar</p>
+                    <ul>
+                      <li>Colócate a un metro, con la cara y el pecho dentro de la imagen.</li>
+                      <li>Busca luz de frente; con una ventana detrás, la mano se ve oscura.</li>
+                      <li>Signa con la mano que prefieras: la app reconoce las dos.</li>
+                    </ul>
+                    <button type="button" className="button" onClick={() => { unlockAudio(); setStatus('loading'); }}>
+                      Probar la cámara
+                    </button>
+                  </div>
                 )}
               </div>
             )}
           </div>
+          {/* Foto modelo junto a la cámara. Al saltar una letra se resalta: es el momento de comparar. */}
+          {focusMode && target?.media?.image && !finished && (
+            <figure className={`stage-model ${flash === 'skip' ? 'is-highlight' : ''}`}>
+              <img src={target.media.image} alt={`Modelo de la letra ${target.gloss}`} />
+              <figcaption>{flash === 'skip' ? `Así es la ${letter}` : 'Modelo'}</figcaption>
+            </figure>
+          )}
+          </div>
 
-          {status === 'running' && (
-            <div className="actions spread">
-              <span className="muted">
-                {!handVisible
-                  ? 'Sin mano a la vista'
-                  : practice?.phase === 'signing'
-                    ? `Parecido: ${evaluation?.target?.score ?? 0}% · quedan ${Math.ceil(practice.remainingMs / 1000)} s`
-                    : guess ? `Parece: ${gloss(guess)}` : 'Mano detectada'}
-              </span>
-              <button type="button" className="button" onClick={() => { stopSession(); setStatus('idle'); }}>
-                Apagar cámara
-              </button>
+          {status === 'running' && !finished && (
+            <div className="stage-status">
+              <span className={focusMode ? '' : 'muted'}>{statusLine}</span>
+              {!focusMode && (
+                <button type="button" className="button" onClick={endSession}>
+                  Apagar cámara
+                </button>
+              )}
             </div>
           )}
-          {practice?.phase === 'signing' && (
-            <p className="muted small">Si te atascas, la letra se salta sola a los 20 s con la mano a la vista (o pulsa espacio).</p>
+          {focusMode && (
+            <p className="stage-foot">
+              {practice?.phase === 'signing' && 'Si una letra se te resiste, se salta sola a los 20 s o con Espacio. '}
+              Fotos modelo: Fundación CNSE · CC BY-NC-SA 3.0
+            </p>
           )}
         </div>
 
@@ -410,12 +590,12 @@ export function PracticePage() {
             })}
           </ul>
           <p className="muted small">
-            No hace falta calibrar: se usan como referencia las fotos de la Fundación CNSE. La calibración
-            guiada añade muestras de tu propia mano (las marcadas con •) y mejora la precisión.
+            Funciona sin calibrar: compara tu mano con las fotos de la Fundación CNSE. Si alguna letra no se
+            valida aunque la hagas bien, usa «Calibrar con mi mano». Las letras calibradas llevan •.
           </p>
           {calibratedIds.size > 0 && !calibration && (
             <button type="button" className="button" onClick={() => clearTemplates()}>
-              Borrar mi calibración ({calibratedIds.size} letras)
+              Borrar mi calibración ({calibratedIds.size === 1 ? '1 letra' : `${calibratedIds.size} letras`})
             </button>
           )}
         </div>
