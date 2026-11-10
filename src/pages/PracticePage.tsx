@@ -90,14 +90,20 @@ export function PracticePage() {
 
   const play = (tone: Parameters<typeof beep>[0]) => live.current.sound && beep(tone);
 
-  function startSession(kind: Session['kind']) {
+  function startSession(kind: Session['kind'], fromId = startId) {
     unlockAudio(); // este clic es el último gesto necesario
-    const order = rotate(staticIds, startId);
+    const order = rotate(staticIds, fromId);
     session.current =
       kind === 'practice' ? { kind, s: new PracticeSession(order) } : { kind, s: new CalibrationSession(order) };
     setPractice(kind === 'practice' ? session.current.s.snapshot() as PracticeSnapshot : null);
     setCalibration(kind === 'calibrate' ? session.current.s.snapshot() as CalibrationSnapshot : null);
     if (status !== 'running') setStatus('loading');
+  }
+
+  /** Elegir una letra (desplegable o panel). Si hay una ronda en marcha, sigue desde esa letra. */
+  function selectSign(id: string) {
+    setParams({ signo: id });
+    if (session.current) startSession(session.current.kind, id);
   }
 
   function stopSession() {
@@ -284,7 +290,7 @@ export function PracticePage() {
         )}
         <label>
           Empezar en
-          <select value={startId} onChange={(e) => setParams({ signo: e.target.value })}>
+          <select value={startId} onChange={(e) => selectSign(e.target.value)}>
             {staticSigns.map((s) => <option key={s.id} value={s.id}>{s.gloss}</option>)}
           </select>
         </label>
@@ -375,16 +381,30 @@ export function PracticePage() {
           )}
 
           <h3>{calibration ? 'Calibración' : 'Letras'}</h3>
-          <ul className="letter-chips" aria-label="Estado de cada letra">
-            {rotate(staticIds, startId).map((id) => {
+          <ul className="letter-chips" aria-label="Elige una letra">
+            {staticIds.map((id) => {
               const result = practice?.results.get(id);
               const state = calibration
                 ? calibration.saved.has(id) ? 'ok' : ''
                 : result ?? '';
-              const current = active && !finished && id === targetId;
+              const current = (!active || !finished) && id === targetId;
+              const hints = [
+                calibratedIds.has(id) && 'calibrada con tu mano',
+                state === 'ok' && (calibration ? 'grabada' : 'validada'),
+                state === 'skipped' && 'saltada',
+              ].filter(Boolean);
               return (
-                <li key={id} className={`chip-letter ${state} ${current ? 'current' : ''}`} title={calibratedIds.has(id) ? 'Calibrada con tu mano' : undefined}>
-                  {gloss(id)}{calibratedIds.has(id) && <sup aria-label="calibrada">•</sup>}
+                <li key={id}>
+                  <button
+                    type="button"
+                    className={`chip-letter ${state} ${current ? 'current' : ''}`}
+                    aria-pressed={current}
+                    aria-label={`${gloss(id)}${hints.length ? ` (${hints.join(', ')})` : ''}`}
+                    title={active ? `Seguir desde la ${gloss(id)}` : `Ver la ${gloss(id)}`}
+                    onClick={() => selectSign(id)}
+                  >
+                    {gloss(id)}{calibratedIds.has(id) && <sup aria-hidden="true">•</sup>}
+                  </button>
                 </li>
               );
             })}
