@@ -7,3 +7,4 @@ dev-dist/
 coverage/
 .vite/
 *.tsbuildinfo
+a11y-report/

@@ -30,7 +30,9 @@
 
 ## Fase 4 · Pulido
 - [ ] Exportar/importar progreso.
-- [ ] Auditoría de accesibilidad (Lighthouse/axe).
+- [x] Auditoría automática de accesibilidad con axe (`npm run a11y`): 10 pantallas × claro/oscuro sin problemas.
+- [ ] Prueba manual con teclado y lector de pantalla (NVDA / VoiceOver).
+- [ ] Ejecutar `npm run a11y` en CI cuando haya repositorio remoto.
 - [ ] Iconos PNG 192/512 para instalación en iOS.
 - [ ] Actualizar Vite a la versión mayor actual (avisos de `npm audit` en dependencias de desarrollo).
 

@@ -4,7 +4,8 @@
   --text: #1f2328;
   --muted: #59636e;
   --border: #d1d9e0;
-  --accent: #1f6feb;
+  /* #0969da: ≥ 4,5:1 sobre --bg y --surface (WCAG AA) */
+  --accent: #0969da;
   --accent-text: #ffffff;
   --ok: #1a7f37;
   --ok-bg: #dafbe1;
@@ -125,7 +126,7 @@ select, input { padding: 8px 10px; }
 .desc dd { margin: 0; }
 
 .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-.sign-card h3 { margin: 12px 0 0; }
+.sign-card h2 { margin: 12px 0 0; font-size: 1.25rem; }
 
 .lesson progress { width: 100%; height: 8px; accent-color: var(--accent); }
 .lesson-sign { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: 12px; }

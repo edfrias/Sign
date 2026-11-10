@@ -10,6 +10,7 @@
 | Persistencia | IndexedDB mediante Dexie |
 | Visión | `@mediapipe/tasks-vision` (Hand Landmarker) |
 | Tests | Vitest |
+| Accesibilidad | axe-core: `scripts/a11y.mjs` (Playwright + Chrome del sistema) y aviso en consola en desarrollo (`src/dev/axeDev.ts`) |
 
 ## Vista general
 

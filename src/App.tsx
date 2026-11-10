@@ -43,7 +43,15 @@ export function App() {
           <Route path="/practica" element={<PracticePage />} />
           <Route path="/diccionario" element={<DictionaryPage />} />
           <Route path="/creditos" element={<CreditsPage />} />
-          <Route path="*" element={<p>Página no encontrada.</p>} />
+          <Route
+            path="*"
+            element={
+              <section className="hero">
+                <h1>Página no encontrada</h1>
+                <NavLink to="/" className="button primary">Ir al inicio</NavLink>
+              </section>
+            }
+          />
         </Routes>
       </main>
 

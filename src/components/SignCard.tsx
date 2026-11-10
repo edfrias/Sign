@@ -125,9 +125,9 @@ export function SignCard({ sign }: { sign: Sign }) {
   return (
     <article className="card sign-card">
       <SignMedia sign={sign} />
-      <h3>
+      <h2>
         {sign.gloss} <UnverifiedBadge sign={sign} />
-      </h3>
+      </h2>
       <SignDescriptionList sign={sign} />
       <SignLinks sign={sign} />
     </article>

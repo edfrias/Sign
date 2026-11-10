@@ -10,10 +10,23 @@ navegador; la imagen de la cámara nunca sale del dispositivo.
 npm install
 npm run dev        # http://localhost:5173
 npm test           # tests unitarios
+npm run a11y       # auditoría de accesibilidad con axe (necesita Chrome instalado)
 npm run build      # compilación de producción en dist/
 ```
 
 La cámara necesita `localhost` o HTTPS.
+
+## Accesibilidad
+
+- `npm run a11y` arranca la app, abre cada pantalla en Chrome (modo claro y oscuro) y pasa
+  [axe-core](https://github.com/dequelabs/axe-core) con las reglas WCAG 2.2 A/AA y buenas prácticas.
+  Termina con error si encuentra problemas y deja el detalle en `a11y-report/report.json`.
+  Opciones: `-- --only /creditos` para una sola ruta, `A11Y_BROWSER=msedge` para usar Edge.
+- Con `npm run dev`, axe revisa la página cada vez que cambia y avisa en la consola del navegador
+  de los problemas nuevos (`[axe] …`). No se incluye en la compilación de producción.
+
+axe detecta automáticamente alrededor de la mitad de los problemas de accesibilidad; la navegación
+con teclado y con lector de pantalla hay que probarla también a mano.
 
 ## Documentación
 

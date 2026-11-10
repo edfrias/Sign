@@ -8,6 +8,8 @@ import './styles.css';
 
 registerSW({ immediate: true });
 
+if (import.meta.env.DEV) void import('./dev/axeDev').then((m) => m.startAxe());
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
