@@ -20,6 +20,32 @@ describe('buildQuiz', () => {
     expect(sameCategory).toHaveLength(3);
   });
 
+  it('nunca muestra dos opciones con la misma glosa', () => {
+    const dup = [
+      sign('comida', 'x'),
+      { ...sign('comida-2', 'x'), gloss: 'comida', variant: 'Variante 2' },
+      { ...sign('naranja-fruta', 'x'), gloss: 'naranja' },
+      { ...sign('naranja-color', 'y'), gloss: 'naranja' },
+      sign('pan', 'x'),
+      sign('sal', 'x'),
+    ];
+    for (let i = 0; i < 50; i++) {
+      for (const q of buildQuiz(dup, dup)) {
+        const glosses = q.options.map((o) => o.gloss);
+        expect(new Set(glosses).size).toBe(glosses.length);
+      }
+    }
+  });
+
+  it('no ofrece como distractor un signo con la misma foto', () => {
+    const img = (id: string, image: string): Sign => ({ ...sign(id, 'x'), media: { image } });
+    const fruits = [img('fruta', '/m/manzana.webp'), img('manzana', '/m/manzana.webp'), img('pera', '/m/pera.webp'), img('uva', '/m/uva.webp'), img('sandia', '/m/sandia.webp')];
+    for (let i = 0; i < 50; i++) {
+      const [q] = buildQuiz([fruits[0]!], fruits);
+      expect(q!.options.map((o) => o.id)).not.toContain('manzana');
+    }
+  });
+
   it('con pocos signos genera menos opciones sin fallar', () => {
     const [q] = buildQuiz([pool[0]!], pool.slice(0, 2));
     expect(q!.options).toHaveLength(2);

@@ -112,6 +112,11 @@ export function SignDescriptionList({ sign }: { sign: Sign }) {
   );
 }
 
+/** "Variante 2", etc.: distingue signos distintos para la misma palabra. */
+export function VariantLabel({ sign }: { sign: Sign }) {
+  return sign.variant ? <span className="variant">· {sign.variant}</span> : null;
+}
+
 export function UnverifiedBadge({ sign }: { sign: Sign }) {
   if (sign.verified !== false) return null;
   return (
@@ -126,7 +131,7 @@ export function SignCard({ sign }: { sign: Sign }) {
     <article className="card sign-card">
       <SignMedia sign={sign} />
       <h2>
-        {sign.gloss} <UnverifiedBadge sign={sign} />
+        {sign.gloss} <VariantLabel sign={sign} /> <UnverifiedBadge sign={sign} />
       </h2>
       <SignDescriptionList sign={sign} />
       <SignLinks sign={sign} />

@@ -1,9 +1,19 @@
 import languagesJson from '../../content/languages.json';
 import type { Language, LanguageContent, Sign, Unit } from './types';
 
-// Cada lengua es una carpeta en /content con signs.json y units.json.
-const signFiles = import.meta.glob<Sign[]>('../../content/*/signs.json', { eager: true, import: 'default' });
-const unitFiles = import.meta.glob<Unit[]>('../../content/*/units.json', { eager: true, import: 'default' });
+// Cada lengua es una carpeta en /content con signs.json y units.json (escritos a mano) y,
+// opcionalmente, ficheros generados por scripts: signs.<origen>.json y units.<origen>.json.
+const signFiles = import.meta.glob<Sign[]>('../../content/*/signs*.json', { eager: true, import: 'default' });
+const unitFiles = import.meta.glob<Unit[]>('../../content/*/units*.json', { eager: true, import: 'default' });
+
+/** Ficheros de una lengua: primero el escrito a mano y luego los generados, por orden alfabético. */
+function filesFor<T>(files: Record<string, T[]>, langId: string, base: 'signs' | 'units'): T[] {
+  const dir = `../../content/${langId}/`;
+  return Object.keys(files)
+    .filter((path) => path.startsWith(dir) && new RegExp(`^${base}(\\.[a-z0-9-]+)?\\.json$`).test(path.slice(dir.length)))
+    .sort((a, b) => (a.endsWith(`/${base}.json`) ? -1 : b.endsWith(`/${base}.json`) ? 1 : a.localeCompare(b)))
+    .flatMap((path) => files[path] ?? []);
+}
 
 export const languages: Language[] = languagesJson;
 
@@ -16,8 +26,8 @@ export function getContent(langId: string): LanguageContent {
   const language = languages.find((l) => l.id === langId);
   if (!language) throw new Error(`Lengua desconocida: ${langId}`);
 
-  const signs = signFiles[`../../content/${langId}/signs.json`] ?? [];
-  const units = unitFiles[`../../content/${langId}/units.json`] ?? [];
+  const signs = filesFor(signFiles, langId, 'signs');
+  const units = filesFor(unitFiles, langId, 'units');
   const signById = new Map(signs.map((s) => [s.id, s]));
 
   for (const unit of units) {

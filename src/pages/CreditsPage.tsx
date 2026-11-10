@@ -116,7 +116,7 @@ export function CreditsPage() {
       <ul>
         <li>
           <a href="https://fundacioncnse-dilse.org/" {...ext}>DILSE</a>, diccionario normativo de la LSE de la
-          Fundación CNSE. Los enlaces «Ver en DILSE» apuntan a{' '}
+          Fundación CNSE, también disponible en{' '}
           <a href="https://dilse.bartol.es/" {...ext}>dilse.bartol.es</a>, una presentación no oficial de esos mismos datos.
         </li>
         <li><a href="https://www.spreadthesign.com/es.es/alphabet/22/" {...ext}>Spread the Sign</a>, European Sign Language Centre.</li>

@@ -9,8 +9,8 @@
 - [x] Dictionary with accent-insensitive search and category filter.
 - [x] Video player with loop and 0.5× (ready; content still missing).
 - [x] Full LSE manual alphabet (30 letters, 5 lessons) with photos from Fundación CNSE's Banco LSE.
+- [x] Full Banco LSE vocabulary: 538 signs in 11 units (81 lessons), replacing the unverified greetings.
 - [ ] Descriptions for F, K, S, T, H and Y (only the photo for now).
-- [ ] Greetings: replace the unverified descriptions with Banco LSE material ("Saludos y cortesía" section).
 - [ ] DILSE videos for the letters with movement (convert `.mov` → MP4/WebM).
 
 ## Phase 2 · Practise

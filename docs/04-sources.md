@@ -6,7 +6,7 @@ Reviewed on 2026-11-10. Licences can change: check them again before importing n
 
 | Source | What it offers | Licence | Use in Sign |
 |---|---|---|---|
-| [Banco de imágenes y signos LSE](https://www.fundacioncnse.org/educa/bancolse/index.php) (Fundación CNSE) | ~550 signs of infant/primary-school vocabulary in 12 topics + fingerspelling A–Z (including CH, LL, Ñ, RR). Per sign: a photo of the sign and a drawing, downloadable as PNG | **CC BY-NC-SA 3.0**, educational non-commercial use | ✅ **Main image source.** Can be included in the app with attribution |
+| [Banco de imágenes y signos LSE](https://www.fundacioncnse.org/educa/bancolse/index.php) (Fundación CNSE) | ~540 signs of infant/primary-school vocabulary in 29 sections + fingerspelling A–Z (including CH, LL, Ñ, RR). Per sign: a photo of the sign and a drawing, downloadable as PNG | **CC BY-NC-SA 3.0**, educational non-commercial use | ✅ **Fully imported** (alphabet + vocabulary), with attribution |
 | [DILSE](https://fundacioncnse-dilse.org/) (Fundación CNSE) | Standard LSE dictionary: a video of every sign | CC BY-NC-SA 3.0 according to the mirror below (the official site is a JS app and its legal notice could not be read) | ✅ Reference for verification and videos; confirm the licence on the official site before importing videos |
 | [dilse.bartol.es](https://dilse.bartol.es/terminos/) | **Unofficial** mirror of DILSE: 10,929 entries with definition, image and video (`.mov` hosted on fundacioncnse-dilse.org). Stable URLs: `/terminos/<word>-<id>.html` | States CC BY-NC-SA 3.0 (Fundación CNSE data) | 🔗 For searching and linking. Always credit Fundación CNSE as the author, not the mirror |
 | [Spread the Sign](https://www.spreadthesign.com/es.es/alphabet/22/) (European Sign Language Centre) | MP4 video of each letter of the LSE alphabet and a multi-language dictionary (useful for ASL and others) | © with no published open licence | 🔗 Link only. Do not download or embed |
@@ -24,7 +24,23 @@ Reviewed on 2026-11-10. Licences can change: check them again before importing n
 
 | What | Origin | How to regenerate it |
 |---|---|---|
-| 30 alphabet photos (`public/media/lse/alfabeto/*.webp`, 640×640, ~466 KB in total) | Banco LSE, `.../dactilologico/descarga/<letter>.png` | `node scripts/import-cnse-alphabet.mjs` |
+| 30 alphabet photos (`public/media/lse/alfabeto/*.webp`, 640×640, ~466 KB in total) | Banco LSE, `.../dactilologico/descarga/<letter>.png` | `pnpm import:alphabet` |
+| 538 vocabulary signs in 11 units / 29 sections (`public/media/lse/vocabulario/*.webp`, 640×640, ~9.7 MB) and the generated `content/lse/signs.bancolse.json` + `units.bancolse.json` | Every section page of Banco LSE → each sign's page → its photo in `descarga(s)/<sign>.png` | `pnpm import:vocabulary` (`--force` to download everything again) |
+
+The vocabulary importer:
+- takes the sign names from the site's general list, which is more precise than the section pages
+  ("Banco (Empresa)" / "Banco (Asiento)"), and fixes one typo of the site ("Atmoférico");
+- tries each candidate photo, since some pages link to files that do not exist (`sed-imgaen.png`);
+- falls back to the general list when a section links to a broken page (Levantarse);
+- drops exact duplicates (same name and same photo: "Comida 2"), marks real variants
+  (`"variant": "Variante 2"`, e.g. Bañador) and lets different words with an identical photo share one
+  file (Alimento = Comida, Fruta = Manzana = Postre, Baño = Cuarto de baño). The quiz never offers two
+  options with the same name or the same photo.
+
+All vocabulary signs are marked `dynamic` (almost all have movement arrows) and have no text
+description: the photo is the reference. They are `verified: true` because the photo comes from
+Fundación CNSE. The four greetings written by hand earlier (hola, gracias, adiós, por favor) were
+removed in favour of the Banco LSE ones.
 
 The text descriptions of the alphabet were written from those photos. Where the handshape was too
 subtle to describe reliably (F, K, S, T, H, Y), only the photo is shown.

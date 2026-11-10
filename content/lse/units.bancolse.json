@@ -1,0 +1,1103 @@
+[
+  {
+    "id": "cnse-saludos",
+    "title": "Saludos y preguntas",
+    "description": "Saludos y cortesía · Preguntas",
+    "lessons": [
+      {
+        "id": "cnse-saludos-y-cortesia-1",
+        "title": "Saludos y cortesía 1",
+        "signIds": [
+          "lse.cnse.saludos-y-cortesia-saludo",
+          "lse.cnse.saludos-y-cortesia-cortesia",
+          "lse.cnse.saludos-y-cortesia-adios",
+          "lse.cnse.saludos-y-cortesia-buenas-noches",
+          "lse.cnse.saludos-y-cortesia-buenas-tardes",
+          "lse.cnse.saludos-y-cortesia-buenos-dias",
+          "lse.cnse.saludos-y-cortesia-cuidado",
+          "lse.cnse.saludos-y-cortesia-de-nada"
+        ]
+      },
+      {
+        "id": "cnse-saludos-y-cortesia-2",
+        "title": "Saludos y cortesía 2",
+        "signIds": [
+          "lse.cnse.saludos-y-cortesia-gracias",
+          "lse.cnse.saludos-y-cortesia-hola",
+          "lse.cnse.saludos-y-cortesia-no",
+          "lse.cnse.saludos-y-cortesia-nombre",
+          "lse.cnse.saludos-y-cortesia-por-favor",
+          "lse.cnse.saludos-y-cortesia-si",
+          "lse.cnse.saludos-y-cortesia-signo"
+        ]
+      },
+      {
+        "id": "cnse-preguntas-1",
+        "title": "Preguntas 1",
+        "signIds": [
+          "lse.cnse.preguntas-preguntar",
+          "lse.cnse.preguntas-como-se-dice",
+          "lse.cnse.preguntas-como-se-signa",
+          "lse.cnse.preguntas-como",
+          "lse.cnse.preguntas-cual",
+          "lse.cnse.preguntas-cuando",
+          "lse.cnse.preguntas-cuando-futuro",
+          "lse.cnse.preguntas-cuanto"
+        ]
+      },
+      {
+        "id": "cnse-preguntas-2",
+        "title": "Preguntas 2",
+        "signIds": [
+          "lse.cnse.preguntas-donde",
+          "lse.cnse.preguntas-para-que",
+          "lse.cnse.preguntas-por-que",
+          "lse.cnse.preguntas-que-dia-es",
+          "lse.cnse.preguntas-que-dice",
+          "lse.cnse.preguntas-que-tal",
+          "lse.cnse.preguntas-que",
+          "lse.cnse.preguntas-quien"
+        ]
+      },
+      {
+        "id": "cnse-preguntas-3",
+        "title": "Preguntas 3",
+        "signIds": [
+          "lse.cnse.preguntas-si-no"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-familia",
+    "title": "Familia",
+    "description": "Familia",
+    "lessons": [
+      {
+        "id": "cnse-familia-1",
+        "title": "Familia 1",
+        "signIds": [
+          "lse.cnse.familia-familia",
+          "lse.cnse.familia-abuelo",
+          "lse.cnse.familia-amigo",
+          "lse.cnse.familia-bebe",
+          "lse.cnse.familia-hermano",
+          "lse.cnse.familia-mama",
+          "lse.cnse.familia-nina",
+          "lse.cnse.familia-nino"
+        ]
+      },
+      {
+        "id": "cnse-familia-2",
+        "title": "Familia 2",
+        "signIds": [
+          "lse.cnse.familia-papa",
+          "lse.cnse.familia-persona",
+          "lse.cnse.familia-primo",
+          "lse.cnse.familia-tio",
+          "lse.cnse.familia-ciego",
+          "lse.cnse.familia-sordo",
+          "lse.cnse.familia-sordociego"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-comida",
+    "title": "Comida y bebidas",
+    "description": "Comidas y bebidas · Postres",
+    "lessons": [
+      {
+        "id": "cnse-comidas-y-bebidas-1",
+        "title": "Comidas y bebidas 1",
+        "signIds": [
+          "lse.cnse.comidas-y-bebidas-comida",
+          "lse.cnse.comidas-y-bebidas-bebida",
+          "lse.cnse.comidas-y-bebidas-desayuno",
+          "lse.cnse.comidas-y-bebidas-merienda",
+          "lse.cnse.comidas-y-bebidas-cena",
+          "lse.cnse.comidas-y-bebidas-alimento",
+          "lse.cnse.comidas-y-bebidas-hambre",
+          "lse.cnse.comidas-y-bebidas-sed"
+        ]
+      },
+      {
+        "id": "cnse-comidas-y-bebidas-2",
+        "title": "Comidas y bebidas 2",
+        "signIds": [
+          "lse.cnse.comidas-y-bebidas-aceite",
+          "lse.cnse.comidas-y-bebidas-agua",
+          "lse.cnse.comidas-y-bebidas-arroz",
+          "lse.cnse.comidas-y-bebidas-azucar",
+          "lse.cnse.comidas-y-bebidas-bocadillo",
+          "lse.cnse.comidas-y-bebidas-caramelo",
+          "lse.cnse.comidas-y-bebidas-carne",
+          "lse.cnse.comidas-y-bebidas-cebolla"
+        ]
+      },
+      {
+        "id": "cnse-comidas-y-bebidas-3",
+        "title": "Comidas y bebidas 3",
+        "signIds": [
+          "lse.cnse.comidas-y-bebidas-chocolate",
+          "lse.cnse.comidas-y-bebidas-galleta",
+          "lse.cnse.comidas-y-bebidas-huevo",
+          "lse.cnse.comidas-y-bebidas-leche",
+          "lse.cnse.comidas-y-bebidas-lechuga",
+          "lse.cnse.comidas-y-bebidas-limon",
+          "lse.cnse.comidas-y-bebidas-macarrones",
+          "lse.cnse.comidas-y-bebidas-pan"
+        ]
+      },
+      {
+        "id": "cnse-comidas-y-bebidas-4",
+        "title": "Comidas y bebidas 4",
+        "signIds": [
+          "lse.cnse.comidas-y-bebidas-patatas",
+          "lse.cnse.comidas-y-bebidas-pescado",
+          "lse.cnse.comidas-y-bebidas-pollo",
+          "lse.cnse.comidas-y-bebidas-pure",
+          "lse.cnse.comidas-y-bebidas-queso",
+          "lse.cnse.comidas-y-bebidas-sal",
+          "lse.cnse.comidas-y-bebidas-sopa",
+          "lse.cnse.comidas-y-bebidas-tomate"
+        ]
+      },
+      {
+        "id": "cnse-comidas-y-bebidas-5",
+        "title": "Comidas y bebidas 5",
+        "signIds": [
+          "lse.cnse.comidas-y-bebidas-zanahoria",
+          "lse.cnse.comidas-y-bebidas-zumo"
+        ]
+      },
+      {
+        "id": "cnse-postres-1",
+        "title": "Postres 1",
+        "signIds": [
+          "lse.cnse.postres-postre",
+          "lse.cnse.postres-dulce",
+          "lse.cnse.postres-flan",
+          "lse.cnse.postres-fresa",
+          "lse.cnse.postres-fruta",
+          "lse.cnse.postres-helado",
+          "lse.cnse.postres-manzana",
+          "lse.cnse.postres-naranja"
+        ]
+      },
+      {
+        "id": "cnse-postres-2",
+        "title": "Postres 2",
+        "signIds": [
+          "lse.cnse.postres-pera",
+          "lse.cnse.postres-platano",
+          "lse.cnse.postres-sandia",
+          "lse.cnse.postres-tarta",
+          "lse.cnse.postres-uva",
+          "lse.cnse.postres-yogur"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-ropa",
+    "title": "Ropa",
+    "description": "Ropa",
+    "lessons": [
+      {
+        "id": "cnse-ropa-1",
+        "title": "Ropa 1",
+        "signIds": [
+          "lse.cnse.ropa-ropa",
+          "lse.cnse.ropa-abrigo",
+          "lse.cnse.ropa-babi",
+          "lse.cnse.ropa-banador1",
+          "lse.cnse.ropa-banador2",
+          "lse.cnse.ropa-braga",
+          "lse.cnse.ropa-bufanda",
+          "lse.cnse.ropa-calzoncillo"
+        ]
+      },
+      {
+        "id": "cnse-ropa-2",
+        "title": "Ropa 2",
+        "signIds": [
+          "lse.cnse.ropa-camisa",
+          "lse.cnse.ropa-chandal",
+          "lse.cnse.ropa-disfraz",
+          "lse.cnse.ropa-gafas",
+          "lse.cnse.ropa-gorra",
+          "lse.cnse.ropa-jersey",
+          "lse.cnse.ropa-mochila",
+          "lse.cnse.ropa-pantalon"
+        ]
+      },
+      {
+        "id": "cnse-ropa-3",
+        "title": "Ropa 3",
+        "signIds": [
+          "lse.cnse.ropa-pijama",
+          "lse.cnse.ropa-reloj",
+          "lse.cnse.ropa-zapatilla",
+          "lse.cnse.ropa-zapato"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-cuerpo",
+    "title": "Cuerpo",
+    "description": "Cuerpo · Sentidos",
+    "lessons": [
+      {
+        "id": "cnse-cuerpo-bis-1",
+        "title": "Cuerpo 1",
+        "signIds": [
+          "lse.cnse.cuerpo-cuerpo",
+          "lse.cnse.cuerpo-boca",
+          "lse.cnse.cuerpo-brazo",
+          "lse.cnse.cuerpo-cabeza",
+          "lse.cnse.cuerpo-culo",
+          "lse.cnse.cuerpo-dedo",
+          "lse.cnse.cuerpo-dientes",
+          "lse.cnse.cuerpo-lengua"
+        ]
+      },
+      {
+        "id": "cnse-cuerpo-bis-2",
+        "title": "Cuerpo 2",
+        "signIds": [
+          "lse.cnse.cuerpo-mano",
+          "lse.cnse.cuerpo-nariz",
+          "lse.cnse.cuerpo-ojo",
+          "lse.cnse.cuerpo-oreja",
+          "lse.cnse.cuerpo-pelo",
+          "lse.cnse.cuerpo-pene",
+          "lse.cnse.cuerpo-pie",
+          "lse.cnse.cuerpo-pierna"
+        ]
+      },
+      {
+        "id": "cnse-cuerpo-bis-3",
+        "title": "Cuerpo 3",
+        "signIds": [
+          "lse.cnse.cuerpo-vulva"
+        ]
+      },
+      {
+        "id": "cnse-sentidos-1",
+        "title": "Sentidos",
+        "signIds": [
+          "lse.cnse.sentidos-sentidos",
+          "lse.cnse.sentidos-gusto",
+          "lse.cnse.sentidos-oido",
+          "lse.cnse.sentidos-olfato",
+          "lse.cnse.sentidos-tacto",
+          "lse.cnse.sentidos-vista"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-casa",
+    "title": "Casa",
+    "description": "Casa · Objetos del baño · Objetos de cocina",
+    "lessons": [
+      {
+        "id": "cnse-casa-bis-1",
+        "title": "Casa 1",
+        "signIds": [
+          "lse.cnse.casa-casa",
+          "lse.cnse.casa-cocina",
+          "lse.cnse.casa-bano",
+          "lse.cnse.casa-dormitorio",
+          "lse.cnse.casa-salon",
+          "lse.cnse.casa-alfombra",
+          "lse.cnse.casa-armario",
+          "lse.cnse.casa-cama"
+        ]
+      },
+      {
+        "id": "cnse-casa-bis-2",
+        "title": "Casa 2",
+        "signIds": [
+          "lse.cnse.casa-cristal",
+          "lse.cnse.casa-despertador",
+          "lse.cnse.casa-fax",
+          "lse.cnse.casa-lampara",
+          "lse.cnse.casa-maceta",
+          "lse.cnse.casa-manta",
+          "lse.cnse.casa-maquina",
+          "lse.cnse.casa-mesa"
+        ]
+      },
+      {
+        "id": "cnse-casa-bis-3",
+        "title": "Casa 3",
+        "signIds": [
+          "lse.cnse.casa-mesilla",
+          "lse.cnse.casa-mueble",
+          "lse.cnse.casa-muneco",
+          "lse.cnse.casa-objeto",
+          "lse.cnse.casa-ordenador",
+          "lse.cnse.casa-pelota",
+          "lse.cnse.casa-plancha",
+          "lse.cnse.casa-puerta"
+        ]
+      },
+      {
+        "id": "cnse-casa-bis-4",
+        "title": "Casa 4",
+        "signIds": [
+          "lse.cnse.casa-sabana",
+          "lse.cnse.casa-silla",
+          "lse.cnse.casa-sofa",
+          "lse.cnse.casa-telefono",
+          "lse.cnse.casa-televisor",
+          "lse.cnse.casa-ventana",
+          "lse.cnse.casa-video"
+        ]
+      },
+      {
+        "id": "cnse-cosas-bano-1",
+        "title": "Objetos del baño 1",
+        "signIds": [
+          "lse.cnse.cosas-bano-objeto",
+          "lse.cnse.cosas-bano-bano",
+          "lse.cnse.cosas-bano-banera",
+          "lse.cnse.cosas-bano-cepillo",
+          "lse.cnse.cosas-bano-champu",
+          "lse.cnse.cosas-bano-colonia",
+          "lse.cnse.cosas-bano-espejo",
+          "lse.cnse.cosas-bano-esponja"
+        ]
+      },
+      {
+        "id": "cnse-cosas-bano-2",
+        "title": "Objetos del baño 2",
+        "signIds": [
+          "lse.cnse.cosas-bano-jabon",
+          "lse.cnse.cosas-bano-lavabo",
+          "lse.cnse.cosas-bano-papel",
+          "lse.cnse.cosas-bano-pasta-de-dientes",
+          "lse.cnse.cosas-bano-peine",
+          "lse.cnse.cosas-bano-toalla"
+        ]
+      },
+      {
+        "id": "cnse-cosas-cocina-1",
+        "title": "Objetos de cocina 1",
+        "signIds": [
+          "lse.cnse.cosas-cocina-cocina",
+          "lse.cnse.cosas-cocina-objeto",
+          "lse.cnse.cosas-cocina-cacerola",
+          "lse.cnse.cosas-cocina-cuchara",
+          "lse.cnse.cosas-cocina-cuchillo",
+          "lse.cnse.cosas-cocina-jarra",
+          "lse.cnse.cosas-cocina-lavadora",
+          "lse.cnse.cosas-cocina-nevera"
+        ]
+      },
+      {
+        "id": "cnse-cosas-cocina-2",
+        "title": "Objetos de cocina 2",
+        "signIds": [
+          "lse.cnse.cosas-cocina-plato",
+          "lse.cnse.cosas-cocina-sarten",
+          "lse.cnse.cosas-cocina-servilleta",
+          "lse.cnse.cosas-cocina-tenedor",
+          "lse.cnse.cosas-cocina-vaso"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-colegio",
+    "title": "Colegio",
+    "description": "Colegio · Cosas del colegio · Colores · Formas y tamaños",
+    "lessons": [
+      {
+        "id": "cnse-colegio-colegio-1",
+        "title": "Colegio 1",
+        "signIds": [
+          "lse.cnse.colegio-colegio-colegio",
+          "lse.cnse.colegio-colegio-abecedario",
+          "lse.cnse.colegio-colegio-alumno",
+          "lse.cnse.colegio-colegio-clase",
+          "lse.cnse.colegio-colegio-dibujo",
+          "lse.cnse.colegio-colegio-diferencia",
+          "lse.cnse.colegio-colegio-gramo",
+          "lse.cnse.colegio-colegio-litro"
+        ]
+      },
+      {
+        "id": "cnse-colegio-colegio-2",
+        "title": "Colegio 2",
+        "signIds": [
+          "lse.cnse.colegio-colegio-signo",
+          "lse.cnse.colegio-colegio-medida",
+          "lse.cnse.colegio-colegio-metro",
+          "lse.cnse.colegio-colegio-multiplicar",
+          "lse.cnse.colegio-colegio-numero",
+          "lse.cnse.colegio-colegio-palabra",
+          "lse.cnse.colegio-colegio-patio",
+          "lse.cnse.colegio-colegio-resta"
+        ]
+      },
+      {
+        "id": "cnse-colegio-colegio-3",
+        "title": "Colegio 3",
+        "signIds": [
+          "lse.cnse.colegio-colegio-servicio",
+          "lse.cnse.colegio-colegio-suma"
+        ]
+      },
+      {
+        "id": "cnse-cosas-del-colegio-1",
+        "title": "Cosas del colegio 1",
+        "signIds": [
+          "lse.cnse.cosas-del-colegio-bis",
+          "lse.cnse.cosas-del-colegio-boligrafo",
+          "lse.cnse.cosas-del-colegio-borrador",
+          "lse.cnse.cosas-del-colegio-cera",
+          "lse.cnse.cosas-del-colegio-cosa",
+          "lse.cnse.cosas-del-colegio-cuaderno",
+          "lse.cnse.cosas-del-colegio-cuentos",
+          "lse.cnse.cosas-del-colegio-diccionario"
+        ]
+      },
+      {
+        "id": "cnse-cosas-del-colegio-2",
+        "title": "Cosas del colegio 2",
+        "signIds": [
+          "lse.cnse.cosas-del-colegio-goma",
+          "lse.cnse.cosas-del-colegio-hojas",
+          "lse.cnse.cosas-del-colegio-lapices-de-colores",
+          "lse.cnse.cosas-del-colegio-lapiz",
+          "lse.cnse.cosas-del-colegio-libro",
+          "lse.cnse.cosas-del-colegio-papel",
+          "lse.cnse.cosas-del-colegio-papelera",
+          "lse.cnse.cosas-del-colegio-pegamento"
+        ]
+      },
+      {
+        "id": "cnse-cosas-del-colegio-3",
+        "title": "Cosas del colegio 3",
+        "signIds": [
+          "lse.cnse.cosas-del-colegio-pintura",
+          "lse.cnse.cosas-del-colegio-pizarra",
+          "lse.cnse.cosas-del-colegio-plastilina",
+          "lse.cnse.cosas-del-colegio-rotulador",
+          "lse.cnse.cosas-del-colegio-sacapuntas",
+          "lse.cnse.cosas-del-colegio-tijera",
+          "lse.cnse.cosas-del-colegio-tiza"
+        ]
+      },
+      {
+        "id": "cnse-colores-1",
+        "title": "Colores 1",
+        "signIds": [
+          "lse.cnse.colores-bis",
+          "lse.cnse.colores-amarillo",
+          "lse.cnse.colores-azul",
+          "lse.cnse.colores-blanco",
+          "lse.cnse.colores-marron",
+          "lse.cnse.colores-naranja",
+          "lse.cnse.colores-negro",
+          "lse.cnse.colores-rojo"
+        ]
+      },
+      {
+        "id": "cnse-colores-2",
+        "title": "Colores 2",
+        "signIds": [
+          "lse.cnse.colores-rosa",
+          "lse.cnse.colores-verde"
+        ]
+      },
+      {
+        "id": "cnse-formas-y-tamanos-1",
+        "title": "Formas y tamaños 1",
+        "signIds": [
+          "lse.cnse.formas-y-tamanos-bis",
+          "lse.cnse.formas-y-tamanos-forma",
+          "lse.cnse.formas-y-tamanos-circulo",
+          "lse.cnse.formas-y-tamanos-cuadrado",
+          "lse.cnse.formas-y-tamanos-rectangulo",
+          "lse.cnse.formas-y-tamanos-triangulo",
+          "lse.cnse.formas-y-tamanos-tamano",
+          "lse.cnse.formas-y-tamanos-grande"
+        ]
+      },
+      {
+        "id": "cnse-formas-y-tamanos-2",
+        "title": "Formas y tamaños 2",
+        "signIds": [
+          "lse.cnse.formas-y-tamanos-mediano",
+          "lse.cnse.formas-y-tamanos-pequeno"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-ciudad",
+    "title": "Ciudad",
+    "description": "Ciudad · Medios de transporte · Profesiones",
+    "lessons": [
+      {
+        "id": "cnse-ciudad-ciudad-1",
+        "title": "Ciudad 1",
+        "signIds": [
+          "lse.cnse.ciudad-ciudad-ciudad",
+          "lse.cnse.ciudad-ciudad-acera",
+          "lse.cnse.ciudad-ciudad-banco1",
+          "lse.cnse.ciudad-ciudad-banco2",
+          "lse.cnse.ciudad-ciudad-biblioteca",
+          "lse.cnse.ciudad-ciudad-buzon",
+          "lse.cnse.ciudad-ciudad-calle",
+          "lse.cnse.ciudad-ciudad-cine"
+        ]
+      },
+      {
+        "id": "cnse-ciudad-ciudad-2",
+        "title": "Ciudad 2",
+        "signIds": [
+          "lse.cnse.ciudad-ciudad-colegio",
+          "lse.cnse.ciudad-ciudad-columpio",
+          "lse.cnse.ciudad-ciudad-farola",
+          "lse.cnse.ciudad-ciudad-fuente",
+          "lse.cnse.ciudad-ciudad-hospital",
+          "lse.cnse.ciudad-ciudad-libreria",
+          "lse.cnse.ciudad-ciudad-luz",
+          "lse.cnse.ciudad-ciudad-museo"
+        ]
+      },
+      {
+        "id": "cnse-ciudad-ciudad-3",
+        "title": "Ciudad 3",
+        "signIds": [
+          "lse.cnse.ciudad-ciudad-parque",
+          "lse.cnse.ciudad-ciudad-cebra",
+          "lse.cnse.ciudad-ciudad-pasteleria",
+          "lse.cnse.ciudad-ciudad-plaza",
+          "lse.cnse.ciudad-ciudad-puente",
+          "lse.cnse.ciudad-ciudad-quiosco",
+          "lse.cnse.ciudad-ciudad-semaforo",
+          "lse.cnse.ciudad-ciudad-supermercado"
+        ]
+      },
+      {
+        "id": "cnse-ciudad-ciudad-4",
+        "title": "Ciudad 4",
+        "signIds": [
+          "lse.cnse.ciudad-ciudad-teatro",
+          "lse.cnse.ciudad-ciudad-tienda",
+          "lse.cnse.ciudad-ciudad-tobogan",
+          "lse.cnse.ciudad-ciudad-zapateria"
+        ]
+      },
+      {
+        "id": "cnse-transporte-1",
+        "title": "Medios de transporte 1",
+        "signIds": [
+          "lse.cnse.transporte-transporte-bis",
+          "lse.cnse.transporte-vehiculo",
+          "lse.cnse.transporte-ambulancia",
+          "lse.cnse.transporte-autobus",
+          "lse.cnse.transporte-barca",
+          "lse.cnse.transporte-bicicleta",
+          "lse.cnse.transporte-camion",
+          "lse.cnse.transporte-coche"
+        ]
+      },
+      {
+        "id": "cnse-transporte-2",
+        "title": "Medios de transporte 2",
+        "signIds": [
+          "lse.cnse.transporte-moto"
+        ]
+      },
+      {
+        "id": "cnse-profesiones-1",
+        "title": "Profesiones",
+        "signIds": [
+          "lse.cnse.profesiones-profesiones",
+          "lse.cnse.profesiones-bombero",
+          "lse.cnse.profesiones-medico",
+          "lse.cnse.profesiones-pastelero",
+          "lse.cnse.profesiones-pescador",
+          "lse.cnse.profesiones-policia",
+          "lse.cnse.profesiones-profesor"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-calendario",
+    "title": "Calendario",
+    "description": "Meses del año · Días de la semana · Estaciones · Tiempo · Fiestas",
+    "lessons": [
+      {
+        "id": "cnse-meses-del-ano-1",
+        "title": "Meses del año 1",
+        "signIds": [
+          "lse.cnse.meses-de-ano-bis",
+          "lse.cnse.meses-de-ano-calendario",
+          "lse.cnse.meses-de-ano-ano",
+          "lse.cnse.meses-de-ano-mes",
+          "lse.cnse.meses-de-ano-enero",
+          "lse.cnse.meses-de-ano-febrero",
+          "lse.cnse.meses-de-ano-marzo",
+          "lse.cnse.meses-de-ano-abril"
+        ]
+      },
+      {
+        "id": "cnse-meses-del-ano-2",
+        "title": "Meses del año 2",
+        "signIds": [
+          "lse.cnse.meses-de-ano-mayo",
+          "lse.cnse.meses-de-ano-junio",
+          "lse.cnse.meses-de-ano-julio",
+          "lse.cnse.meses-de-ano-agosto",
+          "lse.cnse.meses-de-ano-septiembre",
+          "lse.cnse.meses-de-ano-octubre",
+          "lse.cnse.meses-de-ano-noviembre",
+          "lse.cnse.meses-de-ano-diciembre"
+        ]
+      },
+      {
+        "id": "cnse-dias-semana-1",
+        "title": "Días de la semana 1",
+        "signIds": [
+          "lse.cnse.dias-semanas-semanas",
+          "lse.cnse.dias-semanas-dia1",
+          "lse.cnse.dias-semanas-semana",
+          "lse.cnse.dias-semanas-lunes",
+          "lse.cnse.dias-semanas-martes",
+          "lse.cnse.dias-semanas-miercoles",
+          "lse.cnse.dias-semanas-jueves",
+          "lse.cnse.dias-semanas-viernes"
+        ]
+      },
+      {
+        "id": "cnse-dias-semana-2",
+        "title": "Días de la semana 2",
+        "signIds": [
+          "lse.cnse.dias-semanas-sabado",
+          "lse.cnse.dias-semanas-domingo",
+          "lse.cnse.dias-semanas-fin-de-semana"
+        ]
+      },
+      {
+        "id": "cnse-estaciones-1",
+        "title": "Estaciones",
+        "signIds": [
+          "lse.cnse.estaciones-bis",
+          "lse.cnse.estaciones-primavera",
+          "lse.cnse.estaciones-verano",
+          "lse.cnse.estaciones-otono",
+          "lse.cnse.estaciones-invierno"
+        ]
+      },
+      {
+        "id": "cnse-tiempo-1",
+        "title": "Tiempo 1",
+        "signIds": [
+          "lse.cnse.tiempo-bis",
+          "lse.cnse.tiempo-ayer",
+          "lse.cnse.tiempo-hoy",
+          "lse.cnse.tiempo-manana",
+          "lse.cnse.tiempo-por-la-manana",
+          "lse.cnse.tiempo-por-la-tarde",
+          "lse.cnse.tiempo-por-la-noche",
+          "lse.cnse.tiempo-la-hora-de"
+        ]
+      },
+      {
+        "id": "cnse-tiempo-2",
+        "title": "Tiempo 2",
+        "signIds": [
+          "lse.cnse.tiempo-que-hora-es",
+          "lse.cnse.tiempo-en-punto",
+          "lse.cnse.tiempo-y-cuarto",
+          "lse.cnse.tiempo-y-media",
+          "lse.cnse.tiempo-menos-cuarto"
+        ]
+      },
+      {
+        "id": "cnse-fiesta-1",
+        "title": "Fiestas",
+        "signIds": [
+          "lse.cnse.fiesta-bis",
+          "lse.cnse.fiesta-cumpleanos",
+          "lse.cnse.fiesta-navidad",
+          "lse.cnse.fiesta-papa-noel",
+          "lse.cnse.fiesta-reyes-magos"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-naturaleza",
+    "title": "Naturaleza",
+    "description": "Naturaleza · Tiempo atmosférico · Animales",
+    "lessons": [
+      {
+        "id": "cnse-naturaleza-bis-1",
+        "title": "Naturaleza 1",
+        "signIds": [
+          "lse.cnse.naturaleza-naturaleza",
+          "lse.cnse.naturaleza-abeto",
+          "lse.cnse.naturaleza-arbol",
+          "lse.cnse.naturaleza-arco-iris",
+          "lse.cnse.naturaleza-arena",
+          "lse.cnse.naturaleza-estrella",
+          "lse.cnse.naturaleza-faro",
+          "lse.cnse.naturaleza-flor"
+        ]
+      },
+      {
+        "id": "cnse-naturaleza-bis-2",
+        "title": "Naturaleza 2",
+        "signIds": [
+          "lse.cnse.naturaleza-flotador",
+          "lse.cnse.naturaleza-fuego",
+          "lse.cnse.naturaleza-hierba",
+          "lse.cnse.naturaleza-hoja",
+          "lse.cnse.naturaleza-lago",
+          "lse.cnse.naturaleza-luna",
+          "lse.cnse.naturaleza-mar",
+          "lse.cnse.naturaleza-margarita"
+        ]
+      },
+      {
+        "id": "cnse-naturaleza-bis-3",
+        "title": "Naturaleza 3",
+        "signIds": [
+          "lse.cnse.naturaleza-montana",
+          "lse.cnse.naturaleza-palmera",
+          "lse.cnse.naturaleza-piedra",
+          "lse.cnse.naturaleza-playa",
+          "lse.cnse.naturaleza-pozo",
+          "lse.cnse.naturaleza-rio",
+          "lse.cnse.naturaleza-saco-de-dormir",
+          "lse.cnse.naturaleza-sombrilla"
+        ]
+      },
+      {
+        "id": "cnse-naturaleza-bis-4",
+        "title": "Naturaleza 4",
+        "signIds": [
+          "lse.cnse.naturaleza-tienda-de-campana"
+        ]
+      },
+      {
+        "id": "cnse-atmosferico-1",
+        "title": "Tiempo atmosférico 1",
+        "signIds": [
+          "lse.cnse.atmosferico-atmosferico",
+          "lse.cnse.atmosferico-calor",
+          "lse.cnse.atmosferico-frio",
+          "lse.cnse.atmosferico-lluvia",
+          "lse.cnse.atmosferico-nieve",
+          "lse.cnse.atmosferico-nube",
+          "lse.cnse.atmosferico-nublado",
+          "lse.cnse.atmosferico-sol"
+        ]
+      },
+      {
+        "id": "cnse-atmosferico-2",
+        "title": "Tiempo atmosférico 2",
+        "signIds": [
+          "lse.cnse.atmosferico-tormenta",
+          "lse.cnse.atmosferico-viento"
+        ]
+      },
+      {
+        "id": "cnse-animales-1",
+        "title": "Animales 1",
+        "signIds": [
+          "lse.cnse.animales-bis",
+          "lse.cnse.animales-abeja",
+          "lse.cnse.animales-aguila",
+          "lse.cnse.animales-ballena",
+          "lse.cnse.animales-burro",
+          "lse.cnse.animales-caballo",
+          "lse.cnse.animales-cabra",
+          "lse.cnse.animales-camello"
+        ]
+      },
+      {
+        "id": "cnse-animales-2",
+        "title": "Animales 2",
+        "signIds": [
+          "lse.cnse.animales-cerdo",
+          "lse.cnse.animales-cocodrilo",
+          "lse.cnse.animales-conejo",
+          "lse.cnse.animales-delfin",
+          "lse.cnse.animales-elefante",
+          "lse.cnse.animales-foca",
+          "lse.cnse.animales-gallina",
+          "lse.cnse.animales-gato"
+        ]
+      },
+      {
+        "id": "cnse-animales-3",
+        "title": "Animales 3",
+        "signIds": [
+          "lse.cnse.animales-granja",
+          "lse.cnse.animales-jirafa",
+          "lse.cnse.animales-leon",
+          "lse.cnse.animales-loro",
+          "lse.cnse.animales-mariposa",
+          "lse.cnse.animales-mono",
+          "lse.cnse.animales-oso",
+          "lse.cnse.animales-oveja"
+        ]
+      },
+      {
+        "id": "cnse-animales-4",
+        "title": "Animales 4",
+        "signIds": [
+          "lse.cnse.animales-pajaro",
+          "lse.cnse.animales-pato",
+          "lse.cnse.animales-perro",
+          "lse.cnse.animales-tiburon",
+          "lse.cnse.animales-tigre",
+          "lse.cnse.animales-toro",
+          "lse.cnse.animales-tortuga",
+          "lse.cnse.animales-vaca"
+        ]
+      },
+      {
+        "id": "cnse-animales-5",
+        "title": "Animales 5",
+        "signIds": [
+          "lse.cnse.animales-zoo"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cnse-palabras",
+    "title": "Adjetivos, adverbios y verbos",
+    "description": "Adjetivos · Adverbios · Verbos",
+    "lessons": [
+      {
+        "id": "cnse-adjetivos-1",
+        "title": "Adjetivos 1",
+        "signIds": [
+          "lse.cnse.adjetivos-bis",
+          "lse.cnse.adjetivos-aburrido",
+          "lse.cnse.adjetivos-acido",
+          "lse.cnse.adjetivos-agradable",
+          "lse.cnse.adjetivos-alegre",
+          "lse.cnse.adjetivos-alto",
+          "lse.cnse.adjetivos-amargo",
+          "lse.cnse.adjetivos-bajo"
+        ]
+      },
+      {
+        "id": "cnse-adjetivos-2",
+        "title": "Adjetivos 2",
+        "signIds": [
+          "lse.cnse.adjetivos-blando",
+          "lse.cnse.adjetivos-bueno",
+          "lse.cnse.adjetivos-caliente",
+          "lse.cnse.adjetivos-castano",
+          "lse.cnse.adjetivos-claro",
+          "lse.cnse.adjetivos-contento",
+          "lse.cnse.adjetivos-delgado",
+          "lse.cnse.adjetivos-desagradable"
+        ]
+      },
+      {
+        "id": "cnse-adjetivos-3",
+        "title": "Adjetivos 3",
+        "signIds": [
+          "lse.cnse.adjetivos-diferente",
+          "lse.cnse.adjetivos-divertido",
+          "lse.cnse.adjetivos-dulce",
+          "lse.cnse.adjetivos-duro",
+          "lse.cnse.adjetivos-enfadado",
+          "lse.cnse.adjetivos-enfermo",
+          "lse.cnse.adjetivos-feo",
+          "lse.cnse.adjetivos-frio"
+        ]
+      },
+      {
+        "id": "cnse-adjetivos-4",
+        "title": "Adjetivos 4",
+        "signIds": [
+          "lse.cnse.adjetivos-gordo",
+          "lse.cnse.adjetivos-guapo",
+          "lse.cnse.adjetivos-igual",
+          "lse.cnse.adjetivos-lento",
+          "lse.cnse.adjetivos-limpio",
+          "lse.cnse.adjetivos-lleno",
+          "lse.cnse.adjetivos-malo",
+          "lse.cnse.adjetivos-moreno"
+        ]
+      },
+      {
+        "id": "cnse-adjetivos-5",
+        "title": "Adjetivos 5",
+        "signIds": [
+          "lse.cnse.adjetivos-mucho",
+          "lse.cnse.adjetivos-oscuro",
+          "lse.cnse.adjetivos-pelirrojo",
+          "lse.cnse.adjetivos-pocos",
+          "lse.cnse.adjetivos-primer",
+          "lse.cnse.adjetivos-rapido",
+          "lse.cnse.adjetivos-rubio",
+          "lse.cnse.adjetivos-salado"
+        ]
+      },
+      {
+        "id": "cnse-adjetivos-6",
+        "title": "Adjetivos 6",
+        "signIds": [
+          "lse.cnse.adjetivos-sano",
+          "lse.cnse.adjetivos-sucio",
+          "lse.cnse.adjetivos-templado",
+          "lse.cnse.adjetivos-triste",
+          "lse.cnse.adjetivos-ultimo",
+          "lse.cnse.adjetivos-vacio"
+        ]
+      },
+      {
+        "id": "cnse-adverbios-1",
+        "title": "Adverbios 1",
+        "signIds": [
+          "lse.cnse.adverbios-bis",
+          "lse.cnse.adverbios-derecha",
+          "lse.cnse.adverbios-izquierda",
+          "lse.cnse.adverbios-abajo",
+          "lse.cnse.adverbios-arriba",
+          "lse.cnse.adverbios-bien",
+          "lse.cnse.adverbios-cerca",
+          "lse.cnse.adverbios-debajo"
+        ]
+      },
+      {
+        "id": "cnse-adverbios-2",
+        "title": "Adverbios 2",
+        "signIds": [
+          "lse.cnse.adverbios-delante",
+          "lse.cnse.adverbios-dentro",
+          "lse.cnse.adverbios-detras",
+          "lse.cnse.adverbios-encima",
+          "lse.cnse.adverbios-fuera",
+          "lse.cnse.adverbios-lejos",
+          "lse.cnse.adverbios-mal"
+        ]
+      },
+      {
+        "id": "cnse-verbos-1",
+        "title": "Verbos 1",
+        "signIds": [
+          "lse.cnse.verbo-bis",
+          "lse.cnse.verbo-abrazar",
+          "lse.cnse.verbo-amar",
+          "lse.cnse.verbo-andar",
+          "lse.cnse.verbo-aprender",
+          "lse.cnse.verbo-ayudar",
+          "lse.cnse.verbo-beber",
+          "lse.cnse.verbo-besar"
+        ]
+      },
+      {
+        "id": "cnse-verbos-2",
+        "title": "Verbos 2",
+        "signIds": [
+          "lse.cnse.verbo-comer",
+          "lse.cnse.verbo-comprar",
+          "lse.cnse.verbo-conocer",
+          "lse.cnse.verbo-contar",
+          "lse.cnse.verbo-correr",
+          "lse.cnse.verbo-cortar",
+          "lse.cnse.verbo-crecer1",
+          "lse.cnse.verbo-crecer2"
+        ]
+      },
+      {
+        "id": "cnse-verbos-3",
+        "title": "Verbos 3",
+        "signIds": [
+          "lse.cnse.verbo-descansar",
+          "lse.cnse.verbo-dormir",
+          "lse.cnse.verbo-ducharse",
+          "lse.cnse.verbo-entender",
+          "lse.cnse.verbo-escribir",
+          "lse.cnse.verbo-esperar",
+          "lse.cnse.verbo-explicar",
+          "lse.cnse.verbo-gritar"
+        ]
+      },
+      {
+        "id": "cnse-verbos-4",
+        "title": "Verbos 4",
+        "signIds": [
+          "lse.cnse.verbo-gustar",
+          "lse.cnse.verbo-hablar1",
+          "lse.cnse.verbo-hablar2",
+          "lse.cnse.verbo-jugar",
+          "lse.cnse.verbo-lavar1",
+          "lse.cnse.verbo-lavar2",
+          "lse.cnse.verbo-lavar3",
+          "lse.cnse.verbo-leer"
+        ]
+      },
+      {
+        "id": "cnse-verbos-5",
+        "title": "Verbos 5",
+        "signIds": [
+          "lse.cnse.verbo-levantarse",
+          "lse.cnse.verbo-llorar",
+          "lse.cnse.verbo-montarse",
+          "lse.cnse.verbo-nacer",
+          "lse.cnse.verbo-no-conocer",
+          "lse.cnse.verbo-no-gustar",
+          "lse.cnse.verbo-no-tener",
+          "lse.cnse.verbo-oir"
+        ]
+      },
+      {
+        "id": "cnse-verbos-6",
+        "title": "Verbos 6",
+        "signIds": [
+          "lse.cnse.verbo-oler",
+          "lse.cnse.verbo-pasear",
+          "lse.cnse.verbo-patinar",
+          "lse.cnse.verbo-pegar",
+          "lse.cnse.verbo-peinarse",
+          "lse.cnse.verbo-ponerse",
+          "lse.cnse.verbo-quitarse",
+          "lse.cnse.verbo-regalar"
+        ]
+      },
+      {
+        "id": "cnse-verbos-7",
+        "title": "Verbos 7",
+        "signIds": [
+          "lse.cnse.verbo-reir",
+          "lse.cnse.verbo-saborear",
+          "lse.cnse.verbo-saltar",
+          "lse.cnse.verbo-sentarse",
+          "lse.cnse.verbo-tener",
+          "lse.cnse.verbo-tocar",
+          "lse.cnse.verbo-vamos",
+          "lse.cnse.verbo-ver"
+        ]
+      },
+      {
+        "id": "cnse-verbos-8",
+        "title": "Verbos 8",
+        "signIds": [
+          "lse.cnse.verbo-vestirse",
+          "lse.cnse.verbo-vivir"
+        ]
+      }
+    ]
+  }
+]

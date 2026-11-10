@@ -17,7 +17,8 @@ const REPORT_DIR = new URL('../a11y-report/', import.meta.url);
 const PAGES = [
   { name: 'Inicio', path: '/' },
   { name: 'Lección', path: '/leccion/alfabeto-1' },
-  { name: 'Lección sin foto', path: '/leccion/saludos-1' },
+  { name: 'Lección de vocabulario', path: '/leccion/cnse-saludos-y-cortesia-1' },
+  { name: 'Lección inexistente', path: '/leccion/no-existe' },
   { name: 'Quiz (pregunta)', path: '/quiz/alfabeto-1' },
   {
     name: 'Quiz (respondido)',

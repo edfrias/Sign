@@ -2,7 +2,7 @@
   {
     "id": "lse.letra.a",
     "gloss": "A",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Puño cerrado con el pulgar estirado hacia arriba, pegado al lateral del índice.",
@@ -25,7 +25,7 @@
   {
     "id": "lse.letra.b",
     "gloss": "B",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Mano plana con los dedos juntos y estirados.",
@@ -49,7 +49,7 @@
   {
     "id": "lse.letra.c",
     "gloss": "C",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Dedos juntos y curvados, con el pulgar enfrentado, formando una C.",
@@ -72,7 +72,7 @@
   {
     "id": "lse.letra.ch",
     "gloss": "CH",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Pulgar, índice y corazón estirados en horizontal.",
@@ -96,7 +96,7 @@
   {
     "id": "lse.letra.d",
     "gloss": "D",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Índice estirado hacia arriba; los demás dedos curvados tocando el pulgar."
@@ -118,7 +118,7 @@
   {
     "id": "lse.letra.e",
     "gloss": "E",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Los cuatro dedos juntos y doblados por las articulaciones; pulgar estirado hacia el lado.",
@@ -141,7 +141,7 @@
   {
     "id": "lse.letra.f",
     "gloss": "F",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {},
     "media": {
@@ -161,7 +161,7 @@
   {
     "id": "lse.letra.g",
     "gloss": "G",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Índice estirado en horizontal; resto de dedos recogidos.",
@@ -184,7 +184,7 @@
   {
     "id": "lse.letra.h",
     "gloss": "H",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "movement": "Giro de muñeca (ver flecha en la foto)."
@@ -206,7 +206,7 @@
   {
     "id": "lse.letra.i",
     "gloss": "I",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Meñique estirado hacia arriba; resto de dedos recogidos."
@@ -228,7 +228,7 @@
   {
     "id": "lse.letra.j",
     "gloss": "J",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Como la I.",
@@ -251,7 +251,7 @@
   {
     "id": "lse.letra.k",
     "gloss": "K",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {},
     "media": {
@@ -271,7 +271,7 @@
   {
     "id": "lse.letra.l",
     "gloss": "L",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Pulgar e índice estirados formando una L; resto de dedos recogidos.",
@@ -294,7 +294,7 @@
   {
     "id": "lse.letra.ll",
     "gloss": "LL",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Como la L.",
@@ -317,7 +317,7 @@
   {
     "id": "lse.letra.m",
     "gloss": "M",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Índice, corazón y anular estirados apuntando hacia abajo.",
@@ -340,7 +340,7 @@
   {
     "id": "lse.letra.n",
     "gloss": "N",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Índice y corazón estirados apuntando hacia abajo.",
@@ -363,7 +363,7 @@
   {
     "id": "lse.letra.enie",
     "gloss": "Ñ",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Como la N.",
@@ -386,7 +386,7 @@
   {
     "id": "lse.letra.o",
     "gloss": "O",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Dedos curvados con las yemas tocando el pulgar, formando una O."
@@ -408,7 +408,7 @@
   {
     "id": "lse.letra.p",
     "gloss": "P",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Mano plana vertical con los dedos juntos.",
@@ -431,7 +431,7 @@
   {
     "id": "lse.letra.q",
     "gloss": "Q",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Dedos juntos y curvados, con las yemas hacia arriba.",
@@ -454,7 +454,7 @@
   {
     "id": "lse.letra.r",
     "gloss": "R",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Índice y corazón estirados y cruzados."
@@ -476,7 +476,7 @@
   {
     "id": "lse.letra.rr",
     "gloss": "RR",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Como la R.",
@@ -499,7 +499,7 @@
   {
     "id": "lse.letra.s",
     "gloss": "S",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {},
     "media": {
@@ -519,7 +519,7 @@
   {
     "id": "lse.letra.t",
     "gloss": "T",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {},
     "media": {
@@ -539,7 +539,7 @@
   {
     "id": "lse.letra.u",
     "gloss": "U",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "static",
     "description": {
       "handshape": "Índice y corazón estirados y separados; resto de dedos recogidos.",
@@ -562,7 +562,7 @@
   {
     "id": "lse.letra.v",
     "gloss": "V",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Como la U.",
@@ -585,7 +585,7 @@
   {
     "id": "lse.letra.w",
     "gloss": "W",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Índice, corazón y anular estirados y separados.",
@@ -608,7 +608,7 @@
   {
     "id": "lse.letra.x",
     "gloss": "X",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "handshape": "Índice doblado en gancho.",
@@ -631,7 +631,7 @@
   {
     "id": "lse.letra.y",
     "gloss": "Y",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "movement": "Giro de muñeca (ver flecha en la foto)."
@@ -653,7 +653,7 @@
   {
     "id": "lse.letra.z",
     "gloss": "Z",
-    "category": "alfabeto",
+    "category": "Alfabeto",
     "kind": "dynamic",
     "description": {
       "movement": "Trazo en zigzag, dibujando una Z."
@@ -671,77 +671,5 @@
       }
     ],
     "verified": true
-  },
-  {
-    "id": "lse.saludo.hola",
-    "gloss": "Hola",
-    "category": "saludos",
-    "kind": "dynamic",
-    "description": {
-      "handshape": "Mano abierta, dedos juntos.",
-      "location": "Junto a la sien.",
-      "movement": "Se separa de la cabeza hacia fuera, como un saludo militar suave."
-    },
-    "verified": false,
-    "links": [
-      {
-        "label": "DILSE",
-        "url": "https://dilse.bartol.es/terminos/hola-5849.html"
-      }
-    ]
-  },
-  {
-    "id": "lse.saludo.gracias",
-    "gloss": "Gracias",
-    "category": "saludos",
-    "kind": "dynamic",
-    "description": {
-      "handshape": "Mano plana, dedos juntos.",
-      "location": "Yemas cerca de los labios.",
-      "movement": "La mano avanza hacia delante y abajo, alejándose de la boca."
-    },
-    "verified": false,
-    "links": [
-      {
-        "label": "DILSE",
-        "url": "https://dilse.bartol.es/terminos/gracia-gracia-s-5574.html"
-      }
-    ]
-  },
-  {
-    "id": "lse.saludo.adios",
-    "gloss": "Adiós",
-    "category": "saludos",
-    "kind": "dynamic",
-    "description": {
-      "handshape": "Mano abierta.",
-      "location": "A la altura de la cabeza.",
-      "movement": "Los dedos se doblan y estiran repetidamente, o la mano se agita de lado a lado."
-    },
-    "verified": false,
-    "links": [
-      {
-        "label": "DILSE",
-        "url": "https://dilse.bartol.es/terminos/adios-639.html"
-      }
-    ]
-  },
-  {
-    "id": "lse.saludo.por-favor",
-    "gloss": "Por favor",
-    "category": "saludos",
-    "kind": "dynamic",
-    "description": {
-      "handshape": "Mano plana.",
-      "location": "Barbilla.",
-      "movement": "Pequeño movimiento hacia abajo con expresión amable."
-    },
-    "verified": false,
-    "links": [
-      {
-        "label": "DILSE",
-        "url": "https://dilse.bartol.es/terminos/favor-por-favor-5110.html"
-      }
-    ]
   }
 ]

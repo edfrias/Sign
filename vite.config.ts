@@ -21,6 +21,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,webp,json}'],
+        // El vocabulario (~10 MB, 539 fotos) no se descarga al instalar: cada foto se guarda
+        // en caché la primera vez que se ve (regla /media/ de abajo). El alfabeto sí se precarga.
+        globIgnores: ['**/media/lse/vocabulario/**'],
         runtimeCaching: [
           {
             // WASM de MediaPipe y modelo de manos: se guardan para uso offline
@@ -35,12 +38,28 @@ export default defineConfig({
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/media/'),
             handler: 'CacheFirst',
-            options: { cacheName: 'sign-media', expiration: { maxEntries: 500 } },
+            options: {
+              cacheName: 'sign-media',
+              expiration: { maxEntries: 1000 },
+              cacheableResponse: { statuses: [200] },
+            },
           },
         ],
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // Ficheros separados: el contenido cambia más a menudo que el código, y MediaPipe es grande
+        manualChunks(id) {
+          if (id.includes('/content/') && id.endsWith('.json')) return 'content';
+          if (id.includes('@mediapipe')) return 'mediapipe';
+          if (id.includes('node_modules')) return 'vendor';
+        },
+      },
+    },
+  },
   test: {
     include: ['src/**/*.test.ts'],
   },

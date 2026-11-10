@@ -26,10 +26,28 @@ export function HomePage() {
         )}
       </section>
 
-      {content.units.map((unit) => (
-        <section key={unit.id} className="unit">
-          <h2>{unit.title}</h2>
-          <p className="muted">{unit.description}</p>
+      <p className="muted summary-line">
+        {content.signs.length} signos en {content.units.length} unidades
+        {completed && completed.size > 0 && ` · ${completed.size} lecciones completadas`}
+      </p>
+
+      {content.units.map((unit, unitIndex) => {
+        const doneCount = unit.lessons.filter((l) => completed?.has(l.id)).length;
+        const total = unit.lessons.length;
+        const started = doneCount > 0 && doneCount < total;
+        // Abiertas: la primera unidad si aún no hay progreso, y las que estén a medias
+        const open = started || (unitIndex === 0 && !completed?.size);
+        return (
+        <details key={unit.id} className="unit" open={open}>
+          <summary>
+            <span className="unit-title">
+              <h2>{unit.title}</h2>
+              <span className="muted">{unit.description}</span>
+            </span>
+            <span className={`badge ${doneCount === total ? 'ok' : ''}`}>
+              {doneCount} de {total} {total === 1 ? 'lección' : 'lecciones'}
+            </span>
+          </summary>
           <ul className="lesson-list">
             {unit.lessons.map((lesson) => {
               const done = completed?.has(lesson.id);
@@ -48,8 +66,9 @@ export function HomePage() {
               );
             })}
           </ul>
-        </section>
-      ))}
+        </details>
+        );
+      })}
     </>
   );
 }

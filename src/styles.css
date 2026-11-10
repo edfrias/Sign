@@ -82,9 +82,21 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 .hero { text-align: center; padding: 24px 0; }
 .hero h1 { margin-bottom: 4px; }
 
-.unit { margin-top: 24px; }
-.unit h2 { margin-bottom: 0; }
-.lesson-list { list-style: none; padding: 0; display: grid; gap: 8px; }
+.summary-line { text-align: center; margin-top: -8px; }
+.unit { margin-top: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.unit summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; cursor: pointer; list-style: none; border-radius: var(--radius);
+}
+.unit summary::-webkit-details-marker { display: none; }
+.unit summary::before { content: '▸'; color: var(--muted); transition: transform 0.15s; }
+.unit[open] summary::before { transform: rotate(90deg); }
+.unit-title { flex: 1; display: grid; gap: 2px; }
+.unit summary h2 { margin: 0; font-size: 1.2rem; }
+.unit summary .muted { font-size: 0.9rem; }
+.unit summary .badge { margin-left: 0; white-space: nowrap; background: var(--bg); color: var(--muted); }
+.unit summary .badge.ok { background: var(--ok-bg); color: var(--ok); }
+.lesson-list { list-style: none; padding: 0 16px 16px; margin: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 .lesson-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 
 .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
@@ -106,6 +118,7 @@ select, input { padding: 8px 10px; }
 .badge.ok { background: var(--ok-bg); color: var(--ok); }
 .badge.warn { background: var(--warn-bg); color: var(--warn); }
 .ok-text { color: var(--ok); }
+.variant { font-size: 0.6em; font-weight: 600; color: var(--muted); vertical-align: middle; }
 
 /* Signos */
 .media { margin: 0; display: grid; gap: 8px; justify-items: start; }

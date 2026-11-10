@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { findLesson } from '../content/loader';
 import { completeLesson } from '../db/actions';
 import { useLanguage } from '../state/LanguageContext';
-import { SignDescriptionList, SignLinks, SignMedia, UnverifiedBadge } from '../components/SignCard';
+import { SignDescriptionList, SignLinks, SignMedia, UnverifiedBadge, VariantLabel } from '../components/SignCard';
 
 export function LessonPage() {
   const { lessonId = '' } = useParams();
@@ -12,7 +12,15 @@ export function LessonPage() {
   const [index, setIndex] = useState(0);
 
   const found = findLesson(content, lessonId);
-  if (!found) return <p>Esta lección no existe en {content.language.short}. <Link to="/">Volver</Link></p>;
+  if (!found) {
+    return (
+      <section className="hero">
+        <h1>Lección no encontrada</h1>
+        <p className="muted">Esta lección no existe en {content.language.short} o ha cambiado de nombre.</p>
+        <Link to="/" className="button primary">Ver las lecciones</Link>
+      </section>
+    );
+  }
 
   const { unit, lesson } = found;
   const signs = lesson.signIds.flatMap((id) => content.signById.get(id) ?? []);
@@ -34,7 +42,7 @@ export function LessonPage() {
       <article className="card lesson-sign">
         <SignMedia sign={sign} />
         <div>
-          <h1>{sign.gloss} <UnverifiedBadge sign={sign} /></h1>
+          <h1>{sign.gloss} <VariantLabel sign={sign} /> <UnverifiedBadge sign={sign} /></h1>
           <SignDescriptionList sign={sign} />
           <SignLinks sign={sign} />
           {sign.kind === 'static' && (

@@ -50,6 +50,10 @@ Each language is a folder in `content/` with `signs.json` and `units.json`, plus
 `content/languages.json`. Videos and images go in `public/media/<language>/` and are referenced
 as `"/media/lse/a.mp4"`.
 
+The LSE content (30 alphabet letters + 538 vocabulary signs) comes from Fundación CNSE's
+Banco LSE and can be regenerated with `pnpm import:alphabet` and `pnpm import:vocabulary`.
+Files named `*.bancolse.json` are generated: do not edit them by hand.
+
 Only use your own material or material whose licence allows it, and fill in `credit` and `license`.
 Set `"verified": true` once a reliable dictionary or a signer has confirmed the sign.
 

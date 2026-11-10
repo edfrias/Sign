@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b",
-    "a11y": "node scripts/a11y.mjs"
+    "a11y": "node scripts/a11y.mjs",
+    "import:vocabulary": "node scripts/import-cnse-vocabulary.mjs",
+    "import:alphabet": "node scripts/import-cnse-alphabet.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^0.10.18",

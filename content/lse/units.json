@@ -65,22 +65,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": "saludos",
-    "title": "Saludos y cortesía",
-    "description": "Lo primero para empezar una conversación.",
-    "lessons": [
-      {
-        "id": "saludos-1",
-        "title": "Saludar y despedirse",
-        "signIds": [
-          "lse.saludo.hola",
-          "lse.saludo.adios",
-          "lse.saludo.gracias",
-          "lse.saludo.por-favor"
-        ]
-      }
-    ]
   }
 ]
