@@ -17,6 +17,7 @@ pnpm dev           # http://localhost:5173
 pnpm test          # unit tests
 pnpm a11y          # accessibility audit with axe (requires Chrome)
 pnpm build         # production build in dist/
+pnpm icons         # regenerate the PNG app icons from public/icon.svg
 ```
 
 The project uses [pnpm](https://pnpm.io/) (the version is pinned in `packageManager` in

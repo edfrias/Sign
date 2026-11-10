@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
 import { useLanguage } from '../state/LanguageContext';
+import { BackupPanel } from '../components/BackupPanel';
 
 export function HomePage() {
   const { lang, content } = useLanguage();
@@ -28,7 +29,7 @@ export function HomePage() {
 
       <p className="muted summary-line">
         {content.signs.length} signos en {content.units.length} unidades
-        {completed && completed.size > 0 && ` · ${completed.size} lecciones completadas`}
+        {completed && completed.size > 0 && ` · ${completed.size} ${completed.size === 1 ? 'lección completada' : 'lecciones completadas'}`}
       </p>
 
       {content.units.map((unit, unitIndex) => {
@@ -69,6 +70,8 @@ export function HomePage() {
         </details>
         );
       })}
+
+      <BackupPanel />
     </>
   );
 }

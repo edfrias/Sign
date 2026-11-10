@@ -10,8 +10,12 @@
 - [x] Video player with loop and 0.5× (ready; content still missing).
 - [x] Full LSE manual alphabet (30 letters, 5 lessons) with photos from Fundación CNSE's Banco LSE.
 - [x] Full Banco LSE vocabulary: 538 signs in 11 units (81 lessons), replacing the unverified greetings.
-- [ ] Descriptions for F, K, S, T, H and Y (only the photo for now).
-- [ ] DILSE videos for the letters with movement (convert `.mov` → MP4/WebM).
+- [ ] Descriptions for F, K, S, T, H and Y (only the photo for now). They differ in which finger
+      touches the thumb, which the photos do not show reliably: needs a check by an LSE signer.
+- [ ] DILSE videos for the letters with movement (convert `.mov` → MP4/WebM). **Blocked on
+      permission**: DILSE's footer says CC BY-NC-SA 3.0 but its legal notice only allows personal,
+      private use and forbids distribution and transformation. Ask Fundación CNSE first
+      (see [04-sources.md](04-sources.md)).
 
 ## Phase 2 · Practise
 - [x] SM-2 algorithm with tests.
@@ -25,16 +29,22 @@
 - [x] Calibration: save and delete your own templates.
 - [x] Built-in references from the photos: practise without calibrating.
 - [x] Hands-free practice and calibration (automatic validation, advance and skip; beeps).
+- [x] Practice redesign: honest feedback band, full-screen focus mode readable at 1 m, setup tips,
+      edge cases (nobody in front, tab switches, disconnected camera, wrong calibrations), one primary
+      action, phone/tablet layouts and screen-reader announcements only on events.
 - [ ] Test with a real camera and tune `TOLERANCE` (`src/vision/classifier.ts`). So far only tested
       with a virtual camera that streams the reference photos.
 
 ## Phase 4 · Polish
-- [ ] Export/import progress.
+- [x] Export/import progress (merges instead of replacing).
 - [x] Automated accessibility audit with axe (`pnpm a11y`): 10 screens × light/dark, no issues.
 - [ ] Manual testing with keyboard and screen reader (NVDA / VoiceOver).
 - [ ] Run `pnpm a11y` in CI (GitHub Actions).
-- [ ] 192/512 PNG icons for installation on iOS.
-- [ ] Upgrade Vite to the current major version (`pnpm audit` warnings in dev dependencies).
+- [x] 192/512 PNG icons, maskable icon and `apple-touch-icon` (`pnpm icons` regenerates them).
+- [x] Upgrade to Vite 8, Vitest 5, vite-plugin-pwa 2 and React Router 7 (`pnpm audit`: from 23
+      warnings to 3, all in Workbox's build-time dependencies).
+- [ ] Upgrade React 18 → 19, TypeScript 5.6 → 7 and MediaPipe 0.10 → 1.x (major versions with
+      breaking changes; MediaPipe needs a real-camera check).
 
 ## v2 and beyond
 - Dynamic signs (sequences + DTW).

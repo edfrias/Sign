@@ -5,12 +5,12 @@
 | Layer | Technology |
 |---|---|
 | Package manager | pnpm (pinned in `packageManager`) |
-| Build | Vite + TypeScript (strict mode) |
-| UI | React 18 + React Router |
+| Build | Vite 8 + TypeScript (strict mode) |
+| UI | React 18 + React Router 7 |
 | PWA | `vite-plugin-pwa` (Workbox service worker) |
 | Persistence | IndexedDB via Dexie |
 | Vision | `@mediapipe/tasks-vision` (Hand Landmarker) |
-| Tests | Vitest |
+| Tests | Vitest 5 |
 | Accessibility | axe-core: `scripts/a11y.mjs` (Playwright + the system's Chrome) and console warnings during development (`src/dev/axeDev.ts`) |
 
 ## Overview
@@ -140,6 +140,13 @@ Each sign has `{ ease, interval, repetitions, due }`. After each answer it is gr
 | `progress` | `[lang+lessonId]` | completed lesson, date |
 | `reviews` | `signId` | SM-2 state |
 | `templates` | `++id`, index `signId` | the user's camera calibration vectors |
+
+**Backup.** Everything lives only in this browser, so the home screen offers «Descargar copia» /
+«Importar copia» (`src/db/backup.ts`, `src/components/BackupPanel.tsx`). The copy is a versioned JSON
+(`app: "sign"`, `version: 1`) without the local IndexedDB keys. Importing validates the file, shows a
+summary to confirm and then **merges** instead of replacing, so nothing on this device is lost:
+lessons are joined (the earliest date wins), each sign keeps the most recently reviewed SM-2 state,
+and each letter keeps its most recent calibration.
 
 The active language is stored in `localStorage` (`sign.lang`) to avoid a flash on start-up;
 the camera tolerance is stored in `sign.tolerance`.

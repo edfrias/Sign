@@ -1,13 +1,13 @@
 # 04 · Content sources (LSE)
 
-Reviewed on 2026-11-10. Licences can change: check them again before importing new material.
+Reviewed on 2026-11-10 (DILSE legal notice read the same day). Licences can change: check them again before importing new material.
 
 ## Summary
 
 | Source | What it offers | Licence | Use in Sign |
 |---|---|---|---|
 | [Banco de imágenes y signos LSE](https://www.fundacioncnse.org/educa/bancolse/index.php) (Fundación CNSE) | ~540 signs of infant/primary-school vocabulary in 29 sections + fingerspelling A–Z (including CH, LL, Ñ, RR). Per sign: a photo of the sign and a drawing, downloadable as PNG | **CC BY-NC-SA 3.0**, educational non-commercial use | ✅ **Fully imported** (alphabet + vocabulary), with attribution |
-| [DILSE](https://fundacioncnse-dilse.org/) (Fundación CNSE) | Standard LSE dictionary: a video of every sign | CC BY-NC-SA 3.0 according to the mirror below (the official site is a JS app and its legal notice could not be read) | ✅ Reference for verification and videos; confirm the licence on the official site before importing videos |
+| [DILSE](https://fundacioncnse-dilse.org/) (Fundación CNSE) | Standard LSE dictionary: a video of every sign | **Contradictory**: the footer says «Contenido original de Fundación CNSE · Licencia CC BY-NC-SA 3.0», but the [legal notice](https://fundacioncnse-dilse.org/paginas/aviso-legal.php) only allows downloads for personal, private, non-profit use and forbids distribution and transformation | 🔗 Reference and links only. **Do not import videos** until Fundación CNSE confirms in writing that the CC licence covers them |
 | [dilse.bartol.es](https://dilse.bartol.es/terminos/) | **Unofficial** mirror of DILSE: 10,929 entries with definition, image and video (`.mov` hosted on fundacioncnse-dilse.org). Stable URLs: `/terminos/<word>-<id>.html` | States CC BY-NC-SA 3.0 (Fundación CNSE data) | 🔗 For searching and linking. Always credit Fundación CNSE as the author, not the mirror |
 | [Spread the Sign](https://www.spreadthesign.com/es.es/alphabet/22/) (European Sign Language Centre) | MP4 video of each letter of the LSE alphabet and a multi-language dictionary (useful for ASL and others) | © with no published open licence | 🔗 Link only. Do not download or embed |
 | [Sématos](https://www.sematos.eu/es/lse) | ~6,000 LSE signs on video, also LSF, LSC and ISL; includes games | © Sématos. Its terms forbid systematic downloading and redistributing videos | 🔗 Link only, as an external resource |
