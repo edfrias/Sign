@@ -9,9 +9,41 @@ const LABELS: Record<string, string> = {
   nonManual: 'Expresión',
 };
 
-export function SignMedia({ sign }: { sign: Sign }) {
+function Credit({ sign, noLink }: { sign: Sign; noLink?: boolean }) {
+  const media = sign.media;
+  if (!media?.credit) return null;
+  const text = `${media.credit}${media.license ? ` · ${media.license}` : ''}`;
+  return (
+    <figcaption>
+      {!noLink && sign.source?.startsWith('http') ? (
+        <a href={sign.source} target="_blank" rel="noopener noreferrer">{text}</a>
+      ) : (
+        text
+      )}
+    </figcaption>
+  );
+}
+
+export function SignLinks({ sign }: { sign: Sign }) {
+  if (!sign.links?.length) return null;
+  return (
+    <p className="links">
+      Ver en:{' '}
+      {sign.links.map((l, i) => (
+        <span key={l.url}>
+          {i > 0 && ' · '}
+          <a href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>
+        </span>
+      ))}
+    </p>
+  );
+}
+
+/** `hideAnswer`: en los quizzes, no revelar la glosa en textos alternativos ni enlaces. */
+export function SignMedia({ sign, hideAnswer }: { sign: Sign; hideAnswer?: boolean }) {
   const [slow, setSlow] = useState(false);
   const media = sign.media;
+  const label = hideAnswer ? 'Signo a adivinar' : `Signo ${sign.gloss}`;
 
   if (media?.video) {
     return (
@@ -27,25 +59,25 @@ export function SignMedia({ sign }: { sign: Sign }) {
           ref={(el) => {
             if (el) el.playbackRate = slow ? 0.5 : 1;
           }}
-          aria-label={`Vídeo del signo ${sign.gloss}`}
+          aria-label={`Vídeo: ${label}`}
         />
         <button type="button" className="chip" onClick={() => setSlow((s) => !s)}>
           {slow ? 'Velocidad normal' : 'Más lento (0,5×)'}
         </button>
-        {media.credit && <figcaption>{media.credit}{media.license && ` · ${media.license}`}</figcaption>}
+        <Credit sign={sign} noLink={hideAnswer} />
       </figure>
     );
   }
   if (media?.image) {
     return (
       <figure className="media">
-        <img src={media.image} alt={`Signo ${sign.gloss}`} />
-        {media.credit && <figcaption>{media.credit}{media.license && ` · ${media.license}`}</figcaption>}
+        <img src={media.image} alt={label} loading="lazy" />
+        <Credit sign={sign} noLink={hideAnswer} />
       </figure>
     );
   }
   return (
-    <div className="media media-empty" role="img" aria-label={`Sin vídeo para ${sign.gloss}`}>
+    <div className="media media-empty" role="img" aria-label={`Sin vídeo: ${label}`}>
       <span aria-hidden="true">✋</span>
       <small>Sin vídeo todavía</small>
     </div>
@@ -54,6 +86,9 @@ export function SignMedia({ sign }: { sign: Sign }) {
 
 export function SignDescriptionList({ sign }: { sign: Sign }) {
   const entries = Object.entries(sign.description).filter(([, v]) => v);
+  if (entries.length === 0) {
+    return sign.media ? <p className="muted desc">Fíjate en la imagen: es la referencia de este signo.</p> : null;
+  }
   return (
     <dl className="desc">
       {entries.map(([k, v]) => (
@@ -83,6 +118,7 @@ export function SignCard({ sign }: { sign: Sign }) {
         {sign.gloss} <UnverifiedBadge sign={sign} />
       </h3>
       <SignDescriptionList sign={sign} />
+      <SignLinks sign={sign} />
     </article>
   );
 }

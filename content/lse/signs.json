@@ -5,11 +5,22 @@
     "category": "alfabeto",
     "kind": "static",
     "description": {
-      "handshape": "Puño cerrado con el pulgar estirado y apoyado en el lateral del índice.",
-      "orientation": "Palma hacia delante.",
-      "location": "Delante del hombro de la mano dominante."
+      "handshape": "Puño cerrado con el pulgar estirado hacia arriba, pegado al lateral del índice.",
+      "orientation": "Palma hacia delante."
     },
-    "verified": false
+    "media": {
+      "image": "/media/lse/alfabeto/a.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-A.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-A.php"
+      }
+    ],
+    "verified": true
   },
   {
     "id": "lse.letra.b",
@@ -17,11 +28,23 @@
     "category": "alfabeto",
     "kind": "static",
     "description": {
-      "handshape": "Cuatro dedos estirados y juntos; el pulgar doblado sobre la palma.",
-      "orientation": "Palma hacia delante.",
-      "location": "Delante del hombro de la mano dominante."
+      "handshape": "Mano plana con los dedos juntos y estirados.",
+      "orientation": "Mano en horizontal, palma hacia el pecho.",
+      "location": "Delante del pecho."
     },
-    "verified": false
+    "media": {
+      "image": "/media/lse/alfabeto/b.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-B.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-B.php"
+      }
+    ],
+    "verified": true
   },
   {
     "id": "lse.letra.c",
@@ -30,10 +53,45 @@
     "kind": "static",
     "description": {
       "handshape": "Dedos juntos y curvados, con el pulgar enfrentado, formando una C.",
-      "orientation": "Palma hacia el lado contrario a la mano dominante.",
-      "location": "Delante del hombro de la mano dominante."
+      "orientation": "Palma hacia el lado."
     },
-    "verified": false
+    "media": {
+      "image": "/media/lse/alfabeto/c.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-C.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-C.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.ch",
+    "gloss": "CH",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Pulgar, índice y corazón estirados en horizontal.",
+      "orientation": "Palma hacia abajo.",
+      "movement": "Desplazamiento lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/ch.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-CH.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-CH.php"
+      }
+    ],
+    "verified": true
   },
   {
     "id": "lse.letra.d",
@@ -41,11 +99,21 @@
     "category": "alfabeto",
     "kind": "static",
     "description": {
-      "handshape": "Índice estirado hacia arriba; los demás dedos curvados tocando la yema del pulgar.",
-      "orientation": "Palma hacia delante.",
-      "location": "Delante del hombro de la mano dominante."
+      "handshape": "Índice estirado hacia arriba; los demás dedos curvados tocando el pulgar."
     },
-    "verified": false
+    "media": {
+      "image": "/media/lse/alfabeto/d.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-D.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-D.php"
+      }
+    ],
+    "verified": true
   },
   {
     "id": "lse.letra.e",
@@ -53,11 +121,556 @@
     "category": "alfabeto",
     "kind": "static",
     "description": {
-      "handshape": "Dedos doblados por las falanges con las yemas cerca de la palma; pulgar recogido debajo.",
-      "orientation": "Palma hacia delante.",
-      "location": "Delante del hombro de la mano dominante."
+      "handshape": "Los cuatro dedos juntos y doblados por las articulaciones; pulgar estirado hacia el lado.",
+      "orientation": "Palma hacia delante."
     },
-    "verified": false
+    "media": {
+      "image": "/media/lse/alfabeto/e.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-E.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-E.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.f",
+    "gloss": "F",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {},
+    "media": {
+      "image": "/media/lse/alfabeto/f.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-F.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-F.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.g",
+    "gloss": "G",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Índice estirado en horizontal; resto de dedos recogidos.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/g.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-G.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-G.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.h",
+    "gloss": "H",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "movement": "Giro de muñeca (ver flecha en la foto)."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/h.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-H.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-H.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.i",
+    "gloss": "I",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Meñique estirado hacia arriba; resto de dedos recogidos."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/i.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-I.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-I.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.j",
+    "gloss": "J",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Como la I.",
+      "movement": "Movimiento circular."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/j.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-J.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-J.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.k",
+    "gloss": "K",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {},
+    "media": {
+      "image": "/media/lse/alfabeto/k.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-K.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-K.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.l",
+    "gloss": "L",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Pulgar e índice estirados formando una L; resto de dedos recogidos.",
+      "orientation": "Palma hacia delante."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/l.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-L.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-L.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.ll",
+    "gloss": "LL",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Como la L.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/ll.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-LL.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-LL.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.m",
+    "gloss": "M",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Índice, corazón y anular estirados apuntando hacia abajo.",
+      "orientation": "Dorso hacia delante."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/m.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-M.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-M.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.n",
+    "gloss": "N",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Índice y corazón estirados apuntando hacia abajo.",
+      "orientation": "Dorso hacia delante."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/n.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-N.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-N.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.enie",
+    "gloss": "Ñ",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Como la N.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/enie.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-N2.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-N2.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.o",
+    "gloss": "O",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Dedos curvados con las yemas tocando el pulgar, formando una O."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/o.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-O.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-O.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.p",
+    "gloss": "P",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Mano plana vertical con los dedos juntos.",
+      "orientation": "Palma hacia el lado."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/p.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-P.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-P.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.q",
+    "gloss": "Q",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Dedos juntos y curvados, con las yemas hacia arriba.",
+      "orientation": "Palma hacia arriba."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/q.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Q.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Q.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.r",
+    "gloss": "R",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Índice y corazón estirados y cruzados."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/r.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-R.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-R.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.rr",
+    "gloss": "RR",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Como la R.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/rr.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-RR.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-RR.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.s",
+    "gloss": "S",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {},
+    "media": {
+      "image": "/media/lse/alfabeto/s.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-S.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-S.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.t",
+    "gloss": "T",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {},
+    "media": {
+      "image": "/media/lse/alfabeto/t.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-T.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-T.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.u",
+    "gloss": "U",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Índice y corazón estirados y separados; resto de dedos recogidos.",
+      "orientation": "Palma hacia delante."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/u.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-U.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-U.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.v",
+    "gloss": "V",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Como la U.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/v.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-V.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-V.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.w",
+    "gloss": "W",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Índice, corazón y anular estirados y separados.",
+      "movement": "Vaivén lateral."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/w.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-W.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-W.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.x",
+    "gloss": "X",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Índice doblado en gancho.",
+      "movement": "Movimiento hacia abajo."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/x.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-X.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-X.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.y",
+    "gloss": "Y",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "movement": "Giro de muñeca (ver flecha en la foto)."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/y.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Y.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Y.php"
+      }
+    ],
+    "verified": true
+  },
+  {
+    "id": "lse.letra.z",
+    "gloss": "Z",
+    "category": "alfabeto",
+    "kind": "dynamic",
+    "description": {
+      "movement": "Trazo en zigzag, dibujando una Z."
+    },
+    "media": {
+      "image": "/media/lse/alfabeto/z.webp",
+      "credit": "Fundación CNSE · Banco de imágenes y signos LSE",
+      "license": "CC BY-NC-SA 3.0"
+    },
+    "source": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Z.php",
+    "links": [
+      {
+        "label": "Banco LSE",
+        "url": "https://www.fundacioncnse.org/educa/bancolse/dactilologico-Z.php"
+      }
+    ],
+    "verified": true
   },
   {
     "id": "lse.saludo.hola",
@@ -69,7 +682,13 @@
       "location": "Junto a la sien.",
       "movement": "Se separa de la cabeza hacia fuera, como un saludo militar suave."
     },
-    "verified": false
+    "verified": false,
+    "links": [
+      {
+        "label": "DILSE",
+        "url": "https://dilse.bartol.es/terminos/hola-5849.html"
+      }
+    ]
   },
   {
     "id": "lse.saludo.gracias",
@@ -81,7 +700,13 @@
       "location": "Yemas cerca de los labios.",
       "movement": "La mano avanza hacia delante y abajo, alejándose de la boca."
     },
-    "verified": false
+    "verified": false,
+    "links": [
+      {
+        "label": "DILSE",
+        "url": "https://dilse.bartol.es/terminos/gracia-gracia-s-5574.html"
+      }
+    ]
   },
   {
     "id": "lse.saludo.adios",
@@ -93,7 +718,13 @@
       "location": "A la altura de la cabeza.",
       "movement": "Los dedos se doblan y estiran repetidamente, o la mano se agita de lado a lado."
     },
-    "verified": false
+    "verified": false,
+    "links": [
+      {
+        "label": "DILSE",
+        "url": "https://dilse.bartol.es/terminos/adios-639.html"
+      }
+    ]
   },
   {
     "id": "lse.saludo.por-favor",
@@ -105,6 +736,12 @@
       "location": "Barbilla.",
       "movement": "Pequeño movimiento hacia abajo con expresión amable."
     },
-    "verified": false
+    "verified": false,
+    "links": [
+      {
+        "label": "DILSE",
+        "url": "https://dilse.bartol.es/terminos/favor-por-favor-5110.html"
+      }
+    ]
   }
 ]

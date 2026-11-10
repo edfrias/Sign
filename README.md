@@ -20,6 +20,7 @@ La cámara necesita `localhost` o HTTPS.
 - [Análisis y requisitos](docs/01-analisis.md)
 - [Arquitectura](docs/02-arquitectura.md)
 - [Hoja de ruta](docs/03-roadmap.md)
+- [Fuentes de contenido y licencias](docs/04-fuentes.md)
 
 ## Añadir contenido
 

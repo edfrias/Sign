@@ -29,7 +29,10 @@ export interface Sign {
   description: SignDescription;
   media?: SignMediaInfo;
   variant?: string;
+  /** URL o referencia de donde sale el signo */
   source?: string;
+  /** Enlaces a diccionarios externos (se abren en otra pestaña) */
+  links?: { label: string; url: string }[];
   /** false mientras no se haya contrastado con una fuente fiable o una persona signante */
   verified?: boolean;
 }

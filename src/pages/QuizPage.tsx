@@ -80,7 +80,7 @@ export function QuizPage() {
       <p className="muted">{lessonId ? 'Quiz de lección' : 'Repaso'} · {index + 1} / {questions.length}</p>
       <h1>¿Qué signo es?</h1>
       <article className="card lesson-sign">
-        <SignMedia sign={q.sign} />
+        <SignMedia sign={q.sign} hideAnswer={!picked} />
         {/* Mientras no haya vídeos, la descripción es la pista */}
         {!q.sign.media?.video && !q.sign.media?.image && <SignDescriptionList sign={q.sign} />}
       </article>

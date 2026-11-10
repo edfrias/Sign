@@ -75,7 +75,7 @@ Proyecto personal. Prioridades: aprender bien, iterar rápido y no depender de u
 
 | Riesgo | Impacto | Mitigación |
 |---|---|---|
-| **Licencias de los vídeos.** Los diccionarios de la Fundación CNSE, Spread the Sign, etc. tienen copyright | Alto | No incrustar vídeos ajenos. Usar recursos con licencia abierta (p. ej. ARASAAC, CC BY-NC-SA, citando autoría), grabar vídeos propios o enlazar a la fuente |
+| **Licencias del material.** Spread the Sign y Sématos tienen copyright; el Banco LSE y DILSE de la Fundación CNSE son CC BY-NC-SA 3.0 | Alto | Usar solo material con licencia abierta citando autoría, o material propio; lo demás, solo enlazado. Detalle en [04-fuentes.md](04-fuentes.md) |
 | El reconocimiento por cámara da falsos positivos o negativos | Medio | Limitarlo a formas estáticas, usar plantillas calibradas por el propio usuario y mostrarlo como ayuda, no como verdad |
 | Variantes regionales dentro de una misma lengua | Medio | Campo `variant` en cada signo y nota visible |
 | La app enseña un signo mal | Medio | Cada signo cita su fuente; revisión por una persona signante cuando sea posible |

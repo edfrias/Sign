@@ -8,8 +8,10 @@
 - [x] Lista de unidades y vista de lección paso a paso.
 - [x] Diccionario con búsqueda (sin tildes) y filtro por categoría.
 - [x] Reproductor de vídeo con bucle y 0,5× (listo; falta contenido).
-- [ ] **Contenido**: alfabeto manual LSE completo con vídeos/imágenes con licencia.
-- [ ] **Verificar** las descripciones actuales (todas marcadas "Sin verificar").
+- [x] Alfabeto manual LSE completo (30 letras, 5 lecciones) con fotos del Banco LSE de la Fundación CNSE.
+- [ ] Descripciones de F, K, S, T, H e Y (ahora solo hay foto).
+- [ ] Saludos: sustituir las descripciones sin verificar por material del Banco LSE (sección "Saludos y cortesía").
+- [ ] Vídeos de DILSE para las letras con movimiento (convertir `.mov` → MP4/WebM).
 
 ## Fase 2 · Practicar
 - [x] Algoritmo SM-2 con tests.

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { findLesson } from '../content/loader';
 import { completeLesson } from '../db/actions';
 import { useLanguage } from '../state/LanguageContext';
-import { SignDescriptionList, SignMedia, UnverifiedBadge } from '../components/SignCard';
+import { SignDescriptionList, SignLinks, SignMedia, UnverifiedBadge } from '../components/SignCard';
 
 export function LessonPage() {
   const { lessonId = '' } = useParams();
@@ -36,6 +36,7 @@ export function LessonPage() {
         <div>
           <h1>{sign.gloss} <UnverifiedBadge sign={sign} /></h1>
           <SignDescriptionList sign={sign} />
+          <SignLinks sign={sign} />
           {sign.kind === 'static' && (
             <Link to={`/practica?signo=${encodeURIComponent(sign.id)}`} className="button">Practicar con cámara</Link>
           )}

@@ -101,8 +101,12 @@ select, input { padding: 8px 10px; }
 
 /* Signos */
 .media { margin: 0; display: grid; gap: 8px; justify-items: start; }
-.media video, .media img { width: 100%; border-radius: 8px; background: #000; aspect-ratio: 4 / 3; object-fit: contain; }
+.media video, .media img { width: 100%; border-radius: 8px; object-fit: contain; }
+.media video { background: #000; aspect-ratio: 4 / 3; }
+.media img { background: #fff; aspect-ratio: 1; }
 .media figcaption { font-size: 0.8rem; color: var(--muted); }
+.media figcaption a { color: inherit; }
+.links { font-size: 0.9rem; color: var(--muted); }
 .media-empty {
   width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--border); border-radius: 8px;
   display: grid; place-content: center; justify-items: center; color: var(--muted);

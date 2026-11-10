@@ -4,7 +4,66 @@
     "title": "Alfabeto manual",
     "description": "La dactilología: deletrear con las manos.",
     "lessons": [
-      { "id": "alfabeto-1", "title": "Letras A–E", "signIds": ["lse.letra.a", "lse.letra.b", "lse.letra.c", "lse.letra.d", "lse.letra.e"] }
+      {
+        "id": "alfabeto-1",
+        "title": "A, B, C, CH, D, E",
+        "signIds": [
+          "lse.letra.a",
+          "lse.letra.b",
+          "lse.letra.c",
+          "lse.letra.ch",
+          "lse.letra.d",
+          "lse.letra.e"
+        ]
+      },
+      {
+        "id": "alfabeto-2",
+        "title": "F, G, H, I, J, K",
+        "signIds": [
+          "lse.letra.f",
+          "lse.letra.g",
+          "lse.letra.h",
+          "lse.letra.i",
+          "lse.letra.j",
+          "lse.letra.k"
+        ]
+      },
+      {
+        "id": "alfabeto-3",
+        "title": "L, LL, M, N, Ñ, O",
+        "signIds": [
+          "lse.letra.l",
+          "lse.letra.ll",
+          "lse.letra.m",
+          "lse.letra.n",
+          "lse.letra.enie",
+          "lse.letra.o"
+        ]
+      },
+      {
+        "id": "alfabeto-4",
+        "title": "P, Q, R, RR, S, T",
+        "signIds": [
+          "lse.letra.p",
+          "lse.letra.q",
+          "lse.letra.r",
+          "lse.letra.rr",
+          "lse.letra.s",
+          "lse.letra.t"
+        ]
+      },
+      {
+        "id": "alfabeto-5",
+        "title": "U, V, W, X, Y, Z",
+        "signIds": [
+          "lse.letra.u",
+          "lse.letra.v",
+          "lse.letra.w",
+          "lse.letra.x",
+          "lse.letra.y",
+          "lse.letra.z"
+        ]
+      }
     ]
   },
   {
@@ -12,7 +71,16 @@
     "title": "Saludos y cortesía",
     "description": "Lo primero para empezar una conversación.",
     "lessons": [
-      { "id": "saludos-1", "title": "Saludar y despedirse", "signIds": ["lse.saludo.hola", "lse.saludo.adios", "lse.saludo.gracias", "lse.saludo.por-favor"] }
+      {
+        "id": "saludos-1",
+        "title": "Saludar y despedirse",
+        "signIds": [
+          "lse.saludo.hola",
+          "lse.saludo.adios",
+          "lse.saludo.gracias",
+          "lse.saludo.por-favor"
+        ]
+      }
     ]
   }
 ]
