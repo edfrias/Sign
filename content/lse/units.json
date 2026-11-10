@@ -1,0 +1,18 @@
+[
+  {
+    "id": "alfabeto",
+    "title": "Alfabeto manual",
+    "description": "La dactilología: deletrear con las manos.",
+    "lessons": [
+      { "id": "alfabeto-1", "title": "Letras A–E", "signIds": ["lse.letra.a", "lse.letra.b", "lse.letra.c", "lse.letra.d", "lse.letra.e"] }
+    ]
+  },
+  {
+    "id": "saludos",
+    "title": "Saludos y cortesía",
+    "description": "Lo primero para empezar una conversación.",
+    "lessons": [
+      { "id": "saludos-1", "title": "Saludar y despedirse", "signIds": ["lse.saludo.hola", "lse.saludo.adios", "lse.saludo.gracias", "lse.saludo.por-favor"] }
+    ]
+  }
+]

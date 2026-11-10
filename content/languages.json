@@ -1,0 +1,4 @@
+[
+  { "id": "lse", "name": "Lengua de Signos Española", "short": "LSE", "region": "España" },
+  { "id": "asl", "name": "American Sign Language", "short": "ASL", "region": "EE. UU." }
+]

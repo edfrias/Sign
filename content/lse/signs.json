@@ -1,0 +1,110 @@
+[
+  {
+    "id": "lse.letra.a",
+    "gloss": "A",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Puño cerrado con el pulgar estirado y apoyado en el lateral del índice.",
+      "orientation": "Palma hacia delante.",
+      "location": "Delante del hombro de la mano dominante."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.letra.b",
+    "gloss": "B",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Cuatro dedos estirados y juntos; el pulgar doblado sobre la palma.",
+      "orientation": "Palma hacia delante.",
+      "location": "Delante del hombro de la mano dominante."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.letra.c",
+    "gloss": "C",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Dedos juntos y curvados, con el pulgar enfrentado, formando una C.",
+      "orientation": "Palma hacia el lado contrario a la mano dominante.",
+      "location": "Delante del hombro de la mano dominante."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.letra.d",
+    "gloss": "D",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Índice estirado hacia arriba; los demás dedos curvados tocando la yema del pulgar.",
+      "orientation": "Palma hacia delante.",
+      "location": "Delante del hombro de la mano dominante."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.letra.e",
+    "gloss": "E",
+    "category": "alfabeto",
+    "kind": "static",
+    "description": {
+      "handshape": "Dedos doblados por las falanges con las yemas cerca de la palma; pulgar recogido debajo.",
+      "orientation": "Palma hacia delante.",
+      "location": "Delante del hombro de la mano dominante."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.saludo.hola",
+    "gloss": "Hola",
+    "category": "saludos",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Mano abierta, dedos juntos.",
+      "location": "Junto a la sien.",
+      "movement": "Se separa de la cabeza hacia fuera, como un saludo militar suave."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.saludo.gracias",
+    "gloss": "Gracias",
+    "category": "saludos",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Mano plana, dedos juntos.",
+      "location": "Yemas cerca de los labios.",
+      "movement": "La mano avanza hacia delante y abajo, alejándose de la boca."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.saludo.adios",
+    "gloss": "Adiós",
+    "category": "saludos",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Mano abierta.",
+      "location": "A la altura de la cabeza.",
+      "movement": "Los dedos se doblan y estiran repetidamente, o la mano se agita de lado a lado."
+    },
+    "verified": false
+  },
+  {
+    "id": "lse.saludo.por-favor",
+    "gloss": "Por favor",
+    "category": "saludos",
+    "kind": "dynamic",
+    "description": {
+      "handshape": "Mano plana.",
+      "location": "Barbilla.",
+      "movement": "Pequeño movimiento hacia abajo con expresión amable."
+    },
+    "verified": false
+  }
+]

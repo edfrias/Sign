@@ -1,0 +1,10 @@
+[
+  {
+    "id": "alphabet",
+    "title": "Alfabeto manual (ASL)",
+    "description": "Fingerspelling básico.",
+    "lessons": [
+      { "id": "alphabet-1", "title": "Letras A–C", "signIds": ["asl.letter.a", "asl.letter.b", "asl.letter.c"] }
+    ]
+  }
+]

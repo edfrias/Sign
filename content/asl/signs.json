@@ -1,0 +1,26 @@
+[
+  {
+    "id": "asl.letter.a",
+    "gloss": "A",
+    "category": "alphabet",
+    "kind": "static",
+    "description": { "handshape": "Puño cerrado con el pulgar estirado junto al lateral del índice.", "orientation": "Palma hacia delante." },
+    "verified": false
+  },
+  {
+    "id": "asl.letter.b",
+    "gloss": "B",
+    "category": "alphabet",
+    "kind": "static",
+    "description": { "handshape": "Cuatro dedos estirados y juntos; pulgar cruzado sobre la palma.", "orientation": "Palma hacia delante." },
+    "verified": false
+  },
+  {
+    "id": "asl.letter.c",
+    "gloss": "C",
+    "category": "alphabet",
+    "kind": "static",
+    "description": { "handshape": "Dedos y pulgar curvados formando una C.", "orientation": "Palma hacia el lado." },
+    "verified": false
+  }
+]
