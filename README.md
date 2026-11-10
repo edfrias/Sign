@@ -37,6 +37,21 @@ The camera requires `localhost` or HTTPS.
 axe automatically detects roughly half of all accessibility issues; keyboard and screen-reader
 navigation still need to be tested by hand.
 
+## Development tools (optional)
+
+The `.claude/` folder is not tracked: Claude Code tooling is installed locally by each developer.
+
+- **[Impeccable](https://github.com/pbakaus/impeccable)** (design skill for Claude Code):
+
+  ```bash
+  pnpm dlx impeccable install --providers=claude --scope=project
+  ```
+
+  Restart Claude Code, then run `/impeccable init` once. Its project files (`PRODUCT.md`, `DESIGN.md`
+  and the shared parts of `.impeccable/`) are tracked; its runtime files are ignored in `.gitignore`.
+- **Dev server for the Claude desktop app's preview pane**: create `.claude/launch.json` with a
+  configuration that runs `pnpm dev --port 5173 --strictPort` on port 5173.
+
 ## Documentation
 
 - [Analysis and requirements](docs/01-analysis.md)
