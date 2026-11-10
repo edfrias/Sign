@@ -33,7 +33,12 @@ Marca `"verified": true` cuando un diccionario fiable o una persona signante hay
 
 ## Práctica con cámara
 
-1. Abre **Cámara**, elige un signo y activa la cámara.
-2. Haz el signo bien y pulsa **Calibrar** (graba 30 muestras).
-3. Calibra al menos otro signo para que la app pueda distinguirlos.
-4. Practica: la puntuación compara tu mano con tus propias referencias.
+Funciona manos libres y sin calibrar: las fotos de cada letra sirven de referencia.
+
+1. Abre **Cámara** y pulsa **Empezar práctica** (es el único clic).
+2. Signa la letra que aparece en grande. Al mantenerla bien 1 segundo suena un pitido y pasa a la
+   siguiente; si te atascas, se salta sola a los 20 s.
+3. Opcional: **Calibración guiada** recorre las letras grabando tu mano automáticamente cuando la
+   mantienes quieta, y mejora la precisión.
+
+Si valida demasiado fácil o difícil, cambia la **Tolerancia** antes de empezar.

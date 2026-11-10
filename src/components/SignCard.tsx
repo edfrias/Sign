@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { Sign } from '../content/types';
+import { licenseUrl } from '../content/licenses';
 
 const LABELS: Record<string, string> = {
   handshape: 'Configuración',
@@ -9,17 +11,26 @@ const LABELS: Record<string, string> = {
   nonManual: 'Expresión',
 };
 
+/** Atribución exigida por la licencia: autoría, enlace a la fuente original y a la licencia. */
 function Credit({ sign, noLink }: { sign: Sign; noLink?: boolean }) {
   const media = sign.media;
   if (!media?.credit) return null;
-  const text = `${media.credit}${media.license ? ` · ${media.license}` : ''}`;
+  const licUrl = licenseUrl(media.license);
   return (
     <figcaption>
       {!noLink && sign.source?.startsWith('http') ? (
-        <a href={sign.source} target="_blank" rel="noopener noreferrer">{text}</a>
+        <a href={sign.source} target="_blank" rel="noopener noreferrer" title="Página original">{media.credit}</a>
       ) : (
-        text
+        media.credit
       )}
+      {media.license && (
+        <>
+          {' · '}
+          {licUrl ? <a href={licUrl} target="_blank" rel="noopener noreferrer license">{media.license}</a> : media.license}
+        </>
+      )}
+      {' · '}
+      <Link to="/creditos">Créditos</Link>
     </figcaption>
   );
 }

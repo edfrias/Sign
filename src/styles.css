@@ -68,6 +68,13 @@ h1, h2, h3 { line-height: 1.2; }
 
 main { max-width: 960px; margin: 0 auto; padding: 16px; }
 
+.site-footer { max-width: 960px; margin: 24px auto 0; padding: 16px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); text-align: center; }
+.site-footer a { color: inherit; }
+.credit-block { margin: 12px 0; }
+.credit-block h3 { margin-top: 0; }
+.credit-list { font-size: 0.85rem; padding-left: 18px; }
+.credit-list a { word-break: break-all; }
+
 /* Bloques */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
 .muted { color: var(--muted); }
@@ -141,4 +148,29 @@ select, input { padding: 8px 10px; }
 .camera { position: relative; aspect-ratio: 4 / 3; background: #000; border-radius: 8px; overflow: hidden; }
 .camera video, .camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
 .camera-overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; color: #fff; text-align: center; padding: 16px; }
-meter { width: 100%; height: 16px; }
+.camera { border: 4px solid transparent; transition: border-color 0.15s; }
+.camera.flash-ok, .camera.flash-saved { border-color: var(--ok); }
+.camera.flash-skip { border-color: var(--warn); }
+/* Textos grandes: se leen a un metro de distancia mientras signas */
+.camera-target {
+  position: absolute; top: 12px; left: 12px; min-width: 72px; padding: 4px 16px; border-radius: 12px;
+  background: rgba(0, 0, 0, 0.65); color: #fff; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; text-align: center; line-height: 1.1;
+}
+.camera-hint, .camera-flash {
+  position: absolute; left: 0; right: 0; bottom: 28px; text-align: center; color: #fff;
+  font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 700; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+.camera-flash { font-size: clamp(1.8rem, 6vw, 3rem); }
+.camera-progress { position: absolute; left: 12px; right: 12px; bottom: 10px; height: 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.3); overflow: hidden; }
+.camera-progress span { display: block; height: 100%; background: #3fb950; transition: width 0.08s linear; }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; padding: 12px; }
+.toolbar label { display: flex; gap: 6px; align-items: center; }
+.small { font-size: 0.85rem; }
+
+.letter-chips { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-letter { min-width: 36px; padding: 4px 8px; text-align: center; font-weight: 700; border: 2px solid var(--border); border-radius: 8px; }
+.chip-letter.ok { background: var(--ok-bg); color: var(--ok); border-color: var(--ok); }
+.chip-letter.skipped { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
+.chip-letter.current { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.chip-letter sup { color: var(--accent); }

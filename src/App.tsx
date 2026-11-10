@@ -6,6 +6,7 @@ import { LessonPage } from './pages/LessonPage';
 import { DictionaryPage } from './pages/DictionaryPage';
 import { QuizPage } from './pages/QuizPage';
 import { PracticePage } from './pages/PracticePage';
+import { CreditsPage } from './pages/CreditsPage';
 
 export function App() {
   const { lang, setLang } = useLanguage();
@@ -41,9 +42,17 @@ export function App() {
           <Route path="/repaso" element={<QuizPage />} />
           <Route path="/practica" element={<PracticePage />} />
           <Route path="/diccionario" element={<DictionaryPage />} />
+          <Route path="/creditos" element={<CreditsPage />} />
           <Route path="*" element={<p>Página no encontrada.</p>} />
         </Routes>
       </main>
+
+      <footer className="site-footer">
+        Imágenes de signos: <a href="https://www.fundacioncnse.org/educa/bancolse/" target="_blank" rel="noopener noreferrer">Fundación CNSE</a>,{' '}
+        <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.es" target="_blank" rel="noopener noreferrer license">CC BY-NC-SA 3.0</a>
+        {' · '}
+        <NavLink to="/creditos">Créditos y licencias</NavLink>
+      </footer>
     </div>
   );
 }

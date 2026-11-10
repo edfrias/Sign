@@ -25,6 +25,16 @@ export async function saveTemplates(signId: string, vectors: number[][]) {
   await db.templates.bulkAdd(vectors.map((vector) => ({ signId, vector, createdAt: now })));
 }
 
-export async function clearTemplates(signId: string) {
-  await db.templates.where('signId').equals(signId).delete();
+/** Sustituye la calibración de un signo por las muestras nuevas. */
+export async function replaceTemplates(signId: string, vectors: number[][]) {
+  const now = Date.now();
+  await db.transaction('rw', db.templates, async () => {
+    await db.templates.where('signId').equals(signId).delete();
+    await db.templates.bulkAdd(vectors.map((vector) => ({ signId, vector, createdAt: now })));
+  });
+}
+
+export async function clearTemplates(signId?: string) {
+  if (signId) await db.templates.where('signId').equals(signId).delete();
+  else await db.templates.clear();
 }

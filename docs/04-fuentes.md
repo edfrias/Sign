@@ -31,6 +31,16 @@ mano era demasiado sutil para describirla con fiabilidad (F, K, S, T, H, Y), sol
 Las letras con flecha de movimiento en la foto (CH, G, H, J, LL, Ñ, RR, V, W, X, Y, Z) están marcadas
 como `dynamic` y no aparecen en la práctica con cámara.
 
+## Atribución en la app
+
+- Cada foto muestra al pie: autoría (enlazada a su página original), licencia (enlazada al texto
+  legal de Creative Commons) y enlace a **Créditos**.
+- El pie de todas las pantallas enlaza a la Fundación CNSE, a la licencia y a `/creditos`.
+- La página `/creditos` recoge autoría, fuente, licencia, cambios realizados, licencia del contenido
+  derivado, aviso de no afiliación, la página original de cada imagen y las fuentes solo enlazadas.
+- `src/content/content.test.ts` falla si alguna imagen de terceros no tiene autoría, licencia con
+  enlace (`src/content/licenses.ts`) o página original.
+
 ## Notas técnicas
 
 - **Imágenes del dactilológico**: hay varias variantes por letra en

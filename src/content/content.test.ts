@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { getContent, languages } from './loader';
+import { licenseUrl } from './licenses';
 
 const publicDir = fileURLToPath(new URL('../../public', import.meta.url));
 
@@ -28,11 +29,12 @@ describe.each(languages.map((l) => l.id))('contenido %s', (langId) => {
     }
   });
 
-  it('el material de terceros lleva autoría y licencia', () => {
+  it('el material de terceros lleva autoría, licencia enlazada y página original', () => {
     for (const s of content.signs) {
       if (s.media) {
         expect(s.media.credit, s.id).toBeTruthy();
-        expect(s.media.license, s.id).toBeTruthy();
+        expect(licenseUrl(s.media.license), `${s.id}: licencia sin enlace en licenses.ts`).toBeTruthy();
+        expect(s.source, `${s.id}: falta la página original`).toMatch(/^https:\/\//);
       }
     }
   });

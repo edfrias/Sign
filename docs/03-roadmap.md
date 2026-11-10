@@ -23,7 +23,10 @@
 - [x] Detección de manos con MediaPipe y dibujo de puntos.
 - [x] Rasgos normalizados + clasificador por vecino más cercano, con tests.
 - [x] Calibración: guardar y borrar plantillas propias.
-- [ ] Probar con cámara real y ajustar `MAX_DISTANCE` / `PASS_SCORE` (`src/vision/classifier.ts`).
+- [x] Referencias de fábrica a partir de las fotos: practicar sin calibrar.
+- [x] Práctica y calibración manos libres (validación, avance y salto automáticos, pitidos).
+- [ ] Probar con cámara real y ajustar `TOLERANCE` (`src/vision/classifier.ts`). Probado solo con
+      una cámara virtual que emite las fotos de referencia.
 
 ## Fase 4 · Pulido
 - [ ] Exportar/importar progreso.

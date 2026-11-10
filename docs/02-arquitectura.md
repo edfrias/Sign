@@ -80,10 +80,28 @@ Las unidades referencian signos por `id`. Añadir una lengua = nueva carpeta + e
    - Escalar por la distancia muñeca → base del dedo corazón (independiente de la distancia a la cámara).
    - Reflejar el eje X si es la mano izquierda (independiente de la mano dominante).
    - Resultado: vector de 63 números.
-3. **Clasificación** (`classifier.ts`): k vecinos más cercanos contra las plantillas
-   guardadas del usuario. La puntuación 0–100 sale de la distancia a la plantilla más cercana
-   del signo objetivo.
-4. **Estabilidad**: se promedia sobre una ventana de ~10 fotogramas para evitar parpadeos.
+3. **Plantillas** (`referenceTemplates.ts`): al abrir la práctica, MediaPipe (modo imagen, CPU)
+   analiza la foto de cada signo estático y guarda en memoria su vector. Son las **referencias de
+   fábrica**: la app funciona sin calibrar. La calibración del usuario añade sus propios vectores (IndexedDB).
+4. **Clasificación** (`classifier.ts`): vecino más cercano contra referencias + calibración.
+   Un signo es correcto si el más parecido es el objetivo **y** su distancia no supera la
+   tolerancia elegida (estricta 0,25 · normal 0,35 · flexible 0,45, en longitudes de palma).
+5. **Suavizado**: se promedian los últimos 8 fotogramas para evitar parpadeos.
+
+### Manos libres (`sessions.ts`)
+
+Mientras se signa no se puede usar teclado ni ratón, así que todo avanza solo tras un único clic:
+
+- **Práctica** (`PracticeSession`): el signo se valida al mantenerlo correcto 1 s (tolera cortes de
+  0,3 s), suena un pitido y pasa al siguiente. Si en 20 s con la mano visible no se consigue, se salta.
+  El tiempo no corre mientras no hay mano a la vista.
+- **Calibración guiada** (`CalibrationSession`): por cada letra, 1,5 s para colocar la mano, espera
+  a que esté quieta 0,8 s (dispersión ≤ 0,08) y graba durante 1 s. Si la mano desaparece mientras
+  graba, no guarda nada a medias. Sustituye la calibración anterior de esa letra.
+- Pitidos distintos para acierto, salto, grabación y fin (`sound.ts`), y textos grandes legibles a 1 m.
+
+Distancia entre las referencias de letras más parecidas (de las fotos): O–S 0,23 · E–S 0,27 ·
+L–R 0,29. Por eso la tolerancia "normal" exige además que el objetivo sea el más cercano.
 
 v2 (signos dinámicos): grabar secuencias de vectores y compararlas con *Dynamic Time Warping*.
 

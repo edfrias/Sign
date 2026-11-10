@@ -1,4 +1,4 @@
-/** Clasificador por vecino más cercano contra plantillas grabadas por el usuario. */
+/** Clasificador por vecino más cercano contra plantillas (de referencia y del usuario). */
 
 export interface Template {
   signId: string;
@@ -9,14 +9,23 @@ export interface Match {
   signId: string;
   /** Distancia media por punto, en unidades de "longitud de palma" */
   distance: number;
-  /** 0–100 */
+  /** Parecido 0–100, solo para mostrar */
   score: number;
 }
 
-/** Distancia a partir de la cual la puntuación es 0. Ajustar con pruebas reales. */
-export const MAX_DISTANCE = 0.5;
-/** Puntuación mínima para dar el signo por correcto. */
-export const PASS_SCORE = 60;
+/**
+ * Distancia máxima a la plantilla del signo objetivo para darlo por bueno.
+ * Valores iniciales: ajustarlos con pruebas reales de cámara.
+ */
+export const TOLERANCE = {
+  estricta: 0.25,
+  normal: 0.35,
+  flexible: 0.45,
+} as const;
+export type Tolerance = keyof typeof TOLERANCE;
+
+/** Distancia a partir de la cual el parecido mostrado es 0. */
+const DISPLAY_MAX_DISTANCE = 0.7;
 
 /** Distancia euclídea media por punto (cada punto son 3 coordenadas). */
 export function landmarkDistance(a: number[], b: number[]): number {
@@ -29,7 +38,7 @@ export function landmarkDistance(a: number[], b: number[]): number {
 }
 
 export function distanceToScore(distance: number): number {
-  return Math.round(100 * Math.max(0, 1 - distance / MAX_DISTANCE));
+  return Math.round(100 * Math.max(0, 1 - distance / DISPLAY_MAX_DISTANCE));
 }
 
 /** Devuelve cada signo con su plantilla más cercana, ordenado de mejor a peor. */
@@ -46,17 +55,33 @@ export function rankSigns(vector: number[], templates: Template[]): Match[] {
 }
 
 export interface Evaluation {
-  /** Puntuación respecto al signo objetivo (undefined si no tiene plantillas) */
+  /** Coincidencia con el signo objetivo (undefined si no tiene plantillas) */
   target?: Match;
-  /** El signo calibrado que más se parece */
+  /** El signo que más se parece */
   best?: Match;
   correct: boolean;
 }
 
-export function evaluate(vector: number[], templates: Template[], targetSignId: string): Evaluation {
+/** Correcto si el signo más parecido es el objetivo y está lo bastante cerca. */
+export function evaluate(
+  vector: number[],
+  templates: Template[],
+  targetSignId: string,
+  maxDistance: number = TOLERANCE.normal,
+): Evaluation {
   const ranking = rankSigns(vector, templates);
   const target = ranking.find((m) => m.signId === targetSignId);
   const best = ranking[0];
-  const correct = !!target && best?.signId === targetSignId && target.score >= PASS_SCORE;
+  const correct = !!target && best?.signId === targetSignId && target.distance <= maxDistance;
   return { target, best, correct };
+}
+
+/** Dispersión media de una ventana de vectores respecto a su media (mano quieta → valor bajo). */
+export function jitter(vectors: number[][]): number {
+  const n = vectors.length;
+  const first = vectors[0];
+  if (!first || n < 2) return Infinity;
+  const mean = new Array<number>(first.length).fill(0);
+  for (const v of vectors) for (let i = 0; i < v.length; i++) mean[i]! += v[i]! / n;
+  return vectors.reduce((acc, v) => acc + landmarkDistance(v, mean), 0) / n;
 }
