@@ -12,22 +12,26 @@ Repository: <https://github.com/edfrias/Sign> · Issues: <https://github.com/edf
 ## Getting started
 
 ```bash
-npm install
-npm run dev        # http://localhost:5173
-npm test           # unit tests
-npm run a11y       # accessibility audit with axe (requires Chrome)
-npm run build      # production build in dist/
+pnpm install
+pnpm dev           # http://localhost:5173
+pnpm test          # unit tests
+pnpm a11y          # accessibility audit with axe (requires Chrome)
+pnpm build         # production build in dist/
 ```
+
+The project uses [pnpm](https://pnpm.io/) (the version is pinned in `packageManager` in
+`package.json`; run `corepack enable` to get it automatically). Do not use npm or yarn: they would
+create a second lockfile.
 
 The camera requires `localhost` or HTTPS.
 
 ## Accessibility
 
-- `npm run a11y` starts the app, opens every screen in Chrome (light and dark mode) and runs
+- `pnpm a11y` starts the app, opens every screen in Chrome (light and dark mode) and runs
   [axe-core](https://github.com/dequelabs/axe-core) with the WCAG 2.2 A/AA and best-practice rules.
   It exits with an error if it finds issues and writes the details to `a11y-report/report.json`.
-  Options: `-- --only /creditos` for a single route, `A11Y_BROWSER=msedge` to use Edge.
-- With `npm run dev`, axe re-checks the page whenever it changes and logs new issues to the
+  Options: `pnpm a11y --only creditos` for a single route, `A11Y_BROWSER=msedge` to use Edge.
+- With `pnpm dev`, axe re-checks the page whenever it changes and logs new issues to the
   browser console (`[axe] …`). It is not included in the production build.
 
 axe automatically detects roughly half of all accessibility issues; keyboard and screen-reader

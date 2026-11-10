@@ -32,7 +32,8 @@
     "typescript": "~5.6.3",
     "vite": "^5.4.11",
     "vite-plugin-pwa": "^0.21.1",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "workbox-window": "^7.4.1"
   },
   "description": "Installable web app (PWA) to learn sign languages: lessons, spaced-repetition quizzes and hands-free camera practice.",
   "repository": {
@@ -49,5 +50,6 @@
     "pwa",
     "mediapipe",
     "accessibility"
-  ]
+  ],
+  "packageManager": "pnpm@10.34.5"
 }

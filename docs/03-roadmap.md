@@ -30,11 +30,11 @@
 
 ## Phase 4 · Polish
 - [ ] Export/import progress.
-- [x] Automated accessibility audit with axe (`npm run a11y`): 10 screens × light/dark, no issues.
+- [x] Automated accessibility audit with axe (`pnpm a11y`): 10 screens × light/dark, no issues.
 - [ ] Manual testing with keyboard and screen reader (NVDA / VoiceOver).
-- [ ] Run `npm run a11y` in CI (GitHub Actions).
+- [ ] Run `pnpm a11y` in CI (GitHub Actions).
 - [ ] 192/512 PNG icons for installation on iOS.
-- [ ] Upgrade Vite to the current major version (`npm audit` warnings in dev dependencies).
+- [ ] Upgrade Vite to the current major version (`pnpm audit` warnings in dev dependencies).
 
 ## v2 and beyond
 - Dynamic signs (sequences + DTW).

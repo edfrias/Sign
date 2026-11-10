@@ -1,9 +1,9 @@
 // Auditoría de accesibilidad con axe-core en un navegador real (Chrome o Edge del sistema).
 // Recorre todas las pantallas en modo claro y oscuro y falla si hay infracciones WCAG 2.2 A/AA.
 //
-// Uso: npm run a11y                     (todas las pantallas)
-//      npm run a11y -- --only /creditos  (una ruta)
-//      A11Y_BROWSER=msedge npm run a11y  (otro navegador: chrome | msedge)
+// Uso: pnpm a11y                        (todas las pantallas)
+//      pnpm a11y --only creditos        (una ruta; también vale "/creditos" fuera de Git Bash)
+//      A11Y_BROWSER=msedge pnpm a11y    (otro navegador: chrome | msedge)
 
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'vite';
@@ -38,7 +38,10 @@ const SCHEMES = ['light', 'dark'];
 
 function parseArgs() {
   const i = process.argv.indexOf('--only');
-  return { only: i > 0 ? process.argv[i + 1] : null };
+  const raw = i > 0 ? process.argv[i + 1] : null;
+  // Se acepta "creditos" o "/creditos". Sin barra funciona también en Git Bash,
+  // que convierte los argumentos que empiezan por "/" en rutas de Windows.
+  return { only: raw == null ? null : `/${raw.replace(/^\/+/, '')}` };
 }
 
 function formatViolation(v) {

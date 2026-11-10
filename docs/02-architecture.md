@@ -4,6 +4,7 @@
 
 | Layer | Technology |
 |---|---|
+| Package manager | pnpm (pinned in `packageManager`) |
 | Build | Vite + TypeScript (strict mode) |
 | UI | React 18 + React Router |
 | PWA | `vite-plugin-pwa` (Workbox service worker) |
