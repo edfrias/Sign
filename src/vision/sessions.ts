@@ -31,6 +31,12 @@ export const PRACTICE_DEFAULTS: PracticeOptions = {
   skipFeedbackMs: 3000,
 };
 
+/**
+ * Hueco máximo entre dos fotogramas que aún se considera práctica continua. Por encima, la sesión
+ * ha estado interrumpida. Generoso a propósito: un equipo lento a 1 fps debe poder validar letras.
+ */
+export const MAX_FRAME_GAP_MS = 2000;
+
 export type PracticePhase = 'signing' | 'success' | 'skipped' | 'finished';
 export type PracticeEvent = 'success' | 'skipped' | 'next' | 'finished';
 export type Outcome = 'ok' | 'skipped';
@@ -66,7 +72,7 @@ export class PracticeSession {
 
   /** Procesa un fotograma. Devuelve el evento ocurrido, si lo hay. */
   update(now: number, handVisible: boolean, correct: boolean): PracticeEvent | null {
-    const dt = this.lastFrame === null ? 0 : Math.max(0, now - this.lastFrame);
+    const gap = this.lastFrame === null ? 0 : Math.max(0, now - this.lastFrame);
     this.lastFrame = now;
 
     if (this.phase === 'finished') return null;
@@ -74,7 +80,11 @@ export class PracticeSession {
       return now >= this.phaseUntil ? this.advance() : null;
     }
 
-    if (handVisible) this.activeMs += dt;
+    // Un hueco largo entre fotogramas es una interrupción (pestaña en segundo plano, equipo
+    // bloqueado), no tiempo de práctica: ni cuenta para saltar ni completa la barra de mantener.
+    const interrupted = gap > MAX_FRAME_GAP_MS;
+    if (interrupted) this.holdStart = null;
+    else if (handVisible) this.activeMs += gap;
     if (correct) {
       this.lastOk = now;
       this.holdStart ??= now;
@@ -155,7 +165,10 @@ export const CALIBRATION_DEFAULTS: CalibrationOptions = {
   feedbackMs: 1200,
 };
 
-export type CalibrationPhase = 'preparing' | 'waiting' | 'capturing' | 'saved' | 'finished';
+export type CalibrationPhase = 'preparing' | 'waiting' | 'capturing' | 'saved' | 'rejected' | 'finished';
+
+/** Intentos por letra antes de pasar a la siguiente sin guardar nada. */
+export const CALIBRATION_ATTEMPTS = 2;
 
 export interface CalibrationSnapshot {
   index: number;
@@ -164,11 +177,22 @@ export interface CalibrationSnapshot {
   /** 0–1 dentro de la fase actual */
   progress: number;
   saved: ReadonlySet<string>;
+  /** Intento actual para esta letra (1…CALIBRATION_ATTEMPTS) */
+  attempt: number;
+  /** En fase 'rejected': si tras el aviso se pasa a la siguiente letra (no quedan intentos) */
+  givingUp: boolean;
 }
 
 export type CalibrationEvent =
   | { type: 'captured'; signId: string; vectors: number[][] }
+  | { type: 'rejected'; signId: string; givingUp: boolean }
   | { type: 'finished' };
+
+/**
+ * Decide si lo grabado se parece lo bastante a la letra pedida para guardarlo como calibración.
+ * Evita que una forma equivocada quede registrada como «calibrada con tu mano».
+ */
+export type CalibrationCheck = (signId: string, vectors: number[][]) => boolean;
 
 export class CalibrationSession {
   private index = 0;
@@ -178,11 +202,14 @@ export class CalibrationSession {
   private recent: number[][] = [];
   private captured: number[][] = [];
   private progress = 0;
+  private attempt = 1;
+  private givingUp = false;
   private readonly saved = new Set<string>();
 
   constructor(
     readonly signIds: readonly string[],
     private readonly opts: CalibrationOptions = CALIBRATION_DEFAULTS,
+    private readonly check?: CalibrationCheck,
   ) {
     if (signIds.length === 0) this.phase = 'finished';
   }
@@ -228,6 +255,11 @@ export class CalibrationSession {
         this.progress = Math.min(1, elapsed / this.opts.captureMs);
         if (elapsed >= this.opts.captureMs) {
           const signId = this.signIds[this.index]!;
+          if (this.check && !this.check(signId, this.captured)) {
+            this.givingUp = this.attempt >= CALIBRATION_ATTEMPTS;
+            this.enter('rejected', now);
+            return { type: 'rejected', signId, givingUp: this.givingUp };
+          }
           const result: CalibrationEvent = { type: 'captured', signId, vectors: this.captured };
           this.saved.add(signId);
           this.enter('saved', now);
@@ -235,18 +267,32 @@ export class CalibrationSession {
         }
         return null;
 
-      case 'saved':
+      case 'rejected':
         this.progress = 1;
-        if (elapsed >= this.opts.feedbackMs) {
-          this.index += 1;
-          if (this.index >= this.signIds.length) {
-            this.enter('finished', now);
-            return { type: 'finished' };
-          }
+        if (elapsed >= this.opts.feedbackMs * 2) {
+          if (this.givingUp) return this.next(now);
+          this.attempt += 1; // otro intento con la misma letra
           this.enter('preparing', now);
         }
         return null;
+
+      case 'saved':
+        this.progress = 1;
+        if (elapsed >= this.opts.feedbackMs) return this.next(now);
+        return null;
     }
+  }
+
+  private next(now: number): CalibrationEvent | null {
+    this.index += 1;
+    this.attempt = 1;
+    this.givingUp = false;
+    if (this.index >= this.signIds.length) {
+      this.enter('finished', now);
+      return { type: 'finished' };
+    }
+    this.enter('preparing', now);
+    return null;
   }
 
   snapshot(): CalibrationSnapshot {
@@ -256,6 +302,8 @@ export class CalibrationSession {
       phase: this.phase,
       progress: this.progress,
       saved: this.saved,
+      attempt: this.attempt,
+      givingUp: this.givingUp,
     };
   }
 
@@ -266,5 +314,46 @@ export class CalibrationSession {
     this.recent = [];
     this.captured = [];
     this.progress = 0;
+  }
+}
+
+// ---------------------------------------------------------------- Inactividad
+
+export interface IdleOptions {
+  /** Sin mano a la vista durante este tiempo: preguntar «¿Sigues ahí?» */
+  idleMs: number;
+  /** Sin mano durante este tiempo: apagar la cámara (privacidad y batería) */
+  abandonMs: number;
+}
+
+export const IDLE_DEFAULTS: IdleOptions = { idleMs: 30_000, abandonMs: 180_000 };
+
+export type IdleState = 'active' | 'idle' | 'abandoned';
+
+/**
+ * Detecta cuándo no hay nadie delante de la cámara. Manos libres: vuelve a 'active' en cuanto
+ * aparece una mano, sin que haya que tocar nada. Las pausas largas entre fotogramas (pestaña en
+ * segundo plano) no cuentan como tiempo sin mano.
+ */
+export class IdleTracker {
+  private lastHand: number | null = null;
+  private lastFrame: number | null = null;
+  private absentMs = 0;
+
+  constructor(private readonly opts: IdleOptions = IDLE_DEFAULTS) {}
+
+  update(now: number, handVisible: boolean): IdleState {
+    const gap = this.lastFrame === null ? 0 : Math.max(0, now - this.lastFrame);
+    this.lastFrame = now;
+    if (handVisible) {
+      this.lastHand = now;
+      this.absentMs = 0;
+      return 'active';
+    }
+    this.lastHand ??= now;
+    if (gap <= MAX_FRAME_GAP_MS) this.absentMs += gap;
+    if (this.absentMs >= this.opts.abandonMs) return 'abandoned';
+    if (this.absentMs >= this.opts.idleMs) return 'idle';
+    return 'active';
   }
 }

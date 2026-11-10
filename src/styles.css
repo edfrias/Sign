@@ -1,4 +1,5 @@
 :root {
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --bg: #f6f8fa;
   --surface: #ffffff;
   --text: #1f2328;
@@ -68,6 +69,18 @@ p, li, dd, figcaption { text-wrap: pretty; }
 .topbar nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
 .topbar nav a { padding: 6px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; white-space: nowrap; }
 .topbar nav a.active { background: var(--bg); color: var(--text); font-weight: 600; }
+/* Móvil: las cuatro secciones en su propia fila, a partes iguales y sin scroll lateral
+   (antes «Cámara» y «Diccionario» quedaban fuera de la pantalla) */
+@media (max-width: 560px) {
+  .topbar { gap: 4px 12px; padding-bottom: 6px; }
+  .topbar .brand { flex: 1; }
+  .topbar nav { order: 3; flex-basis: 100%; gap: 2px; overflow: visible; }
+  .topbar nav a {
+    flex: 1; display: grid; place-items: center; min-height: 44px; padding: 4px 2px;
+    font-size: 0.95rem; text-align: center;
+  }
+  .topbar nav a.active { box-shadow: inset 0 -3px 0 var(--accent); }
+}
 
 main { max-width: 960px; margin: 0 auto; padding: 16px; }
 
@@ -91,8 +104,17 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
   padding: 14px 16px; cursor: pointer; list-style: none; border-radius: var(--radius);
 }
 .unit summary::-webkit-details-marker { display: none; }
-.unit summary::before { content: '▸'; color: var(--muted); transition: transform 0.15s; }
-.unit[open] summary::before { transform: rotate(90deg); }
+.unit summary::before { color: var(--muted); }
+/* Chevrón de los desplegables: SVG de trazo, coloreado con currentColor mediante máscara */
+.unit summary::before, .practice-settings summary::before {
+  content: ''; flex: none; width: 0.9em; height: 0.9em; background: currentColor;
+  -webkit-mask: var(--chevron) center / contain no-repeat; mask: var(--chevron) center / contain no-repeat;
+  transition: transform 0.15s ease-out;
+}
+.unit[open] summary::before, .practice-settings[open] summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+  .unit summary::before, .practice-settings summary::before { transition: none; }
+}
 .unit-title { flex: 1; display: grid; gap: 2px; }
 .unit summary h2 { margin: 0; font-size: 1.2rem; }
 .unit summary .muted { font-size: 0.9rem; }
@@ -114,6 +136,12 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 .button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 .button:disabled { opacity: 0.5; cursor: not-allowed; }
 .chip { padding: 4px 10px; font-size: 0.85rem; cursor: pointer; }
+/* Pantallas táctiles: objetivos de al menos 44 px */
+@media (pointer: coarse) {
+  .button, select { min-height: 44px; }
+  .chip { min-height: 36px; }
+  .letter-chips .chip-letter { min-width: 44px; min-height: 44px; }
+}
 select, input { padding: 8px 10px; }
 
 .badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; vertical-align: middle; }
@@ -159,7 +187,7 @@ select, input { padding: 8px 10px; }
 .option.wrong { border-color: var(--bad); background: var(--bad-bg); color: var(--bad); }
 
 /* Cámara */
-.practice-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.practice-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
 @media (max-width: 760px) { .practice-grid { grid-template-columns: 1fr; } }
 .camera { position: relative; aspect-ratio: 4 / 3; background: #000; border-radius: 8px; overflow: hidden; }
 .camera video, .camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
@@ -247,6 +275,16 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
   .is-focus .camera { width: min(64cqw, 100cqh * 4 / 3); }
   .stage-model { width: min(100cqw - min(64cqw, 100cqh * 4 / 3) - 16px, 100cqh); max-width: 42cqw; }
 }
+/* Móvil en vertical: la cámara frontal entrega imagen vertical; un recuadro 4:3 apaisado
+   dejaba la mano pequeña y media pantalla vacía */
+@media (orientation: portrait) and (max-width: 600px) {
+  .is-focus .camera { aspect-ratio: 3 / 4; width: min(100cqw, 64cqh * 3 / 4); }
+  .stage-model { width: min(100cqw, 36cqh - 16px); }
+}
+/* Sin teclado físico (táctil), no anunciar atajos de teclado */
+@media (hover: none) and (pointer: coarse) {
+  .stage-exit kbd, .kbd-only { display: none; }
+}
 .is-focus .stage-status {
   justify-content: center; margin: 0; text-align: center;
   font-size: clamp(1.1rem, 2.4vw, 1.6rem); font-weight: 600; font-variant-numeric: tabular-nums;
@@ -272,11 +310,30 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 .camera-setup-title { margin: 0; font-weight: 700; font-size: 1.1rem; }
 .camera-setup ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--stage-muted); }
 
+.notice { padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); color: var(--warn); font-weight: 600; max-width: 68ch; }
+.undo-status:empty { position: absolute; }
+
 .stage-foot { margin: 0; text-align: center; font-size: 0.85rem; color: var(--stage-muted); }
 .is-focus .camera-overlay .button { margin-top: 8px; }
 
-.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; padding: 12px; }
-.toolbar label { display: flex; gap: 6px; align-items: center; }
+/* Fuera de la sesión: una acción principal; lo demás, plegado en «Ajustes» */
+.practice-start { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: flex-start; margin: 20px 0 16px; }
+.practice-start-button { padding: 12px 22px; font-size: 1.1rem; }
+.button-sub { font-weight: 400; opacity: 0.9; }
+.practice-settings { flex: 1 1 22rem; }
+.practice-settings summary {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px;
+  cursor: pointer; list-style: none; font-weight: 600; color: var(--muted); border-radius: 8px;
+}
+.practice-settings summary::-webkit-details-marker { display: none; }
+.practice-settings summary:hover, .practice-settings[open] summary { color: var(--text); }
+.practice-settings-body { display: grid; gap: 8px; padding: 4px 4px 0; max-width: 60ch; }
+.practice-settings-body p { margin: 0 0 8px; }
+.practice-settings-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.practice-settings-row label { display: flex; gap: 6px; align-items: center; }
+.practice-settings-row .undo { margin: 0; }
+.side-title { margin: 0 0 4px; font-size: 1.1rem; }
+.side-letter { margin: 16px 0 8px; font-size: 1.6rem; }
 .small { font-size: 0.85rem; }
 
 .letter-chips { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -286,7 +343,5 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
   border: 2px solid var(--border); border-radius: 8px; cursor: pointer;
 }
 .chip-letter:hover { border-color: var(--accent); }
-.chip-letter.ok { background: var(--ok-bg); color: var(--ok); border-color: var(--ok); }
-.chip-letter.skipped { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
 .chip-letter.current { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
 .chip-letter sup { color: var(--accent); }

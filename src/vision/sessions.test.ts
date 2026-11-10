@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CalibrationSession, PracticeSession, type CalibrationOptions, type PracticeOptions } from './sessions';
+import { CalibrationSession, IdleTracker, PracticeSession, type CalibrationOptions, type PracticeOptions } from './sessions';
 
 const FRAME = 33; // ~30 fps
 
@@ -138,5 +138,75 @@ describe('CalibrationSession', () => {
     expect(r.captured).toEqual(['a:5', 'finished']); // el evento de fin llega una sola vez
     expect(s.snapshot().phase).toBe('finished');
     expect([...s.snapshot().saved]).toEqual(['a']);
+  });
+});
+
+describe('interrupciones', () => {
+  it('volver de otra pestaña no salta la letra por el tiempo transcurrido', () => {
+    const s = new PracticeSession(['a', 'b'], P);
+    s.update(0, true, false);
+    s.update(33, true, false);
+    // la pestaña estuvo oculta 60 s con la mano a la vista
+    expect(s.update(60_033, true, false)).toBeNull();
+    expect(s.snapshot().phase).toBe('signing');
+    expect(s.snapshot().remainingMs).toBeGreaterThan(P.timeoutMs - 100);
+  });
+
+  it('volver de otra pestaña no valida la letra sin haberla mantenido', () => {
+    const s = new PracticeSession(['a'], P);
+    s.update(0, true, true); // empieza a mantener
+    expect(s.update(60_000, true, true)).toBeNull(); // 60 s después, primer fotograma
+    expect(s.snapshot().hold).toBe(0);
+  });
+
+  it('un equipo lento (1 fps) sigue pudiendo validar', () => {
+    const s = new PracticeSession(['a'], P);
+    const events: (string | null)[] = [];
+    for (let t = 0; t <= 3000; t += 1000) events.push(s.update(t, true, true));
+    expect(events).toContain('success');
+  });
+});
+
+describe('IdleTracker', () => {
+  const O = { idleMs: 1000, abandonMs: 3000 };
+  it('pregunta si sigues ahí y luego da la sesión por abandonada', () => {
+    const t = new IdleTracker(O);
+    const states = [0, 500, 1100, 2000, 3100].map((now) => t.update(now, false));
+    expect(states).toEqual(['active', 'active', 'idle', 'idle', 'abandoned']);
+  });
+  it('vuelve a activa en cuanto aparece la mano', () => {
+    const t = new IdleTracker(O);
+    for (const now of [0, 600, 1200]) t.update(now, false);
+    expect(t.update(1300, true)).toBe('active');
+    expect(t.update(1400, false)).toBe('active');
+  });
+  it('una pausa larga entre fotogramas no cuenta como ausencia', () => {
+    const t = new IdleTracker(O);
+    t.update(0, false);
+    expect(t.update(10_000, false)).toBe('active');
+  });
+});
+
+describe('calibración con comprobación', () => {
+  it('no guarda una forma que no se parece a la letra y repite el intento', () => {
+    const s = new CalibrationSession(['a', 'b'], C, () => false);
+    const r = runCal(s, 0, 1200, () => still);
+    expect(r.captured).toEqual(['rejected']);
+    expect(s.snapshot().saved.size).toBe(0);
+    runCal(s, r.t, 450, () => still); // aviso (2 × feedbackMs)
+    expect(s.snapshot().signId).toBe('a');
+    expect(s.snapshot().attempt).toBe(2);
+  });
+  it('tras el último intento pasa a la siguiente letra sin guardar', () => {
+    const s = new CalibrationSession(['a', 'b'], C, () => false);
+    const r = runCal(s, 0, 4000, () => still);
+    expect(r.captured.filter((e) => e === 'rejected').length).toBeGreaterThanOrEqual(2);
+    expect(s.snapshot().signId).toBe('b');
+    expect(s.snapshot().saved.has('a')).toBe(false);
+  });
+  it('guarda cuando la comprobación acepta', () => {
+    const s = new CalibrationSession(['a'], C, (id) => id === 'a');
+    const r = runCal(s, 0, 3000, () => still);
+    expect(r.captured).toEqual(['a:5', 'finished']);
   });
 });

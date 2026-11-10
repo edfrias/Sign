@@ -10,15 +10,25 @@ import { averageVectors, normalizeHand, type Handedness } from '../vision/featur
 import { TOLERANCE, evaluate, proximity, rankSigns, type Evaluation, type Proximity, type Tolerance } from '../vision/classifier';
 import {
   CalibrationSession,
+  IdleTracker,
   PracticeSession,
+  type CalibrationCheck,
   type CalibrationSnapshot,
+  type IdleState,
   type PracticeSnapshot,
 } from '../vision/sessions';
+import type { StoredTemplate } from '../db/db';
 import { beep, unlockAudio } from '../vision/sound';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
 
-const SMOOTHING_FRAMES = 8;
+/**
+ * Suavizado por tiempo, no por número de fotogramas: a 1 fps, 8 fotogramas serían 8 s mezclando
+ * la letra anterior con la nueva.
+ */
+const SMOOTHING_MS = 300;
+/** Para guardar una calibración, la letra pedida debe estar entre las N referencias más parecidas. */
+const CALIBRATION_TOP_N = 3;
 const TOLERANCE_KEY = 'sign.tolerance';
 /** Cuánto se parece tu mano antes de darla por buena (internamente, la tolerancia del clasificador). */
 const TOLERANCE_LABELS: Record<Tolerance, string> = { estricta: 'Alta', normal: 'Normal', flexible: 'Baja' };
@@ -110,30 +120,63 @@ export function PracticePage() {
   const [practice, setPractice] = useState<PracticeSnapshot | null>(null);
   const [calibration, setCalibration] = useState<CalibrationSnapshot | null>(null);
   const [sessionTotal, setSessionTotal] = useState(0);
+  const [idle, setIdle] = useState<IdleState>('active');
+  /** Aviso en la página cuando la sesión terminó sola (p. ej. nadie delante de la cámara) */
+  const [notice, setNotice] = useState('');
+  const idleTracker = useRef(new IdleTracker());
 
   const session = useRef<Session | null>(null);
   // Lo que lee el bucle de la cámara sin reiniciarse
-  const live = useRef({ templates, tolerance, sound });
-  live.current = { templates, tolerance, sound };
+  const refTemplates = refs?.templates ?? [];
+  const live = useRef({ templates, refTemplates, tolerance, sound });
+  live.current = { templates, refTemplates, tolerance, sound };
 
   const play = (tone: Parameters<typeof beep>[0]) => live.current.sound && beep(tone);
+
+  /**
+   * Antes de guardar una calibración: la letra pedida debe estar entre las más parecidas de las
+   * fotos de referencia. Si no hay referencia para esa letra, se acepta.
+   */
+  const checkCalibration: CalibrationCheck = (signId, vectors) => {
+    const refsNow = live.current.refTemplates;
+    if (!refsNow.some((t) => t.signId === signId)) return true;
+    const ranking = rankSigns(averageVectors(vectors), refsNow);
+    const position = ranking.findIndex((m) => m.signId === signId);
+    return position >= 0 && position < CALIBRATION_TOP_N;
+  };
+
+  // Borrar la calibración se puede deshacer durante unos segundos (mejor que pedir confirmación)
+  const [deleted, setDeleted] = useState<StoredTemplate[] | null>(null);
+  const undoTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(undoTimer.current), []);
+  async function deleteCalibration() {
+    const rows = await db.templates.toArray();
+    await clearTemplates();
+    setDeleted(rows);
+    window.clearTimeout(undoTimer.current);
+    undoTimer.current = window.setTimeout(() => setDeleted(null), 8000);
+  }
+  async function undoDelete() {
+    window.clearTimeout(undoTimer.current);
+    if (deleted?.length) await db.templates.bulkPut(deleted);
+    setDeleted(null);
+  }
 
   /** `ids`: una ronda con solo esas letras (p. ej. repetir las saltadas). Si no, todas desde `fromId`. */
   function startSession(kind: Session['kind'], fromId = startId, ids?: string[]) {
     unlockAudio(); // este clic es el último gesto necesario
     const order = ids?.length ? ids : rotate(staticIds, fromId);
     setSessionTotal(order.length);
+    setNotice('');
+    setIdle('active');
+    idleTracker.current = new IdleTracker();
     session.current =
-      kind === 'practice' ? { kind, s: new PracticeSession(order) } : { kind, s: new CalibrationSession(order) };
+      kind === 'practice'
+        ? { kind, s: new PracticeSession(order) }
+        : { kind, s: new CalibrationSession(order, undefined, checkCalibration) };
     setPractice(kind === 'practice' ? session.current.s.snapshot() as PracticeSnapshot : null);
     setCalibration(kind === 'calibrate' ? session.current.s.snapshot() as CalibrationSnapshot : null);
     if (status !== 'running') setStatus('loading');
-  }
-
-  /** Elegir una letra (desplegable o panel). Si hay una ronda en marcha, sigue desde esa letra. */
-  function selectSign(id: string) {
-    setParams({ signo: id });
-    if (session.current) startSession(session.current.kind, id);
   }
 
   function stopSession() {
@@ -205,7 +248,7 @@ export function PracticePage() {
     let stream: MediaStream | null = null;
     let raf = 0;
     let stopped = false;
-    const buffer: number[][] = [];
+    const buffer: { t: number; vec: number[] }[] = [];
     let lastTime = -1;
 
     (async () => {
@@ -221,6 +264,12 @@ export function PracticePage() {
         }
         const video = videoRef.current!;
         video.srcObject = media;
+        // Cámara desconectada a mitad de sesión (USB, permiso retirado, otra app): avisar y dejar reintentar
+        media.getVideoTracks()[0]?.addEventListener('ended', () => {
+          if (stopped) return;
+          setError('Se ha desconectado la cámara. Vuelve a conectarla y pulsa «Reintentar».');
+          setStatus('error');
+        });
         await video.play();
         setStatus('running');
         loop(landmarker, video);
@@ -257,17 +306,27 @@ export function PracticePage() {
           const side = res.handedness[0]?.[0]?.categoryName as Handedness | undefined;
           const vec = hand && side ? normalizeHand(hand, side) : null;
           if (vec) {
-            buffer.push(vec);
-            if (buffer.length > SMOOTHING_FRAMES) buffer.shift();
+            buffer.push({ t: now, vec });
+            while (buffer.length > 1 && buffer[0]!.t < now - SMOOTHING_MS) buffer.shift();
           } else {
             buffer.length = 0;
           }
-          const smooth = vec ? averageVectors(buffer) : null;
+          const smooth = vec ? averageVectors(buffer.map((b) => b.vec)) : null;
           const { templates: tpl, tolerance: tol } = live.current;
           setHandVisible(!!vec);
           setGuess(smooth && tpl.length ? rankSigns(smooth, tpl)[0]?.signId : undefined);
 
           const sess = session.current;
+          if (sess) {
+            const idleState = idleTracker.current.update(now, !!vec);
+            setIdle(idleState);
+            if (idleState === 'abandoned') {
+              // Nadie delante de la cámara desde hace minutos: se apaga por privacidad y batería
+              setNotice('La cámara se apagó porque no se vio a nadie durante 3 minutos.');
+              endSessionRef.current();
+              return;
+            }
+          }
           if (sess?.kind === 'practice') {
             const target = sess.s.snapshot().signId;
             const ev = smooth && target && tpl.length ? evaluate(smooth, tpl, target, TOLERANCE[tol]) : null;
@@ -283,6 +342,7 @@ export function PracticePage() {
               void replaceTemplates(event.signId, event.vectors);
               play('saved');
             }
+            if (event?.type === 'rejected') play('skip');
             if (event?.type === 'finished') play('done');
             setEvaluation(null);
             setCalibration({ ...sess.s.snapshot() });
@@ -349,17 +409,42 @@ export function PracticePage() {
     if (p === 'saved') {
       flash = 'saved';
       flashText = `${letter} guardada`;
+    } else if (p === 'rejected') {
+      // Mismo tratamiento que un salto: ámbar y foto modelo resaltada para comparar
+      flash = 'skip';
+      flashText = calibration.givingUp
+        ? `No se parece a la ${letter}: pasamos a la siguiente`
+        : `No se parece a la ${letter} de la foto: otra vez`;
     }
   }
+
+  // Nadie a la vista desde hace un rato: la sesión espera, y sigue sola en cuanto vuelve la mano
+  const away = idle === 'idle' && !flash && active?.phase !== 'finished';
+  if (away) headline = '¿Sigues ahí? Pon la mano delante de la cámara';
 
   const finished = active?.phase === 'finished';
   const okCount = practice ? [...practice.results.values()].filter((r) => r === 'ok').length : 0;
   const skippedIds = practice ? [...practice.results].filter(([, r]) => r === 'skipped').map(([id]) => id) : [];
   const skippedGlosses = skippedIds.map((id) => gloss(id));
 
+  // Lo que oye un lector de pantalla: solo cambia con hechos (letra nueva, acierto, salto, fin),
+  // no con cada fotograma
+  const announcement =
+    status !== 'running' || !active ? ''
+    : finished
+      ? practice
+        ? `Ronda terminada. Has validado ${okCount} de ${practice.results.size}.${skippedGlosses.length ? ` Te han costado: ${skippedGlosses.join(', ')}.` : ''}`
+        : `Calibración terminada. ${calibration?.saved.size ?? 0} guardadas.`
+    : away ? headline
+    : flash ? flashText
+    : practice ? `Letra ${gloss(targetId)}, ${practice.index + 1} de ${sessionTotal}`
+    : calibration?.phase === 'preparing' ? `Calibración: prepárate para la ${letter}, ${calibration.index + 1} de ${sessionTotal}`
+    : '';
+
   // Línea de estado bajo la cámara
-  const statusLine =
-    calibration && !finished
+  const statusLine = away
+    ? 'Si la mano está delante y no se detecta, busca más luz de frente.'
+    : calibration && !finished
       ? `Calibrando ${calibration.index + 1} de ${sessionTotal}${handVisible ? '' : ' · sin mano a la vista'}`
       : !handVisible
         ? 'Sin mano a la vista'
@@ -371,40 +456,59 @@ export function PracticePage() {
     <section className="practice">
       <h1>Práctica con cámara</h1>
       <p className="muted">
-        Pulsa «Empezar práctica», colócate a un metro y signa la letra que aparece. Si la mantienes bien
-        un segundo, se valida sola y pasa a la siguiente: no hace falta tocar nada. La imagen se procesa en
-        tu dispositivo y no se guarda.
+        Signa la letra que aparece y mantenla un segundo: se valida sola y pasa a la siguiente, sin tocar
+        nada. La imagen se procesa en tu dispositivo y no se guarda.
       </p>
 
-      <div className="toolbar card">
+      <div className="practice-start">
         <button
           ref={startButtonRef}
           type="button"
-          className="button primary"
+          className="button primary practice-start-button"
           disabled={!refsReady}
           onClick={() => startSession('practice')}
         >
-          Empezar práctica
+          Empezar práctica <span className="button-sub">desde la {gloss(startId)}</span>
         </button>
-        <button type="button" className="button" disabled={!refsReady} onClick={() => startSession('calibrate')}>
-          Calibrar con mi mano
-        </button>
-        <label>
-          Empezar en
-          <select value={startId} onChange={(e) => selectSign(e.target.value)}>
-            {staticSigns.map((s) => <option key={s.id} value={s.id}>{s.gloss}</option>)}
-          </select>
-        </label>
-        <label title="Cuánto debe parecerse tu mano a la referencia para dar la letra por buena">
-          Exigencia
-          <select value={tolerance} onChange={(e) => setTolerance(e.target.value as Tolerance)}>
-            {Object.keys(TOLERANCE).map((t) => <option key={t} value={t}>{TOLERANCE_LABELS[t as Tolerance]}</option>)}
-          </select>
-        </label>
-        <label className="check">
-          <input type="checkbox" checked={sound} onChange={(e) => setSound(e.target.checked)} /> Sonido
-        </label>
+        <details className="practice-settings">
+          <summary>Ajustes</summary>
+          <div className="practice-settings-body">
+            <div className="practice-settings-row">
+              <label>
+                Exigencia
+                <select value={tolerance} onChange={(e) => setTolerance(e.target.value as Tolerance)} aria-describedby="exigencia-help">
+                  {Object.keys(TOLERANCE).map((t) => <option key={t} value={t}>{TOLERANCE_LABELS[t as Tolerance]}</option>)}
+                </select>
+              </label>
+              <label className="check">
+                <input type="checkbox" checked={sound} onChange={(e) => setSound(e.target.checked)} /> Sonido
+              </label>
+            </div>
+            <p id="exigencia-help" className="muted small">Cuánto debe parecerse tu mano a la foto para dar la letra por buena.</p>
+
+            <div className="practice-settings-row">
+              <button type="button" className="button" disabled={!refsReady} onClick={() => startSession('calibrate')}>
+                Calibrar con mi mano
+              </button>
+              <span role="status" className="undo-status">{deleted && 'Calibración borrada.'}</span>
+              {deleted ? (
+                <button type="button" className="button" onClick={undoDelete}>Deshacer</button>
+              ) : (
+                calibratedIds.size > 0 && (
+                  <button type="button" className="button" onClick={deleteCalibration}>
+                    Borrar mi calibración ({calibratedIds.size === 1 ? '1 letra' : `${calibratedIds.size} letras`})
+                  </button>
+                )
+              )}
+            </div>
+            <p className="muted small">
+              Funciona sin calibrar: compara tu mano con las fotos de la Fundación CNSE. Si alguna letra no se
+              valida aunque la hagas bien, grábala con tu mano. Las letras calibradas llevan un punto.
+            </p>
+          </div>
+        </details>
       </div>
+      <div role="status">{notice && <p className="notice">{notice}</p>}</div>
       {!refsReady && !refsError && <p className="muted" role="status">Preparando las letras de referencia…</p>}
       {refsError && (
         <p role="alert">
@@ -424,6 +528,7 @@ export function PracticePage() {
           tabIndex={focusMode ? -1 : undefined}
           onKeyDown={focusMode ? trapFocus : undefined}
         >
+          <p className="visually-hidden" aria-live="polite" aria-atomic="true">{announcement}</p>
           {focusMode && (
             <div className="stage-bar">
               <span className="stage-count">
@@ -437,16 +542,16 @@ export function PracticePage() {
           )}
           <div className="stage-main">
           <div className={`camera ${flash ? `flash-${flash}` : ''}`}>
-            <video ref={videoRef} playsInline muted />
-            <canvas ref={canvasRef} />
+            <video ref={videoRef} playsInline muted aria-hidden="true" />
+            <canvas ref={canvasRef} aria-hidden="true" />
 
             {status === 'running' && active && !finished && (
               <>
-                <div className="camera-target" aria-live="polite">{gloss(targetId)}</div>
+                <div className="camera-target" aria-hidden="true">{gloss(targetId)}</div>
                 {/* Mensaje y barra de mantener en una sola banda: se llena de verde mientras mantienes el
-                    signo, queda verde al acertar y ámbar al saltar. Es una sola región anunciada que no se
-                    desmonta, para que los lectores de pantalla oigan cada cambio. */}
-                <div className={`camera-band ${flash ? `is-${flash}` : ''}`} aria-live="polite" aria-atomic="true">
+                    signo, queda verde al acertar y ámbar al saltar. Cambia varias veces por segundo, así que
+                    los lectores de pantalla oyen la región `announcement`, que solo cambia con los hechos. */}
+                <div className={`camera-band ${flash ? `is-${flash}` : ''}`} aria-hidden="true">
                   <span className="camera-band-fill" style={{ transform: `scaleX(${flash ? 1 : progress})` }} aria-hidden="true" />
                   <span className="camera-band-text">
                     {(flash === 'ok' || flash === 'saved') && <CheckIcon />}
@@ -457,7 +562,7 @@ export function PracticePage() {
             )}
 
             {status === 'running' && finished && (
-              <div className="camera-overlay round-end" role="status">
+              <div className="camera-overlay round-end">
                 {practice ? (
                   <>
                     <h2>{skippedIds.length === 0 ? '¡Todas validadas!' : 'Ronda terminada'}</h2>
@@ -468,11 +573,11 @@ export function PracticePage() {
                     </p>
                     <div className="round-end-actions">
                       {skippedIds.length > 0 ? (
-                        <button type="button" className="button primary" onClick={() => startSession('practice', undefined, skippedIds)}>
+                        <button type="button" className="button primary" autoFocus onClick={() => startSession('practice', undefined, skippedIds)}>
                           Repetir las saltadas ({skippedIds.length})
                         </button>
                       ) : (
-                        <button type="button" className="button primary" onClick={() => startSession('practice')}>
+                        <button type="button" className="button primary" autoFocus onClick={() => startSession('practice')}>
                           Otra ronda
                         </button>
                       )}
@@ -487,7 +592,7 @@ export function PracticePage() {
                       {calibration?.saved.size === 1 ? 'Se ha guardado 1 letra' : `Se han guardado ${calibration?.saved.size ?? 0} letras`} con tu mano.
                     </p>
                     <div className="round-end-actions">
-                      <button type="button" className="button primary" onClick={() => startSession('practice')}>
+                      <button type="button" className="button primary" autoFocus onClick={() => startSession('practice')}>
                         Empezar práctica
                       </button>
                       <button type="button" className="button stage-exit" onClick={endSession}>Volver</button>
@@ -528,8 +633,7 @@ export function PracticePage() {
           {focusMode && target?.media?.image && !finished && (
             <figure className={`stage-model ${flash === 'skip' ? 'is-highlight' : ''}`}>
               <img src={target.media.image} alt={`Modelo de la letra ${target.gloss}`} />
-              <figcaption>{flash === 'skip' ? `Así es la ${letter}` : 'Modelo'}</figcaption>
-            </figure>
+              <figcaption>{flash === 'skip' ? `Así es la ${letter}` : 'Modelo'}</figcaption>            </figure>
           )}
           </div>
 
@@ -545,43 +649,29 @@ export function PracticePage() {
           )}
           {focusMode && (
             <p className="stage-foot">
-              {practice?.phase === 'signing' && 'Si una letra se te resiste, se salta sola a los 20 s o con Espacio. '}
+              {practice?.phase === 'signing' && (
+                <>Si una letra se te resiste, se salta sola a los 20 s<span className="kbd-only"> o con Espacio</span>. </>
+              )}
               Fotos modelo: Fundación CNSE · CC BY-NC-SA 3.0
             </p>
           )}
         </div>
 
-        <div className="card">
-          {target && (
-            <>
-              <h2>{target.gloss}</h2>
-              <SignMedia sign={target} />
-              <SignDescriptionList sign={target} />
-            </>
-          )}
-
-          <h3>{calibration ? 'Calibración' : 'Letras'}</h3>
-          <ul className="letter-chips" aria-label="Elige una letra">
+        <div className="card side">
+          <h2 id="letras-titulo" className="side-title">Empieza por</h2>
+          {/* Fuera de la sesión: elegir letra cambia la que se ve aquí y por dónde empieza la práctica.
+              Durante la sesión este panel queda tapado por el modo práctica. */}
+          <ul className="letter-chips" aria-labelledby="letras-titulo">
             {staticIds.map((id) => {
-              const result = practice?.results.get(id);
-              const state = calibration
-                ? calibration.saved.has(id) ? 'ok' : ''
-                : result ?? '';
-              const current = (!active || !finished) && id === targetId;
-              const hints = [
-                calibratedIds.has(id) && 'calibrada con tu mano',
-                state === 'ok' && (calibration ? 'grabada' : 'validada'),
-                state === 'skipped' && 'saltada',
-              ].filter(Boolean);
+              const current = id === startId;
               return (
                 <li key={id}>
                   <button
                     type="button"
-                    className={`chip-letter ${state} ${current ? 'current' : ''}`}
-                    aria-pressed={current}
-                    aria-label={`${gloss(id)}${hints.length ? ` (${hints.join(', ')})` : ''}`}
-                    title={active ? `Seguir desde la ${gloss(id)}` : `Ver la ${gloss(id)}`}
-                    onClick={() => selectSign(id)}
+                    className={`chip-letter ${current ? 'current' : ''}`}
+                    aria-current={current || undefined}
+                    aria-label={`${gloss(id)}${calibratedIds.has(id) ? ' (calibrada con tu mano)' : ''}`}
+                    onClick={() => setParams({ signo: id })}
                   >
                     {gloss(id)}{calibratedIds.has(id) && <sup aria-hidden="true">•</sup>}
                   </button>
@@ -589,15 +679,14 @@ export function PracticePage() {
               );
             })}
           </ul>
-          <p className="muted small">
-            Funciona sin calibrar: compara tu mano con las fotos de la Fundación CNSE. Si alguna letra no se
-            valida aunque la hagas bien, usa «Calibrar con mi mano». Las letras calibradas llevan •.
-          </p>
-          {calibratedIds.size > 0 && !calibration && (
-            <button type="button" className="button" onClick={() => clearTemplates()}>
-              Borrar mi calibración ({calibratedIds.size === 1 ? '1 letra' : `${calibratedIds.size} letras`})
-            </button>
+          {target && (
+            <>
+              <h3 className="side-letter">{target.gloss}</h3>
+              <SignMedia sign={target} />
+              <SignDescriptionList sign={target} />
+            </>
           )}
+
         </div>
       </div>
     </section>

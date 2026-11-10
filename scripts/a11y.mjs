@@ -30,7 +30,7 @@ const PAGES = [
   },
   { name: 'Repaso vacío', path: '/repaso' },
   { name: 'Diccionario', path: '/diccionario' },
-  { name: 'Práctica con cámara', path: '/practica', ready: 'role=button[name="Empezar práctica"]' },
+  { name: 'Práctica con cámara', path: '/practica', ready: 'role=button[name=/^Empezar práctica/]' },
   { name: 'Créditos', path: '/creditos', prepare: (page) => page.locator('details summary').first().click() },
   { name: 'Página no encontrada', path: '/no-existe' },
 ];
