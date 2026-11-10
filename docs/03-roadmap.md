@@ -1,42 +1,42 @@
-# 03 · Hoja de ruta
+# 03 · Roadmap
 
-## Fase 0 · Base ✅
-- [x] Repositorio, documentación, esqueleto Vite + React + TS + PWA.
-- [x] Modelo de contenido y carga por lengua (LSE y ASL de ejemplo).
+## Phase 0 · Foundations ✅
+- [x] Repository, documentation, Vite + React + TS + PWA skeleton.
+- [x] Content model and per-language loading (LSE, plus a sample of ASL).
 
-## Fase 1 · Aprender
-- [x] Lista de unidades y vista de lección paso a paso.
-- [x] Diccionario con búsqueda (sin tildes) y filtro por categoría.
-- [x] Reproductor de vídeo con bucle y 0,5× (listo; falta contenido).
-- [x] Alfabeto manual LSE completo (30 letras, 5 lecciones) con fotos del Banco LSE de la Fundación CNSE.
-- [ ] Descripciones de F, K, S, T, H e Y (ahora solo hay foto).
-- [ ] Saludos: sustituir las descripciones sin verificar por material del Banco LSE (sección "Saludos y cortesía").
-- [ ] Vídeos de DILSE para las letras con movimiento (convertir `.mov` → MP4/WebM).
+## Phase 1 · Learn
+- [x] Unit list and step-by-step lesson view.
+- [x] Dictionary with accent-insensitive search and category filter.
+- [x] Video player with loop and 0.5× (ready; content still missing).
+- [x] Full LSE manual alphabet (30 letters, 5 lessons) with photos from Fundación CNSE's Banco LSE.
+- [ ] Descriptions for F, K, S, T, H and Y (only the photo for now).
+- [ ] Greetings: replace the unverified descriptions with Banco LSE material ("Saludos y cortesía" section).
+- [ ] DILSE videos for the letters with movement (convert `.mov` → MP4/WebM).
 
-## Fase 2 · Practicar
-- [x] Algoritmo SM-2 con tests.
-- [x] Quiz de opción múltiple que alimenta el repaso.
-- [x] Repaso de los signos pendientes con contador en la portada.
-- [ ] Quiz inverso (palabra → vídeo); tiene sentido cuando haya vídeos.
+## Phase 2 · Practise
+- [x] SM-2 algorithm with tests.
+- [x] Multiple-choice quiz that feeds the review queue.
+- [x] Review of due signs, with a counter on the home screen.
+- [ ] Reverse quiz (word → video); makes sense once there are videos.
 
-## Fase 3 · Cámara
-- [x] Detección de manos con MediaPipe y dibujo de puntos.
-- [x] Rasgos normalizados + clasificador por vecino más cercano, con tests.
-- [x] Calibración: guardar y borrar plantillas propias.
-- [x] Referencias de fábrica a partir de las fotos: practicar sin calibrar.
-- [x] Práctica y calibración manos libres (validación, avance y salto automáticos, pitidos).
-- [ ] Probar con cámara real y ajustar `TOLERANCE` (`src/vision/classifier.ts`). Probado solo con
-      una cámara virtual que emite las fotos de referencia.
+## Phase 3 · Camera
+- [x] Hand detection with MediaPipe and landmark drawing.
+- [x] Normalised features + nearest-neighbour classifier, with tests.
+- [x] Calibration: save and delete your own templates.
+- [x] Built-in references from the photos: practise without calibrating.
+- [x] Hands-free practice and calibration (automatic validation, advance and skip; beeps).
+- [ ] Test with a real camera and tune `TOLERANCE` (`src/vision/classifier.ts`). So far only tested
+      with a virtual camera that streams the reference photos.
 
-## Fase 4 · Pulido
-- [ ] Exportar/importar progreso.
-- [x] Auditoría automática de accesibilidad con axe (`npm run a11y`): 10 pantallas × claro/oscuro sin problemas.
-- [ ] Prueba manual con teclado y lector de pantalla (NVDA / VoiceOver).
-- [ ] Ejecutar `npm run a11y` en CI cuando haya repositorio remoto.
-- [ ] Iconos PNG 192/512 para instalación en iOS.
-- [ ] Actualizar Vite a la versión mayor actual (avisos de `npm audit` en dependencias de desarrollo).
+## Phase 4 · Polish
+- [ ] Export/import progress.
+- [x] Automated accessibility audit with axe (`npm run a11y`): 10 screens × light/dark, no issues.
+- [ ] Manual testing with keyboard and screen reader (NVDA / VoiceOver).
+- [ ] Run `npm run a11y` in CI (GitHub Actions).
+- [ ] 192/512 PNG icons for installation on iOS.
+- [ ] Upgrade Vite to the current major version (`npm audit` warnings in dev dependencies).
 
-## v2 y siguientes
-- Signos dinámicos (secuencias + DTW).
-- Expresiones faciales (MediaPipe Face Landmarker).
-- Sincronización opcional entre dispositivos.
+## v2 and beyond
+- Dynamic signs (sequences + DTW).
+- Facial expressions (MediaPipe Face Landmarker).
+- Optional sync between devices.

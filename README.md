@@ -1,57 +1,68 @@
 # Sign
 
-Aplicación web instalable (PWA) para aprender lenguas de signos: lecciones, quizzes con
-repetición espaciada y práctica de la forma de la mano con la cámara. Todo se ejecuta en el
-navegador; la imagen de la cámara nunca sale del dispositivo.
+Installable web app (PWA) for learning sign languages: lessons, spaced-repetition quizzes and
+handshape practice with the camera. Everything runs in the browser; the camera image never
+leaves the device.
 
-## Puesta en marcha
+Repository: <https://github.com/edfrias/Sign> · Issues: <https://github.com/edfrias/Sign/issues>
+
+> The app's interface and learning content are in Spanish; it currently teaches Spanish Sign
+> Language (LSE), with American Sign Language (ASL) set up as a second language.
+
+## Getting started
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm test           # tests unitarios
-npm run a11y       # auditoría de accesibilidad con axe (necesita Chrome instalado)
-npm run build      # compilación de producción en dist/
+npm test           # unit tests
+npm run a11y       # accessibility audit with axe (requires Chrome)
+npm run build      # production build in dist/
 ```
 
-La cámara necesita `localhost` o HTTPS.
+The camera requires `localhost` or HTTPS.
 
-## Accesibilidad
+## Accessibility
 
-- `npm run a11y` arranca la app, abre cada pantalla en Chrome (modo claro y oscuro) y pasa
-  [axe-core](https://github.com/dequelabs/axe-core) con las reglas WCAG 2.2 A/AA y buenas prácticas.
-  Termina con error si encuentra problemas y deja el detalle en `a11y-report/report.json`.
-  Opciones: `-- --only /creditos` para una sola ruta, `A11Y_BROWSER=msedge` para usar Edge.
-- Con `npm run dev`, axe revisa la página cada vez que cambia y avisa en la consola del navegador
-  de los problemas nuevos (`[axe] …`). No se incluye en la compilación de producción.
+- `npm run a11y` starts the app, opens every screen in Chrome (light and dark mode) and runs
+  [axe-core](https://github.com/dequelabs/axe-core) with the WCAG 2.2 A/AA and best-practice rules.
+  It exits with an error if it finds issues and writes the details to `a11y-report/report.json`.
+  Options: `-- --only /creditos` for a single route, `A11Y_BROWSER=msedge` to use Edge.
+- With `npm run dev`, axe re-checks the page whenever it changes and logs new issues to the
+  browser console (`[axe] …`). It is not included in the production build.
 
-axe detecta automáticamente alrededor de la mitad de los problemas de accesibilidad; la navegación
-con teclado y con lector de pantalla hay que probarla también a mano.
+axe automatically detects roughly half of all accessibility issues; keyboard and screen-reader
+navigation still need to be tested by hand.
 
-## Documentación
+## Documentation
 
-- [Análisis y requisitos](docs/01-analisis.md)
-- [Arquitectura](docs/02-arquitectura.md)
-- [Hoja de ruta](docs/03-roadmap.md)
-- [Fuentes de contenido y licencias](docs/04-fuentes.md)
+- [Analysis and requirements](docs/01-analysis.md)
+- [Architecture](docs/02-architecture.md)
+- [Roadmap](docs/03-roadmap.md)
+- [Content sources and licences](docs/04-sources.md)
 
-## Añadir contenido
+## Adding content
 
-Cada lengua es una carpeta en `content/` con `signs.json` y `units.json`, más una entrada en
-`content/languages.json`. Los vídeos e imágenes van en `public/media/<lengua>/` y se
-referencian como `"/media/lse/a.mp4"`.
+Each language is a folder in `content/` with `signs.json` and `units.json`, plus an entry in
+`content/languages.json`. Videos and images go in `public/media/<language>/` and are referenced
+as `"/media/lse/a.mp4"`.
 
-Usa solo material propio o con licencia que lo permita, e indica `credit` y `license`.
-Marca `"verified": true` cuando un diccionario fiable o una persona signante haya confirmado el signo.
+Only use your own material or material whose licence allows it, and fill in `credit` and `license`.
+Set `"verified": true` once a reliable dictionary or a signer has confirmed the sign.
 
-## Práctica con cámara
+## Camera practice
 
-Funciona manos libres y sin calibrar: las fotos de cada letra sirven de referencia.
+It works hands-free and without calibration: the photo of each letter is used as the reference.
 
-1. Abre **Cámara** y pulsa **Empezar práctica** (es el único clic).
-2. Signa la letra que aparece en grande. Al mantenerla bien 1 segundo suena un pitido y pasa a la
-   siguiente; si te atascas, se salta sola a los 20 s.
-3. Opcional: **Calibración guiada** recorre las letras grabando tu mano automáticamente cuando la
-   mantienes quieta, y mejora la precisión.
+1. Open **Cámara** (Camera) and press **Empezar práctica** (Start practice) — it is the only click.
+2. Sign the letter shown in large type. Hold it correctly for 1 second: a beep plays and the next
+   letter appears. If you get stuck, it is skipped automatically after 20 s.
+3. Optional: **Calibración guiada** (Guided calibration) goes through the letters and records your
+   own hand automatically whenever you hold it still, which improves accuracy.
 
-Si valida demasiado fácil o difícil, cambia la **Tolerancia** antes de empezar.
+If validation feels too easy or too hard, change the **Tolerancia** (Tolerance) before starting.
+
+## Licence
+
+The sign content and images in `content/` and `public/media/` include material from Fundación
+CNSE and are licensed under CC BY-NC-SA 3.0 — see [content/LICENSE.md](content/LICENSE.md) and the
+in-app **Créditos** page.

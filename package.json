@@ -33,5 +33,21 @@
     "vite": "^5.4.11",
     "vite-plugin-pwa": "^0.21.1",
     "vitest": "^2.1.8"
-  }
+  },
+  "description": "Installable web app (PWA) to learn sign languages: lessons, spaced-repetition quizzes and hands-free camera practice.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edfrias/Sign.git"
+  },
+  "homepage": "https://github.com/edfrias/Sign#readme",
+  "bugs": {
+    "url": "https://github.com/edfrias/Sign/issues"
+  },
+  "keywords": [
+    "sign-language",
+    "lse",
+    "pwa",
+    "mediapipe",
+    "accessibility"
+  ]
 }

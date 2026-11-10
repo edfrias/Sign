@@ -1,0 +1,133 @@
+# 02 · Architecture
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Build | Vite + TypeScript (strict mode) |
+| UI | React 18 + React Router |
+| PWA | `vite-plugin-pwa` (Workbox service worker) |
+| Persistence | IndexedDB via Dexie |
+| Vision | `@mediapipe/tasks-vision` (Hand Landmarker) |
+| Tests | Vitest |
+| Accessibility | axe-core: `scripts/a11y.mjs` (Playwright + the system's Chrome) and console warnings during development (`src/dev/axeDev.ts`) |
+
+## Overview
+
+```
+┌──────────────── Browser ────────────────┐
+│  UI (React)                             │
+│   ├─ Lessons / Dictionary               │
+│   ├─ Quiz / Review ─── srs/ (SM-2)      │
+│   └─ Practice ──────── vision/          │
+│                       ├─ HandLandmarker │ ← camera (in memory only)
+│                       ├─ features.ts    │   21 points → normalised vector
+│                       └─ classifier.ts  │   comparison against templates
+│  content/ (JSON per language)           │
+│  db/ (Dexie → IndexedDB)                │   progress, reviews, templates
+└─────────────────────────────────────────┘
+```
+
+## Repository layout
+
+```
+content/
+  languages.json            index of available languages
+  lse/
+    signs.json              the language's signs
+    units.json              units and lessons
+  asl/ ...
+  LICENSE.md                licence of the content (CC BY-NC-SA 3.0)
+public/media/<language>/    own or openly licensed videos/images
+scripts/                    content import and accessibility audit
+src/
+  content/                  content types, loading and licences
+  srs/                      spaced-repetition algorithm
+  quiz/                     question generation
+  vision/                   MediaPipe, feature extraction, classifier, hands-free sessions
+  db/                       Dexie schema and actions
+  state/                    active language (React context)
+  pages/                    screens
+  components/               reusable components
+  dev/                      development-only tools (axe)
+docs/                       this documentation
+```
+
+## Content model
+
+```ts
+interface Sign {
+  id: string;               // "lse.letra.a"
+  gloss: string;            // "A"
+  category: string;         // "alfabeto"
+  kind: "static" | "dynamic";
+  description: {
+    handshape?: string;
+    orientation?: string;
+    location?: string;
+    movement?: string;
+    nonManual?: string;     // facial / body expression
+  };
+  media?: { video?: string; image?: string; credit?: string; license?: string };
+  variant?: string;         // regional variant
+  source?: string;          // where the information comes from (original page URL)
+  links?: { label: string; url: string }[];  // external dictionaries
+  verified?: boolean;       // false until checked against a reliable source
+}
+```
+
+Units reference signs by `id`. Adding a language = new folder + entry in `languages.json`.
+
+## Camera recognition
+
+1. **Detection**: MediaPipe returns 21 points (x, y, z) per hand on every frame.
+2. **Normalisation** (`features.ts`):
+   - Translate so the wrist is the origin.
+   - Scale by the wrist → middle-finger knuckle distance (independent of distance to the camera).
+   - Mirror the X axis for a left hand (independent of the dominant hand).
+   - Result: a 63-number vector.
+3. **Templates** (`referenceTemplates.ts`): when practice opens, MediaPipe (image mode, CPU)
+   analyses the photo of each static sign and keeps its vector in memory. These are the
+   **built-in references**: the app works without calibration. The user's calibration adds
+   their own vectors (IndexedDB).
+4. **Classification** (`classifier.ts`): nearest neighbour against references + calibration.
+   A sign is correct if the closest match is the target **and** its distance is within the
+   chosen tolerance (strict 0.25 · normal 0.35 · lenient 0.45, in palm lengths).
+5. **Smoothing**: the last 8 frames are averaged to avoid flicker.
+
+### Hands-free (`sessions.ts`)
+
+While signing you cannot use the keyboard or mouse, so everything advances on its own after a single click:
+
+- **Practice** (`PracticeSession`): a sign is validated once held correctly for 1 s (dropouts of up to
+  0.3 s are tolerated), a beep plays and the next sign appears. If it is not achieved within 20 s with
+  the hand in view, it is skipped. The timer does not run while no hand is visible.
+- **Guided calibration** (`CalibrationSession`): for each letter, 1.5 s to position the hand, then it
+  waits for the hand to be still for 0.8 s (spread ≤ 0.08) and records for 1 s. If the hand disappears
+  while recording, nothing partial is saved. It replaces any previous calibration for that letter.
+- Distinct beeps for success, skip, recording and finish (`sound.ts`), and large text readable from 1 m.
+
+Distance between the references of the most similar letters (from the photos): O–S 0.23 · E–S 0.27 ·
+L–R 0.29. That is why the "normal" tolerance also requires the target to be the closest match.
+
+v2 (dynamic signs): record sequences of vectors and compare them with *Dynamic Time Warping*.
+
+The `hand_landmarker.task` model (~8 MB) and the WASM files are downloaded the first time,
+and the service worker caches them for offline use.
+
+## Spaced repetition (SM-2)
+
+Each sign has `{ ease, interval, repetitions, due }`. After each answer it is graded from 0 to 5:
+- < 3 → `repetitions = 0`, `interval = 1` day.
+- ≥ 3 → interval 1, 6 and then `interval × ease`; `ease` is adjusted according to the grade (minimum 1.3).
+
+## Persistence (Dexie)
+
+| Table | Key | Contents |
+|---|---|---|
+| `progress` | `[lang+lessonId]` | completed lesson, date |
+| `reviews` | `signId` | SM-2 state |
+| `templates` | `++id`, index `signId` | the user's camera calibration vectors |
+
+The active language is stored in `localStorage` (`sign.lang`) to avoid a flash on start-up;
+the camera tolerance is stored in `sign.tolerance`.
