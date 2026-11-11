@@ -5,6 +5,7 @@ import { languages } from '../content/loader';
 import { useLanguage } from '../state/LanguageContext';
 import { nextLesson, reviewMinutes } from '../progress/today';
 import { CameraIcon, ReviewIcon } from '../components/icons';
+import { HandZoom } from '../components/HandZoom';
 
 /** Hoy: la portada. Una acción principal (seguir con la lección) y, al lado, repaso y cámara. */
 export function TodayPage() {
@@ -84,8 +85,21 @@ function ContinueCard({ completed }: { completed: ReadonlySet<string> }) {
 
   const { unit, lesson, lessonIndex, unitDone, started } = next;
   const total = unit.lessons.length;
+  // Primer signo de la lección con la mano localizada, para el recorte
+  const preview = lesson.signIds.map((id) => content.signById.get(id)).find((s) => s?.handFocus && s.media?.image);
   return (
     <section className="continue" aria-labelledby="hoy-continua">
+      {preview && (
+        <figure className="continue-figure">
+          <HandZoom sign={preview} />
+          {preview.media?.credit && (
+            <figcaption>
+              {preview.media.credit.split(' · ')[0]}
+              {preview.media.license && ` · ${preview.media.license}`}
+            </figcaption>
+          )}
+        </figure>
+      )}
       <p className="label continue-kicker">{started ? 'Continúa' : 'Empieza aquí'}</p>
       <h2 id="hoy-continua" className="continue-title">{lesson.title}</h2>
       <p className="continue-meta">

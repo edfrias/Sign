@@ -40,7 +40,7 @@ export function LessonPage() {
       <progress value={index + 1} max={signs.length} aria-label="Progreso de la lección" />
 
       <article className="card lesson-sign">
-        <SignMedia sign={sign} />
+        <SignMedia sign={sign} handZoom />
         <div>
           <h1>{sign.gloss} <VariantLabel sign={sign} /> <UnverifiedBadge sign={sign} /></h1>
           <SignDescriptionList sign={sign} />

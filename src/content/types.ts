@@ -35,6 +35,15 @@ export interface Sign {
   links?: { label: string; url: string }[];
   /** false mientras no se haya contrastado con una fuente fiable o una persona signante */
   verified?: boolean;
+  /** Dónde están las manos en la foto (lo calcula pnpm hand-focus; sin él, no hay zoom) */
+  handFocus?: HandFocus;
+}
+
+/** Centro de las manos en la foto (fracciones 0–1) y ampliación del zoom. */
+export interface HandFocus {
+  x: number;
+  y: number;
+  scale?: number;
 }
 
 export interface Lesson {

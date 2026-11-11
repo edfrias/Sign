@@ -167,7 +167,13 @@ main:focus { outline: none; }
   background: var(--hero); color: var(--hero-text); border-radius: var(--radius-lg);
 }
 .continue p { margin: 0; }
+.continue { position: relative; }
 .continue-kicker { color: var(--hero-muted); }
+/* Recorte de la mano arriba a la derecha; el texto le deja sitio */
+.continue-figure { position: absolute; top: 20px; right: 20px; width: 96px; margin: 0; display: grid; gap: 4px; justify-items: center; }
+.continue-figure .hand-zoom { width: 96px; border-color: var(--mint); }
+.continue-figure figcaption { font-size: 0.6875rem; line-height: 0.875rem; color: var(--hero-muted); text-align: center; }
+.continue:has(.continue-figure) > :is(.continue-kicker, .continue-title, .continue-meta) { padding-right: 112px; }
 .continue-title { margin: 0; font-size: 1.5rem; line-height: 2rem; font-weight: 700; letter-spacing: -0.02em; }
 .continue-meta { color: var(--hero-muted); }
 .continue-progress { display: grid; gap: 6px; width: 100%; margin: 8px 0; font-size: 0.875rem; color: var(--hero-muted); }
@@ -284,6 +290,18 @@ select, input { padding: 8px 10px; }
 .variant { font-size: 0.6em; font-weight: 600; color: var(--muted); vertical-align: middle; }
 
 /* Signos */
+/* Zoom a la mano: círculo con la foto ampliada y desplazada (src/content/handFocus.ts) */
+.hand-zoom {
+  position: relative; display: block; aspect-ratio: 1; overflow: hidden; flex: none;
+  border: 3px solid var(--hand-ring); border-radius: 50%; background: #fff;
+}
+.hand-zoom img, .media .hand-zoom img {
+  position: absolute; max-width: none; height: auto; aspect-ratio: 1;
+  border-radius: 0; background: none; object-fit: fill;
+}
+.media-frame { position: relative; display: block; width: 100%; }
+.media-frame > img { display: block; }
+.media-zoom { position: absolute; right: 8px; bottom: 8px; width: 38%; box-shadow: 0 2px 10px rgba(17, 29, 43, 0.25); }
 .media { margin: 0; display: grid; gap: 8px; justify-items: start; }
 .media video, .media img { width: 100%; border-radius: var(--radius-sm); object-fit: contain; }
 .media video { background: #000; aspect-ratio: 4 / 3; }

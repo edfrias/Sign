@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Sign } from '../content/types';
 import { licenseUrl } from '../content/licenses';
+import { HandZoom } from './HandZoom';
 
 const LABELS: Record<string, string> = {
   handshape: 'Configuración',
@@ -50,8 +51,11 @@ export function SignLinks({ sign }: { sign: Sign }) {
   );
 }
 
-/** `hideAnswer`: en los quizzes, no revelar la glosa en textos alternativos ni enlaces. */
-export function SignMedia({ sign, hideAnswer }: { sign: Sign; hideAnswer?: boolean }) {
+/**
+ * `hideAnswer`: en los quizzes, no revelar la glosa en textos alternativos ni enlaces.
+ * `handZoom`: superpone el recorte ampliado de la mano (lección y quiz).
+ */
+export function SignMedia({ sign, hideAnswer, handZoom }: { sign: Sign; hideAnswer?: boolean; handZoom?: boolean }) {
   const [slow, setSlow] = useState(false);
   const media = sign.media;
   const label = hideAnswer ? 'Signo a adivinar' : `Signo ${sign.gloss}`;
@@ -82,7 +86,10 @@ export function SignMedia({ sign, hideAnswer }: { sign: Sign; hideAnswer?: boole
   if (media?.image) {
     return (
       <figure className="media">
-        <img src={media.image} alt={label} loading="lazy" />
+        <span className="media-frame">
+          <img src={media.image} alt={label} loading="lazy" />
+          {handZoom && <HandZoom sign={sign} className="media-zoom" />}
+        </span>
         <Credit sign={sign} noLink={hideAnswer} />
       </figure>
     );
