@@ -40,7 +40,32 @@ const PAGES = [
   { name: 'Práctica con cámara', path: '/practica', ready: 'role=button[name=/^Empezar práctica/]' },
   { name: 'Créditos', path: '/creditos', prepare: (page) => page.locator('details summary').first().click() },
   { name: 'Página no encontrada', path: '/no-existe' },
+  // Al final: deja progreso guardado en el contexto y cambiaría las pantallas «vacías» de arriba
+  { name: 'Hoy (con progreso y repaso)', path: '/', viewport: MOBILE, prepare: seedProgress },
 ];
+
+/** Una lección hecha y seis signos pendientes de repaso, escritos directamente en IndexedDB. */
+async function seedProgress(page) {
+  await page.evaluate(
+    () =>
+      new Promise((resolve, reject) => {
+        const req = indexedDB.open('sign');
+        req.onerror = reject;
+        req.onsuccess = () => {
+          const tx = req.result.transaction(['progress', 'reviews'], 'readwrite');
+          tx.objectStore('progress').put({ lang: 'lse', lessonId: 'alfabeto-1', completedAt: Date.now() });
+          for (const id of ['lse-a', 'lse-b', 'lse-c', 'lse-ch', 'lse-d', 'lse-e']) {
+            tx.objectStore('reviews').put({ signId: id, lang: 'lse', ease: 2.5, interval: 0, repetitions: 0, due: Date.now() - 1000 });
+          }
+          tx.oncomplete = () => resolve();
+          tx.onerror = reject;
+        };
+      }),
+  );
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.getByText('Seguir aprendiendo').waitFor();
+  await page.getByText('6 signos pendientes').waitFor();
+}
 
 const SCHEMES = ['light', 'dark'];
 

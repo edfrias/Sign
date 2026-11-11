@@ -6,8 +6,7 @@ import { findLesson } from '../content/loader';
 import { buildQuiz, type Question } from '../quiz/buildQuiz';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
-
-const MAX_QUESTIONS = 10;
+import { SESSION_SIZE } from '../progress/today';
 
 export function QuizPage() {
   const { lessonId } = useParams();
@@ -28,7 +27,7 @@ export function QuizPage() {
         const due = await db.reviews.where('due').belowOrEqual(Date.now()).filter((r) => r.lang === lang).toArray();
         targetIds = due.sort((a, b) => a.due - b.due).map((r) => r.signId);
       }
-      const targets = targetIds.flatMap((id) => content.signById.get(id) ?? []).slice(0, MAX_QUESTIONS);
+      const targets = targetIds.flatMap((id) => content.signById.get(id) ?? []).slice(0, SESSION_SIZE);
       if (!cancelled) {
         setQuestions(buildQuiz(targets, content.signs));
         setIndex(0);
