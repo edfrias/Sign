@@ -215,7 +215,7 @@ main:focus { outline: none; }
 .continue-figure { position: absolute; top: 20px; right: 20px; width: 96px; margin: 0; display: grid; gap: 4px; justify-items: center; }
 .continue-figure .hand-zoom { width: 96px; border-color: var(--mint); }
 .continue-figure figcaption { font-size: 0.6875rem; line-height: 0.875rem; color: var(--hero-muted); text-align: center; }
-.continue:has(.continue-figure) > :is(.continue-kicker, .continue-title, .continue-meta) { padding-right: 112px; }
+.continue:has(.continue-figure) > :is(.continue-kicker, .continue-title, .continue-meta, .continue-progress) { padding-right: 112px; }
 .continue-title { margin: 0; font-size: 1.5rem; line-height: 2rem; font-weight: 700; letter-spacing: -0.02em; }
 .continue-meta { color: var(--hero-muted); }
 .continue-progress { display: grid; gap: 6px; width: 100%; margin: 8px 0; font-size: 0.875rem; color: var(--hero-muted); }
