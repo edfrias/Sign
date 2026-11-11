@@ -13,10 +13,17 @@ import { AxeBuilder } from '@axe-core/playwright';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 const REPORT_DIR = new URL('../a11y-report/', import.meta.url);
 
-/** Pantallas y estados a revisar. `prepare` deja la página en el estado que interesa. */
+/** Pantallas y estados a revisar. `prepare` deja la página en el estado que interesa;
+ *  `viewport` la mide en otro tamaño (móvil: pestañas abajo en lugar de barra lateral). */
+const MOBILE = { width: 375, height: 812 };
 const PAGES = [
-  { name: 'Inicio', path: '/' },
+  { name: 'Hoy', path: '/' },
+  { name: 'Hoy (móvil)', path: '/', viewport: MOBILE },
+  { name: 'Aprender', path: '/aprender' },
+  { name: 'Tú', path: '/tu' },
+  { name: 'Tú (móvil)', path: '/tu', viewport: MOBILE },
   { name: 'Lección', path: '/leccion/alfabeto-1' },
+  { name: 'Lección (móvil)', path: '/leccion/alfabeto-1', viewport: MOBILE },
   { name: 'Lección de vocabulario', path: '/leccion/cnse-saludos-y-cortesia-1' },
   { name: 'Lección inexistente', path: '/leccion/no-existe' },
   { name: 'Quiz (pregunta)', path: '/quiz/alfabeto-1' },
@@ -74,6 +81,7 @@ async function main() {
       const context = await browser.newContext({ colorScheme: scheme, locale: 'es-ES', viewport: { width: 1280, height: 900 } });
       for (const p of pages) {
         const page = await context.newPage();
+        if (p.viewport) await page.setViewportSize(p.viewport);
         await page.goto(base + p.path, { waitUntil: 'networkidle' });
         if (p.ready) await page.locator(p.ready).waitFor();
         await page.locator('main').waitFor();

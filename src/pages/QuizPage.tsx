@@ -50,7 +50,7 @@ export function QuizPage() {
         <p className="muted">
           {lessonId ? 'Esta lección no tiene signos.' : 'Completa una lección y sus signos aparecerán aquí cuando toque repasarlos.'}
         </p>
-        <Link to="/" className="button primary">Ir a las lecciones</Link>
+        <Link to="/aprender" className="button primary">Ir a las lecciones</Link>
       </section>
     );
   }
@@ -62,7 +62,7 @@ export function QuizPage() {
         <h1>¡Hecho!</h1>
         <p>{correctCount} de {questions.length} correctas.</p>
         <p className="muted">Las que fallaste volverán a salir mañana en el repaso.</p>
-        <Link to="/" className="button primary">Volver</Link>
+        <Link to={lessonId ? '/aprender' : '/'} className="button primary">Volver</Link>
       </section>
     );
   }

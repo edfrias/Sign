@@ -17,7 +17,7 @@ export function LessonPage() {
       <section className="hero">
         <h1>Lección no encontrada</h1>
         <p className="muted">Esta lección no existe en {content.language.short} o ha cambiado de nombre.</p>
-        <Link to="/" className="button primary">Ver las lecciones</Link>
+        <Link to="/aprender" className="button primary">Ver las lecciones</Link>
       </section>
     );
   }

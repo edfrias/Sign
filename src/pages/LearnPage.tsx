@@ -2,32 +2,22 @@ import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
 import { useLanguage } from '../state/LanguageContext';
-import { BackupPanel } from '../components/BackupPanel';
 
-export function HomePage() {
+/** Aprender: todas las unidades y lecciones (todo desbloqueado). */
+export function LearnPage() {
   const { lang, content } = useLanguage();
   const completed = useLiveQuery(
     async () => new Set((await db.progress.where('lang').equals(lang).toArray()).map((p) => p.lessonId)),
     [lang],
   );
-  const dueCount = useLiveQuery(
-    () => db.reviews.where('due').belowOrEqual(Date.now()).filter((r) => r.lang === lang).count(),
-    [lang],
-  );
-
   return (
     <>
-      <section className="hero">
-        <h1>{content.language.name}</h1>
-        <p>{content.language.region}</p>
-        {!!dueCount && (
-          <Link to="/repaso" className="button primary">
-            Repasar {dueCount} {dueCount === 1 ? 'signo' : 'signos'}
-          </Link>
-        )}
-      </section>
+      <header className="page-head">
+        <h1>Aprender</h1>
+        <p className="muted">{content.language.name}</p>
+      </header>
 
-      <p className="muted summary-line">
+      <p className="muted">
         {content.signs.length} signos en {content.units.length} unidades
         {completed && completed.size > 0 && ` · ${completed.size} ${completed.size === 1 ? 'lección completada' : 'lecciones completadas'}`}
       </p>
@@ -70,8 +60,6 @@ export function HomePage() {
         </details>
         );
       })}
-
-      <BackupPanel />
     </>
   );
 }

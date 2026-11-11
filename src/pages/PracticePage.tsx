@@ -19,6 +19,7 @@ import {
 } from '../vision/sessions';
 import type { StoredTemplate } from '../db/db';
 import { beep, unlockAudio } from '../vision/sound';
+import { SOUND_KEY, useStoredBoolean } from '../state/preferences';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
 
@@ -108,7 +109,7 @@ export function PracticePage() {
       /* sin persistencia */
     }
   };
-  const [sound, setSound] = useState(true);
+  const [sound, setSound] = useStoredBoolean(SOUND_KEY, true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

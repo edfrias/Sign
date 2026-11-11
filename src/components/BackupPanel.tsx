@@ -57,7 +57,7 @@ export function BackupPanel() {
 
   return (
     <section className="backup" aria-labelledby="backup-title">
-      <h2 id="backup-title">Tu progreso</h2>
+      <h3 id="backup-title">Copia de seguridad</h3>
       <p className="muted">
         Se guarda solo en este navegador. Descarga una copia para pasarlo a otro dispositivo o no perderlo si
         borras los datos del navegador.
