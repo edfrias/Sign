@@ -62,6 +62,20 @@ const PAGES = [
   },
   { name: 'Repaso vacío', path: '/repaso' },
   { name: 'Diccionario', path: '/diccionario' },
+  {
+    name: 'Diccionario (categoría y búsqueda, móvil)',
+    path: '/diccionario',
+    viewport: MOBILE,
+    prepare: async (page) => {
+      await page.getByRole('button', { name: 'Animales' }).click();
+      await page.getByRole('searchbox', { name: 'Buscar palabra' }).fill('ga');
+    },
+  },
+  {
+    name: 'Diccionario sin resultados',
+    path: '/diccionario',
+    prepare: (page) => page.getByRole('searchbox', { name: 'Buscar palabra' }).fill('zzzz'),
+  },
   { name: 'Práctica con cámara', path: '/practica', ready: 'role=button[name=/^Empezar práctica/]' },
   { name: 'Créditos', path: '/creditos', prepare: (page) => page.locator('details summary').first().click() },
   { name: 'Página no encontrada', path: '/no-existe' },

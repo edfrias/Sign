@@ -22,6 +22,7 @@ import { beep, unlockAudio } from '../vision/sound';
 import { SOUND_KEY, useStoredBoolean } from '../state/preferences';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
+import { HandZoom } from '../components/HandZoom';
 
 /**
  * Suavizado por tiempo, no por número de fotogramas: a 1 fps, 8 fotogramas serían 8 s mezclando
@@ -120,7 +121,8 @@ export function PracticePage() {
   const [guess, setGuess] = useState<string | undefined>();
   const [practice, setPractice] = useState<PracticeSnapshot | null>(null);
   const [calibration, setCalibration] = useState<CalibrationSnapshot | null>(null);
-  const [sessionTotal, setSessionTotal] = useState(0);
+  const [roundIds, setRoundIds] = useState<string[]>([]);
+  const sessionTotal = roundIds.length;
   const [idle, setIdle] = useState<IdleState>('active');
   /** Aviso en la página cuando la sesión terminó sola (p. ej. nadie delante de la cámara) */
   const [notice, setNotice] = useState('');
@@ -167,7 +169,7 @@ export function PracticePage() {
   function startSession(kind: Session['kind'], fromId = startId, ids?: string[]) {
     unlockAudio(); // este clic es el último gesto necesario
     const order = ids?.length ? ids : rotate(staticIds, fromId);
-    setSessionTotal(order.length);
+    setRoundIds(order);
     setNotice('');
     setIdle('active');
     idleTracker.current = new IdleTracker();
@@ -537,7 +539,7 @@ export function PracticePage() {
                 {!finished && active && <> · <strong>{active.index + 1}</strong> de {sessionTotal}</>}
               </span>
               <button type="button" className="button stage-exit" onClick={endSession}>
-                Terminar <kbd>Esc</kbd>
+                Salir <kbd>Esc</kbd>
               </button>
             </div>
           )}
@@ -633,10 +635,36 @@ export function PracticePage() {
           {/* Foto modelo junto a la cámara. Al saltar una letra se resalta: es el momento de comparar. */}
           {focusMode && target?.media?.image && !finished && (
             <figure className={`stage-model ${flash === 'skip' ? 'is-highlight' : ''}`}>
-              <img src={target.media.image} alt={`Modelo de la letra ${target.gloss}`} />
+              <span className="stage-model-frame">
+                <img src={target.media.image} alt={`Modelo de la letra ${target.gloss}`} />
+                <HandZoom sign={target} className="media-zoom" />
+              </span>
               <figcaption>{flash === 'skip' ? `Así es la ${letter}` : 'Modelo'}</figcaption>            </figure>
           )}
           </div>
+
+          {/* Las letras de la ronda: hechas con ✓, saltadas tachadas, la actual destacada */}
+          {focusMode && !finished && active && roundIds.length > 1 && (
+            <ol className="round-letters" aria-label="Letras de la ronda">
+              {roundIds.map((id, i) => {
+                const outcome = practice ? practice.results.get(id) : calibration?.saved.has(id) ? 'ok' : undefined;
+                const current = i === active.index;
+                return (
+                  <li
+                    key={id}
+                    className={`${outcome ? `is-${outcome}` : ''} ${current ? 'is-current' : ''}`}
+                    aria-current={current ? 'step' : undefined}
+                  >
+                    {outcome === 'ok' && <CheckIcon />}
+                    {gloss(id)}
+                    <span className="visually-hidden">
+                      {outcome === 'ok' ? ', hecha' : outcome === 'skipped' ? ', saltada' : ''}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          )}
 
           {status === 'running' && !finished && (
             <div className="stage-status">

@@ -162,16 +162,3 @@ export function UnverifiedBadge({ sign }: { sign: Sign }) {
     </span>
   );
 }
-
-export function SignCard({ sign }: { sign: Sign }) {
-  return (
-    <article className="card sign-card">
-      <SignMedia sign={sign} />
-      <h2>
-        {sign.gloss} <VariantLabel sign={sign} /> <UnverifiedBadge sign={sign} />
-      </h2>
-      <SignDescriptionList sign={sign} />
-      <SignLinks sign={sign} />
-    </article>
-  );
-}
