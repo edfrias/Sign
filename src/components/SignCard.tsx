@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import type { Sign } from '../content/types';
 import { licenseUrl } from '../content/licenses';
 import { HandZoom } from './HandZoom';
+import { CompassIcon, FaceIcon, HandIcon, MoveIcon, PinIcon } from './icons';
 
 const LABELS: Record<string, string> = {
   handshape: 'Configuración',
@@ -10,6 +11,14 @@ const LABELS: Record<string, string> = {
   location: 'Ubicación',
   movement: 'Movimiento',
   nonManual: 'Expresión',
+};
+
+const ICONS: Record<string, ReactNode> = {
+  handshape: <HandIcon />,
+  orientation: <CompassIcon />,
+  location: <PinIcon />,
+  movement: <MoveIcon />,
+  nonManual: <FaceIcon />,
 };
 
 /** Atribución exigida por la licencia: autoría, enlace a la fuente original y a la licencia. */
@@ -54,8 +63,19 @@ export function SignLinks({ sign }: { sign: Sign }) {
 /**
  * `hideAnswer`: en los quizzes, no revelar la glosa en textos alternativos ni enlaces.
  * `handZoom`: superpone el recorte ampliado de la mano (lección y quiz).
+ * `view="hand"`: en lugar de la foto completa, solo el recorte de la mano, grande.
  */
-export function SignMedia({ sign, hideAnswer, handZoom }: { sign: Sign; hideAnswer?: boolean; handZoom?: boolean }) {
+export function SignMedia({
+  sign,
+  hideAnswer,
+  handZoom,
+  view = 'full',
+}: {
+  sign: Sign;
+  hideAnswer?: boolean;
+  handZoom?: boolean;
+  view?: 'full' | 'hand';
+}) {
   const [slow, setSlow] = useState(false);
   const media = sign.media;
   const label = hideAnswer ? 'Signo a adivinar' : `Signo ${sign.gloss}`;
@@ -79,6 +99,16 @@ export function SignMedia({ sign, hideAnswer, handZoom }: { sign: Sign; hideAnsw
         <button type="button" className="chip" onClick={() => setSlow((s) => !s)}>
           {slow ? 'Velocidad normal' : 'Más lento (0,5×)'}
         </button>
+        <Credit sign={sign} noLink={hideAnswer} />
+      </figure>
+    );
+  }
+  if (media?.image && view === 'hand' && sign.handFocus) {
+    return (
+      <figure className="media media-hand">
+        <span className="media-hand-frame" role="img" aria-label={`${label}: detalle de la mano`}>
+          <HandZoom sign={sign} />
+        </span>
         <Credit sign={sign} noLink={hideAnswer} />
       </figure>
     );
@@ -111,7 +141,7 @@ export function SignDescriptionList({ sign }: { sign: Sign }) {
     <dl className="desc">
       {entries.map(([k, v]) => (
         <div key={k}>
-          <dt>{LABELS[k] ?? k}</dt>
+          <dt>{ICONS[k]}{LABELS[k] ?? k}</dt>
           <dd>{v}</dd>
         </div>
       ))}

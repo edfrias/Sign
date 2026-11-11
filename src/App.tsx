@@ -10,6 +10,7 @@ import { QuizPage } from './pages/QuizPage';
 import { PracticePage } from './pages/PracticePage';
 import { CreditsPage } from './pages/CreditsPage';
 import { YouPage } from './pages/YouPage';
+import { UnitPage } from './pages/UnitPage';
 
 /** Al cambiar de pantalla: arriba del todo, como una página nueva. */
 function ScrollToTop() {
@@ -29,6 +30,7 @@ export function App() {
         <Route element={<AppShell />}>
           <Route path="/" element={<TodayPage />} />
           <Route path="/aprender" element={<LearnPage />} />
+          <Route path="/aprender/:unitId" element={<UnitPage />} />
           <Route path="/practica" element={<PracticePage />} />
           <Route path="/diccionario" element={<DictionaryPage />} />
           <Route path="/tu" element={<YouPage />} />
@@ -45,9 +47,13 @@ export function App() {
         </Route>
 
         {/* Pantallas de foco: sin pestañas, con ✕ para salir */}
-        <Route element={<FocusLayout exitTo="/aprender" exitLabel="Salir a Aprender" />}>
+        {/* La lección pinta su propia barra: progreso junto al ✕, que vuelve a su unidad */}
+        <Route element={<FocusLayout />}>
           <Route path="/leccion/:lessonId" element={<LessonPage />} />
+        </Route>
+        <Route element={<FocusLayout exitTo="/aprender" exitLabel="Salir a Aprender" />}>
           <Route path="/quiz/:lessonId" element={<QuizPage />} />
+          <Route path="/quiz/unidad/:unitId" element={<QuizPage />} />
         </Route>
         <Route element={<FocusLayout exitTo="/" exitLabel="Salir a Hoy" />}>
           <Route path="/repaso" element={<QuizPage />} />

@@ -3,13 +3,14 @@ import { Link, useParams } from 'react-router-dom';
 import { db } from '../db/db';
 import { recordAnswer } from '../db/actions';
 import { findLesson } from '../content/loader';
-import { buildQuiz, type Question } from '../quiz/buildQuiz';
+import { buildQuiz, shuffle, type Question } from '../quiz/buildQuiz';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
 import { SESSION_SIZE } from '../progress/today';
 
 export function QuizPage() {
-  const { lessonId } = useParams();
+  const { lessonId, unitId } = useParams();
+  const kind = lessonId ? 'lesson' : unitId ? 'unit' : 'review';
   const { lang, content } = useLanguage();
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [index, setIndex] = useState(0);
@@ -23,6 +24,9 @@ export function QuizPage() {
       let targetIds: string[];
       if (lessonId) {
         targetIds = findLesson(content, lessonId)?.lesson.signIds ?? [];
+      } else if (unitId) {
+        // Repaso de la unidad: una muestra al azar de todas sus lecciones
+        targetIds = shuffle(content.units.find((u) => u.id === unitId)?.lessons.flatMap((l) => l.signIds) ?? []);
       } else {
         const due = await db.reviews.where('due').belowOrEqual(Date.now()).filter((r) => r.lang === lang).toArray();
         targetIds = due.sort((a, b) => a.due - b.due).map((r) => r.signId);
@@ -38,16 +42,16 @@ export function QuizPage() {
     return () => {
       cancelled = true;
     };
-  }, [lessonId, lang, content]);
+  }, [lessonId, unitId, lang, content]);
 
   if (!questions) return <p>Cargando…</p>;
 
   if (questions.length === 0) {
     return (
       <section className="hero">
-        <h1>{lessonId ? 'Sin preguntas' : 'Nada que repasar'}</h1>
+        <h1>{kind === 'review' ? 'Nada que repasar' : 'Sin preguntas'}</h1>
         <p className="muted">
-          {lessonId ? 'Esta lección no tiene signos.' : 'Completa una lección y sus signos aparecerán aquí cuando toque repasarlos.'}
+          {kind === 'lesson' ? 'Esta lección no tiene signos.' : kind === 'unit' ? 'Esta unidad no existe o no tiene signos.' : 'Completa una lección y sus signos aparecerán aquí cuando toque repasarlos.'}
         </p>
         <Link to="/aprender" className="button primary">Ir a las lecciones</Link>
       </section>
@@ -61,7 +65,7 @@ export function QuizPage() {
         <h1>¡Hecho!</h1>
         <p>{correctCount} de {questions.length} correctas.</p>
         <p className="muted">Las que fallaste volverán a salir mañana en el repaso.</p>
-        <Link to={lessonId ? '/aprender' : '/'} className="button primary">Volver</Link>
+        <Link to={kind === 'review' ? '/' : unitId ? `/aprender/${unitId}` : '/aprender'} className="button primary">Volver</Link>
       </section>
     );
   }
@@ -76,7 +80,7 @@ export function QuizPage() {
 
   return (
     <section className="quiz">
-      <p className="muted">{lessonId ? 'Quiz de lección' : 'Repaso'} · {index + 1} / {questions.length}</p>
+      <p className="muted">{kind === 'lesson' ? 'Quiz de lección' : kind === 'unit' ? 'Repaso de la unidad' : 'Repaso'} · {index + 1} / {questions.length}</p>
       <h1>¿Qué signo es?</h1>
       <article className="card lesson-sign">
         <SignMedia sign={q.sign} hideAnswer={!picked} handZoom />
