@@ -13,8 +13,8 @@ export default defineConfig({
         short_name: 'Sign',
         description: 'Aprende lenguas de signos con lecciones, repaso y práctica con cámara.',
         lang: 'es',
-        theme_color: '#1f6feb',
-        background_color: '#0d1117',
+        theme_color: '#17382d',
+        background_color: '#f7f9f8',
         display: 'standalone',
         start_url: '/',
         // PNG para Android/iOS (pnpm icons los regenera desde icon.svg); el SVG para el resto
@@ -26,7 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,webp,json}'],
+        // woff2: Inter autoalojada, para que la tipografía también funcione sin conexión
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,json,woff2}'],
         // El vocabulario (~10 MB, 539 fotos) no se descarga al instalar: cada foto se guarda
         // en caché la primera vez que se ve (regla /media/ de abajo). El alfabeto sí se precarga.
         globIgnores: ['**/media/lse/vocabulario/**'],

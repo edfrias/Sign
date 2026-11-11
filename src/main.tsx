@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { registerSW } from 'virtual:pwa-register';
 import { App } from './App';
 import { LanguageProvider } from './state/LanguageContext';
+import './fonts.css';
 import './styles.css';
 
 registerSW({ immediate: true });

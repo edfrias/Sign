@@ -1,38 +1,53 @@
 :root {
   --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  --bg: #f6f8fa;
+  /* Marca (docs/05-rediseno-ui.md) */
+  --night: #111d2b;
+  --forest: #17382d;
+  --mint: #b6ebd6;
+
+  /* Contrastes medidos (WCAG AA ≥ 4,5:1): --text 15:1 y --muted 6,2:1 sobre --bg/--surface-alt;
+     --accent 11:1 sobre --accent-soft; cada estado ≥ 4,7:1 sobre su fondo */
+  --bg: #f7f9f8;
   --surface: #ffffff;
-  --text: #1f2328;
-  --muted: #59636e;
-  --border: #d1d9e0;
-  /* #0969da: ≥ 4,5:1 sobre --bg y --surface (WCAG AA) */
-  --accent: #0969da;
+  --surface-alt: #eef2f0;
+  --text: #17251f;
+  --muted: #4c5d55;
+  --border: #dde5e1;
+  --accent: #17382d;        /* Forest: acción principal */
   --accent-text: #ffffff;
-  --ok: #1a7f37;
-  --ok-bg: #dafbe1;
-  --warn: #9a6700;
-  --warn-bg: #fff8c5;
-  --bad: #cf222e;
-  --bad-bg: #ffebe9;
-  --radius: 12px;
+  --accent-soft: #ddf3ea;   /* selección, pista de anillos/barras, pestaña activa */
+  --hero: #17382d;          /* tarjeta «Continúa» */
+  --hand-ring: #17382d;     /* borde del zoom a la mano sobre claro */
+  /* #187846 en vez del #1a7f4b del canvas: aquel daba 4,32:1 sobre --ok-bg */
+  --ok: #187846;   --ok-bg: #ddf3e7;
+  --warn: #8a4b00; --warn-bg: #fff1dc;
+  --bad: #b42318;  --bad-bg: #fdecea;
+
+  /* Escenario de la cámara: oscuro en ambos temas */
+  --stage: #111d2b;  --stage-2: #1c2b3a;  --stage-line: #354758;  --stage-muted: #c1ced8;
+  --stage-text: #f4f7f9;
+
+  --radius-xs: 6px; --radius-sm: 10px; --radius: 16px; --radius-lg: 20px; --radius-xl: 24px;
+  --font: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --text: #e6edf3;
-    --muted: #9198a1;
-    --border: #30363d;
-    --accent: #4493f8;
-    --accent-text: #0d1117;
-    --ok: #3fb950;
-    --ok-bg: #12261e;
-    --warn: #d29922;
-    --warn-bg: #272115;
-    --bad: #f85149;
-    --bad-bg: #2d1214;
+    --bg: #111d2b;
+    --surface: #1c2b3a;
+    --surface-alt: #243746;
+    --text: #f4f7f9;
+    --muted: #c1ced8;
+    --border: #354758;
+    --accent: #b6ebd6;      /* Mint */
+    --accent-text: #111d2b;
+    --accent-soft: #244638;
+    --hero: #243746;
+    --hand-ring: #b6ebd6;
+    --ok: #6fd39b;   --ok-bg: #173b2a;
+    --warn: #f2b45a; --warn-bg: #3a2a12;
+    --bad: #ff8a80;  --bad-bg: #3b1a1a;
     color-scheme: dark;
   }
 }
@@ -43,11 +58,16 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font: 400 16px/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
 }
 
 a { color: var(--accent); }
 h1, h2, h3 { line-height: 1.2; text-wrap: balance; }
+/* Escala: 30/38 título de pantalla · 20/28 título de tarjeta; ≥ 24 px con tracking negativo */
+h1 { font-size: 1.875rem; line-height: 2.375rem; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-weight: 600; }
+.label { font-size: 0.8125rem; line-height: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
 /* Sin palabras sueltas al final de párrafos y listas */
 p, li, dd, figcaption { text-wrap: pretty; }
 
@@ -67,8 +87,8 @@ p, li, dd, figcaption { text-wrap: pretty; }
 }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.1rem; color: var(--text); text-decoration: none; }
 .topbar nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
-.topbar nav a { padding: 6px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; white-space: nowrap; }
-.topbar nav a.active { background: var(--bg); color: var(--text); font-weight: 600; }
+.topbar nav a { padding: 6px 10px; border-radius: var(--radius-sm); color: var(--muted); text-decoration: none; white-space: nowrap; }
+.topbar nav a.active { background: var(--accent-soft); color: var(--text); font-weight: 600; }
 /* Móvil: las cuatro secciones en su propia fila, a partes iguales y sin scroll lateral
    (antes «Cámara» y «Diccionario» quedaban fuera de la pantalla) */
 @media (max-width: 560px) {
@@ -128,7 +148,7 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 .unit-title { flex: 1; display: grid; gap: 2px; }
 .unit summary h2 { margin: 0; font-size: 1.2rem; }
 .unit summary .muted { font-size: 0.9rem; }
-.unit summary .badge { margin-left: 0; white-space: nowrap; background: var(--bg); color: var(--muted); }
+.unit summary .badge { margin-left: 0; white-space: nowrap; background: var(--surface-alt); color: var(--muted); }
 .unit summary .badge.ok { background: var(--ok-bg); color: var(--ok); }
 .lesson-list { list-style: none; padding: 0 16px 16px; margin: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 .lesson-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -139,7 +159,7 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 /* Botones */
 .button, .chip, select, input {
   font: inherit; color: var(--text);
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
 }
 .button { display: inline-block; padding: 8px 14px; cursor: pointer; text-decoration: none; font-weight: 600; }
 .button:hover:not(:disabled) { border-color: var(--accent); }
@@ -162,20 +182,20 @@ select, input { padding: 8px 10px; }
 
 /* Signos */
 .media { margin: 0; display: grid; gap: 8px; justify-items: start; }
-.media video, .media img { width: 100%; border-radius: 8px; object-fit: contain; }
+.media video, .media img { width: 100%; border-radius: var(--radius-sm); object-fit: contain; }
 .media video { background: #000; aspect-ratio: 4 / 3; }
 .media img { background: #fff; aspect-ratio: 1; }
 .media figcaption { font-size: 0.8rem; color: var(--muted); }
 .media figcaption a { color: inherit; }
 .links { font-size: 0.9rem; color: var(--muted); }
 .media-empty {
-  width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--border); border-radius: 8px;
+  width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--border); border-radius: var(--radius-sm);
   display: grid; place-content: center; justify-items: center; color: var(--muted);
 }
 .media-empty span { font-size: 3rem; }
 
 .desc { display: grid; gap: 8px; margin: 12px 0; }
-.desc dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.desc dt { font-size: 0.8125rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 .desc dd { margin: 0; }
 
 .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
@@ -199,7 +219,7 @@ select, input { padding: 8px 10px; }
 /* Cámara */
 .practice-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
 @media (max-width: 760px) { .practice-grid { grid-template-columns: 1fr; } }
-.camera { position: relative; aspect-ratio: 4 / 3; background: #000; border-radius: 8px; overflow: hidden; }
+.camera { position: relative; aspect-ratio: 4 / 3; background: #000; border-radius: var(--radius-sm); overflow: hidden; }
 .camera video, .camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
 .camera-overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; color: #fff; text-align: center; padding: 16px; }
 /* background-clip: el borde neutro transparente deja ver el fondo exterior, no un marco negro */
@@ -209,25 +229,25 @@ select, input { padding: 8px 10px; }
 /* Lo que hay sobre la imagen se lee a un metro: letra pedida arriba, una sola banda de estado abajo.
    Ambas sobre la misma placa oscura, que no depende de lo que haya detrás (pared clara, ropa…). */
 .camera-target {
-  position: absolute; top: 12px; left: 12px; min-width: 1.4em; padding: 2px 16px; border-radius: 12px;
-  background: rgba(11, 15, 20, 0.82); color: #fff; text-align: center; line-height: 1.1;
+  position: absolute; top: 12px; left: 12px; min-width: 1.4em; padding: 2px 16px; border-radius: var(--radius-sm);
+  background: rgba(17, 29, 43, 0.82); color: #fff; text-align: center; line-height: 1.1;
   font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800;
 }
 .is-focus .camera-target { font-size: clamp(3rem, 9vw, 6rem); }
 
 .camera-band {
   position: absolute; left: 12px; right: 12px; bottom: 12px; overflow: hidden;
-  display: grid; place-items: center; min-height: 2.4em; padding: 6px 16px; border-radius: 12px;
-  background: rgba(11, 15, 20, 0.82); color: #fff; text-align: center; line-height: 1.2;
+  display: grid; place-items: center; min-height: 2.4em; padding: 6px 16px; border-radius: var(--radius-sm);
+  background: rgba(17, 29, 43, 0.82); color: #fff; text-align: center; line-height: 1.2;
   font-size: clamp(1.15rem, 2.8vw, 1.9rem); font-weight: 700;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
-/* El relleno es la barra de mantener: #1a7f37 (--ok del sistema) deja el texto blanco a 5,1:1 */
+/* El relleno es la barra de mantener: #187846 (--ok claro) deja el texto blanco a 5,5:1 */
 .camera-band-fill {
-  position: absolute; inset: 0; background: #1a7f37;
+  position: absolute; inset: 0; background: #187846;
   transform-origin: left center; transition: transform 0.1s linear;
 }
-.camera-band.is-skip .camera-band-fill { background: #9a6700; } /* --warn: texto blanco a 4,9:1 */
+.camera-band.is-skip .camera-band-fill { background: #8a4b00; } /* --warn claro: texto blanco a 6,8:1 */
 .camera-band-text { position: relative; display: inline-flex; align-items: center; gap: 0.35em; }
 .band-icon { width: 1.1em; height: 1.1em; flex: none; }
 @media (prefers-reduced-motion: reduce) {
@@ -239,20 +259,13 @@ select, input { padding: 8px 10px; }
 
 /* ── Modo práctica: la sesión ocupa la pantalla y todo se lee a ~1 m ──────────────────────────
    Fondo oscuro fijo en ambos temas: la imagen de la cámara es el contenido y debe destacar. */
-:root {
-  --stage-bg: #0b0f14;
-  --stage-surface: #161b22;
-  --stage-line: #3d444d;
-  --stage-text: #f0f6fc;
-  --stage-muted: #b7c0ca;
-}
 html.practice-focus, html.practice-focus body { overflow: hidden; }
 
 .stage.is-focus {
   position: fixed; inset: 0; z-index: 100;
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 12px;
   padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
-  background: var(--stage-bg); color: var(--stage-text);
+  background: var(--stage); color: var(--stage-text);
 }
 .stage.is-focus:focus { outline: none; }
 .stage-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -260,12 +273,12 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 .stage-count strong { color: var(--stage-text); font-weight: 800; }
 .stage-exit {
   min-height: 48px; padding: 8px 16px; font-size: 1.05rem;
-  background: var(--stage-surface); color: var(--stage-text); border-color: var(--stage-line);
+  background: var(--stage-2); color: var(--stage-text); border-color: var(--stage-line);
 }
 .stage-exit:hover:not(:disabled) { border-color: var(--stage-text); }
 .stage-exit kbd {
   margin-left: 8px; padding: 0 6px; font: inherit; font-size: 0.8em; color: var(--stage-muted);
-  border: 1px solid var(--stage-line); border-radius: 4px;
+  border: 1px solid var(--stage-line); border-radius: var(--radius-xs);
 }
 
 /* Cámara y modelo, dimensionados contra el espacio disponible (container query units) */
@@ -275,7 +288,7 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 }
 .is-focus .camera { width: min(100cqw, 62cqh * 4 / 3); flex: none; }
 .stage-model { position: relative; margin: 0; flex: none; width: min(100cqw, 38cqh - 16px); }
-.stage-model img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; }
+.stage-model img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: var(--radius-sm); }
 .stage-model figcaption {
   position: absolute; top: 8px; left: 8px; padding: 2px 10px; border-radius: 999px;
   background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 0.9rem; font-weight: 700;
@@ -301,11 +314,11 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 }
 /* Al saltar, la foto modelo se resalta (mismo ámbar que la banda) para comparar */
 .stage-model img { outline: 0 solid transparent; outline-offset: 3px; transition: outline-width 0.15s; }
-.stage-model.is-highlight img { outline: 4px solid #9a6700; }
-.stage-model.is-highlight figcaption { background: #9a6700; font-size: clamp(1rem, 2.2vw, 1.4rem); }
+.stage-model.is-highlight img { outline: 4px solid #8a4b00; }
+.stage-model.is-highlight figcaption { background: #8a4b00; font-size: clamp(1rem, 2.2vw, 1.4rem); }
 
 /* Final de ronda: resumen y siguiente paso, sobre la imagen oscurecida */
-.round-end { background: rgba(11, 15, 20, 0.88); gap: 12px; }
+.round-end { background: rgba(17, 29, 43, 0.88); gap: 12px; }
 .round-end h2 { margin: 0; font-size: clamp(1.6rem, 4vw, 2.6rem); }
 .round-end p { margin: 0; max-width: 40ch; font-size: clamp(1rem, 2.2vw, 1.3rem); }
 .round-end-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
@@ -320,7 +333,7 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 .camera-setup-title { margin: 0; font-weight: 700; font-size: 1.1rem; }
 .camera-setup ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--stage-muted); }
 
-.notice { padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); color: var(--warn); font-weight: 600; max-width: 68ch; }
+.notice { padding: 10px 14px; border-radius: var(--radius-sm); background: var(--warn-bg); color: var(--warn); font-weight: 600; max-width: 68ch; }
 .undo-status:empty { position: absolute; }
 
 .stage-foot { margin: 0; text-align: center; font-size: 0.85rem; color: var(--stage-muted); }
@@ -333,7 +346,7 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 .practice-settings { flex: 1 1 22rem; }
 .practice-settings summary {
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px;
-  cursor: pointer; list-style: none; font-weight: 600; color: var(--muted); border-radius: 8px;
+  cursor: pointer; list-style: none; font-weight: 600; color: var(--muted); border-radius: var(--radius-sm);
 }
 .practice-settings summary::-webkit-details-marker { display: none; }
 .practice-settings summary:hover, .practice-settings[open] summary { color: var(--text); }
@@ -350,7 +363,7 @@ html.practice-focus, html.practice-focus body { overflow: hidden; }
 .chip-letter {
   min-width: 40px; min-height: 36px; padding: 4px 8px; text-align: center;
   font: inherit; font-weight: 700; color: var(--text); background: var(--surface);
-  border: 2px solid var(--border); border-radius: 8px; cursor: pointer;
+  border: 2px solid var(--border); border-radius: var(--radius-sm); cursor: pointer;
 }
 .chip-letter:hover { border-color: var(--accent); }
 .chip-letter.current { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
