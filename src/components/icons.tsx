@@ -125,6 +125,14 @@ export const FaceIcon = () => (
   </Icon>
 );
 
+/** Racha */
+export const FlameIcon = () => (
+  <Icon>
+    <path d="M12 22a7 7 0 0 0 7-7c0-4-3-6.5-4.5-10C13 7 12 8 10.5 6.5 9.5 9 5 11 5 15a7 7 0 0 0 7 7z" />
+    <path d="M12 22a3 3 0 0 0 3-3c0-2-1.5-3-3-5-1.5 2-3 3-3 5a3 3 0 0 0 3 3z" />
+  </Icon>
+);
+
 export const CloseIcon = () => (
   <Icon>
     <path d="M6 6l12 12M18 6 6 18" />

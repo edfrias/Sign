@@ -6,6 +6,7 @@ import { useLanguage } from '../state/LanguageContext';
 import { FocusBar } from '../components/FocusLayout';
 import { SignDescriptionList, SignLinks, SignMedia, UnverifiedBadge, VariantLabel } from '../components/SignCard';
 import { ArrowLeftIcon, CameraIcon, MoveIcon } from '../components/icons';
+import { useStudyClock } from '../progress/useStudy';
 
 type View = 'full' | 'hand';
 
@@ -21,6 +22,7 @@ export function LessonPage() {
   const startIndex = Math.max(0, signs.findIndex((s) => s.id === params.get('signo')));
   const [index, setIndex] = useState(startIndex);
   const [view, setView] = useState<View>('full');
+  useStudyClock();
 
   useEffect(() => setIndex(startIndex), [lessonId, startIndex]);
 

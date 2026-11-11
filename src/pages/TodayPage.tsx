@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
 import { languages } from '../content/loader';
@@ -6,6 +6,8 @@ import { useLanguage } from '../state/LanguageContext';
 import { nextLesson, reviewMinutes } from '../progress/today';
 import { CameraIcon, ReviewIcon } from '../components/icons';
 import { HandZoom } from '../components/HandZoom';
+import { GoalRing, StreakChip } from '../components/GoalRing';
+import { useDailyProgress, useGoal, useWelcomed } from '../progress/useStudy';
 
 /** Hoy: la portada. Una acción principal (seguir con la lección) y, al lado, repaso y cámara. */
 export function TodayPage() {
@@ -19,11 +21,18 @@ export function TodayPage() {
     [lang],
   );
   const hasStatic = content.signs.some((s) => s.kind === 'static');
+  const [goal] = useGoal();
+  const daily = useDailyProgress(goal);
+  const welcomed = useWelcomed();
+
+  // Primera vez (sin progreso guardado): elegir lengua y ritmo antes de nada
+  if (welcomed === false) return <Navigate to="/bienvenida" replace />;
 
   return (
     <>
       <header className="page-head today-head">
         <h1>Hoy</h1>
+        {daily && <StreakChip count={daily.count} />}
         {/* En escritorio la lengua se elige en la barra lateral */}
         <label className="today-lang">
           <span className="visually-hidden">Lengua de signos</span>
@@ -34,6 +43,24 @@ export function TodayPage() {
           </select>
         </label>
       </header>
+
+      {daily && (
+        <section className="goal" aria-labelledby="hoy-meta">
+          <GoalRing fraction={daily.fraction} done={daily.todayDone} />
+          <div>
+            <h2 id="hoy-meta" className="goal-title">Meta de hoy</h2>
+            <p className="goal-text">
+              {daily.todayDone ? (
+                <>Cumplida: {daily.minutes} de {goal} min</>
+              ) : (
+                <>{Math.min(daily.minutes, goal)} de {goal} min</>
+              )}
+              <span className="muted"> · cuenta el tiempo en lecciones, repasos y cámara</span>
+            </p>
+          </div>
+          <Link to="/tu#tu-lengua" className="goal-change" aria-label="Cambiar la meta diaria">Cambiar</Link>
+        </section>
+      )}
 
       {/* Hasta que se lea el progreso no se sabe qué lección toca: mejor vacío que un salto */}
       {completed && <ContinueCard completed={completed} />}

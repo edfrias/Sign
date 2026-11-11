@@ -1,25 +1,31 @@
 import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
-import { getContent, languages } from '../content/loader';
+import { languages } from '../content/loader';
+import { languageSummary } from '../content/summary';
+import { dayKey } from '../progress/activity';
+import { useDailyProgress, useGoal } from '../progress/useStudy';
+import { GoalChoice } from '../components/GoalChoice';
 import { useLanguage } from '../state/LanguageContext';
 import { SOUND_KEY, useStoredBoolean } from '../state/preferences';
 import { BackupPanel } from '../components/BackupPanel';
-
-const dayKey = (ms: number) => new Date(ms).toDateString();
 
 /** Tú: resumen, lengua, ajustes de cámara, datos y créditos. */
 export function YouPage() {
   const { lang, setLang } = useLanguage();
   const [sound, setSound] = useStoredBoolean(SOUND_KEY, true);
+  const [goal, setGoal] = useGoal();
+  const daily = useDailyProgress(goal);
 
   const stats = useLiveQuery(async () => {
     const [lessons, signs] = await Promise.all([
       db.progress.where('lang').equals(lang).toArray(),
       db.reviews.where('lang').equals(lang).count(),
     ]);
-    return { signs, lessons: lessons.length, days: new Set(lessons.map((l) => dayKey(l.completedAt))).size };
+    return { signs, lessons: lessons.length, lessonDays: lessons.map((l) => dayKey(l.completedAt)) };
   }, [lang]);
+  // Días de estudio: con al menos un minuto contado o con alguna lección completada (anteriores al reloj)
+  const studyDays = new Set([...(daily?.studyDays ?? []), ...(stats?.lessonDays ?? [])]).size;
   const calibrated = useLiveQuery(async () => new Set(await db.templates.orderBy('signId').keys()).size);
 
   return (
@@ -41,14 +47,18 @@ export function YouPage() {
             <dd>{stats?.lessons ?? 0}</dd>
           </div>
           <div className="stat">
-            <dt>Días con lecciones</dt>
-            <dd>{stats?.days ?? 0}</dd>
+            <dt>Días de estudio</dt>
+            <dd>{studyDays}</dd>
+          </div>
+          <div className="stat">
+            <dt>Racha (días seguidos con la meta)</dt>
+            <dd>{daily?.count ?? 0}</dd>
           </div>
         </dl>
       </section>
 
       <section className="you-section" aria-labelledby="tu-lengua">
-        <h2 id="tu-lengua">Lengua</h2>
+        <h2 id="tu-lengua">Lengua y meta diaria</h2>
         <fieldset className="choice-list">
           <legend className="visually-hidden">Lengua de signos que estudias</legend>
           {languages.map((l) => (
@@ -56,10 +66,20 @@ export function YouPage() {
               <input type="radio" name="lengua" value={l.id} checked={l.id === lang} onChange={() => setLang(l.id)} />
               <span className="choice-text">
                 <strong>{l.name} ({l.short})</strong>
-                <span className="muted">{getContent(l.id).signs.length} signos · {l.region}</span>
+                <span className="muted">
+                  {languageSummary(l.id).count} · {l.region}
+                  {languageSummary(l.id).testing && ' · En pruebas'}
+                </span>
               </span>
             </label>
           ))}
+        </fieldset>
+        <fieldset className="choice-list goal-fieldset">
+          <legend>Meta diaria</legend>
+          <GoalChoice name="meta-tu" value={goal} onChange={setGoal} />
+          <p className="muted small">
+            Cuenta el tiempo en lecciones, repasos y práctica con cámara. La racha suma los días seguidos en que la cumples.
+          </p>
         </fieldset>
       </section>
 

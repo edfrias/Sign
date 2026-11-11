@@ -10,6 +10,7 @@ import { ResultPanel, resultMessage } from '../components/ResultPanel';
 import { PhotoCredit } from '../components/PhotoCredit';
 import { CheckIcon, CloseIcon } from '../components/icons';
 import { SESSION_SIZE } from '../progress/today';
+import { useStudyClock } from '../progress/useStudy';
 
 /** Pregunta de la sesión; `retry` si vuelve tras un fallo (no cuenta otra vez para el repaso espaciado). */
 type Item = Question & { retry?: boolean };
@@ -24,6 +25,7 @@ export function QuizPage() {
   const [picked, setPicked] = useState<string | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [announcement, setAnnouncement] = useState('');
+  useStudyClock(!!queue?.length);
 
   // Las preguntas se generan una vez al entrar, no en cada respuesta.
   useEffect(() => {

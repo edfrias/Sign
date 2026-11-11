@@ -23,6 +23,7 @@ import { SOUND_KEY, useStoredBoolean } from '../state/preferences';
 import { useLanguage } from '../state/LanguageContext';
 import { SignDescriptionList, SignMedia } from '../components/SignCard';
 import { HandZoom } from '../components/HandZoom';
+import { useStudyClock } from '../progress/useStudy';
 
 /**
  * Suavizado por tiempo, no por número de fotogramas: a 1 fps, 8 fotogramas serían 8 s mezclando
@@ -200,6 +201,8 @@ export function PracticePage() {
   // Modo práctica: la sesión ocupa la pantalla. Se bloquea el scroll de la página y el foco
   // pasa al propio panel (no a un botón, para que Espacio siga sirviendo para saltar).
   const focusMode = !!(practice || calibration);
+  // Tiempo de estudio: cuenta con la sesión en marcha, sin exigir tocar nada (manos libres)
+  useStudyClock(focusMode && status === 'running', true);
   const stageRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {

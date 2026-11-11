@@ -5,10 +5,14 @@
  * Importar combina en vez de sustituir, para no perder lo que ya hay en este dispositivo:
  * - lecciones: se unen; si están en los dos sitios, cuenta la fecha más antigua;
  * - repaso: por signo, gana el que se repasó por última vez;
- * - calibración: por letra, gana la grabación más reciente.
+ * - calibración: por letra, gana la grabación más reciente;
+ * - tiempo de estudio: por día, el mayor (sumar contaría dos veces el mismo día).
+ *
+ * `activity` es opcional: las copias anteriores a la meta diaria no lo traen y siguen valiendo.
  */
 import { DAY_MS, type ReviewState } from '../srs/sm2';
 import type { LessonProgress, StoredTemplate } from './db';
+import type { DayActivity } from '../progress/activity';
 
 export const BACKUP_APP = 'sign';
 export const BACKUP_VERSION = 1;
@@ -20,6 +24,8 @@ export interface BackupData {
   reviews: ReviewState[];
   /** Sin `id`: es la clave local autoincremental de IndexedDB */
   templates: Omit<StoredTemplate, 'id'>[];
+  /** Segundos de estudio por día */
+  activity?: DayActivity[];
 }
 
 export interface Backup extends BackupData {
@@ -36,6 +42,7 @@ export function buildBackup(data: BackupData, now = Date.now()): Backup {
     progress: data.progress.map(({ lang, lessonId, completedAt }) => ({ lang, lessonId, completedAt })),
     reviews: data.reviews.map(({ signId, lang, ease, interval, repetitions, due }) => ({ signId, lang, ease, interval, repetitions, due })),
     templates: data.templates.map(({ signId, vector, createdAt }) => ({ signId, vector, createdAt })),
+    activity: (data.activity ?? []).map(({ day, seconds }) => ({ day, seconds })),
   };
 }
 
@@ -65,7 +72,8 @@ export function parseBackup(text: string): Backup {
     throw new BackupError('Esta copia es de otra versión de Sign. Actualiza la app y vuelve a intentarlo.');
   }
   const { progress, reviews, templates } = raw;
-  if (!Array.isArray(progress) || !Array.isArray(reviews) || !Array.isArray(templates)) {
+  const activity = raw.activity ?? [];
+  if (!Array.isArray(progress) || !Array.isArray(reviews) || !Array.isArray(templates) || !Array.isArray(activity)) {
     throw new BackupError('La copia está incompleta o dañada.');
   }
   const okProgress = progress.every((p) => isObj(p) && isStr(p.lang) && isStr(p.lessonId) && isNum(p.completedAt));
@@ -75,11 +83,17 @@ export function parseBackup(text: string): Backup {
   const okTemplates = templates.every(
     (t) => isObj(t) && isStr(t.signId) && isNum(t.createdAt) && Array.isArray(t.vector) && t.vector.length > 0 && t.vector.every(isNum),
   );
-  if (!okProgress || !okReviews || !okTemplates) {
+  const okActivity = activity.every((a) => isObj(a) && isStr(a.day) && /^\d{4}-\d{2}-\d{2}$/.test(a.day) && isNum(a.seconds) && a.seconds >= 0);
+  if (!okProgress || !okReviews || !okTemplates || !okActivity) {
     throw new BackupError('La copia está dañada: algunos datos no tienen el formato esperado.');
   }
   return buildBackup(
-    { progress: progress as LessonProgress[], reviews: reviews as ReviewState[], templates: templates as StoredTemplate[] },
+    {
+      progress: progress as LessonProgress[],
+      reviews: reviews as ReviewState[],
+      templates: templates as StoredTemplate[],
+      activity: activity as DayActivity[],
+    },
     isNum(raw.exportedAt) ? raw.exportedAt : 0,
   );
 }
@@ -114,7 +128,18 @@ export function mergeBackup(local: BackupData, incoming: BackupData): BackupData
     if (!mine || newest(list) > newest(mine)) templates.set(signId, list);
   }
 
-  return { progress: [...progress.values()], reviews: [...reviews.values()], templates: [...templates.values()].flat() };
+  const activity = new Map((local.activity ?? []).map((a) => [a.day, a]));
+  for (const a of incoming.activity ?? []) {
+    const mine = activity.get(a.day);
+    if (!mine || a.seconds > mine.seconds) activity.set(a.day, a);
+  }
+
+  return {
+    progress: [...progress.values()],
+    reviews: [...reviews.values()],
+    templates: [...templates.values()].flat(),
+    activity: [...activity.values()],
+  };
 }
 
 /** Resumen legible de una copia, para confirmar antes de importar. */
@@ -125,5 +150,6 @@ export function describeBackup(b: BackupData): string {
     n(b.progress.length, 'lección completada', 'lecciones completadas'),
     n(b.reviews.length, 'signo en repaso', 'signos en repaso'),
     n(letters, 'letra calibrada', 'letras calibradas'),
+    ...(b.activity?.length ? [n(b.activity.length, 'día de estudio', 'días de estudio')] : []),
   ].join(', ');
 }

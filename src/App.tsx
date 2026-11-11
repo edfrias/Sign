@@ -11,13 +11,16 @@ import { PracticePage } from './pages/PracticePage';
 import { CreditsPage } from './pages/CreditsPage';
 import { YouPage } from './pages/YouPage';
 import { UnitPage } from './pages/UnitPage';
+import { WelcomePage } from './pages/WelcomePage';
 
-/** Al cambiar de pantalla: arriba del todo, como una página nueva. */
+/** Al cambiar de pantalla: arriba del todo, como una página nueva (o a la sección del #enlace). */
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -50,6 +53,8 @@ export function App() {
         {/* La lección pinta su propia barra: progreso junto al ✕, que vuelve a su unidad */}
         <Route element={<FocusLayout />}>
           <Route path="/leccion/:lessonId" element={<LessonPage />} />
+          {/* Primera vez: sin pestañas ni ✕, una sola decisión */}
+          <Route path="/bienvenida" element={<WelcomePage />} />
         </Route>
         <Route element={<FocusLayout exitTo="/aprender" exitLabel="Salir a Aprender" />}>
           <Route path="/quiz/:lessonId" element={<QuizPage />} />

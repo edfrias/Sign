@@ -17,6 +17,9 @@ const REPORT_DIR = new URL('../a11y-report/', import.meta.url);
  *  `viewport` la mide en otro tamaño (móvil: pestañas abajo en lugar de barra lateral). */
 const MOBILE = { width: 375, height: 812 };
 const PAGES = [
+  // Primero: `firstRun` borra la marca de bienvenida vista; el resto de pantallas la tienen puesta
+  { name: 'Bienvenida (primera vez)', path: '/', firstRun: true, ready: 'text=¿Qué lengua quieres aprender?' },
+  { name: 'Bienvenida (móvil)', path: '/bienvenida', firstRun: true, viewport: MOBILE },
   { name: 'Hoy', path: '/' },
   { name: 'Hoy (móvil)', path: '/', viewport: MOBILE },
   { name: 'Aprender', path: '/aprender' },
@@ -104,7 +107,7 @@ async function answerWrongAndShowSign(page) {
   throw new Error('No se consiguió fallar ninguna pregunta');
 }
 
-/** Una lección hecha y seis signos pendientes de repaso, escritos directamente en IndexedDB. */
+/** Una lección hecha, seis signos pendientes de repaso y 7 min de estudio hoy, escritos en IndexedDB. */
 async function seedProgress(page) {
   await page.evaluate(
     () =>
@@ -112,7 +115,10 @@ async function seedProgress(page) {
         const req = indexedDB.open('sign');
         req.onerror = reject;
         req.onsuccess = () => {
-          const tx = req.result.transaction(['progress', 'reviews'], 'readwrite');
+          const tx = req.result.transaction(['progress', 'reviews', 'activity'], 'readwrite');
+          const d = new Date();
+          const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+          tx.objectStore('activity').put({ day, seconds: 7 * 60 }); // 7 de 10 min: el anillo a medias
           tx.objectStore('progress').put({ lang: 'lse', lessonId: 'alfabeto-1', completedAt: Date.now() });
           for (const id of ['lse-a', 'lse-b', 'lse-c', 'lse-ch', 'lse-d', 'lse-e']) {
             tx.objectStore('reviews').put({ signId: id, lang: 'lse', ease: 2.5, interval: 0, repetitions: 0, due: Date.now() - 1000 });
@@ -125,6 +131,7 @@ async function seedProgress(page) {
   await page.reload({ waitUntil: 'networkidle' });
   await page.getByText('Seguir aprendiendo').waitFor();
   await page.getByText('6 signos pendientes').waitFor();
+  await page.getByText('7 de 10 min').waitFor();
 }
 
 const SCHEMES = ['light', 'dark'];
@@ -167,6 +174,10 @@ async function main() {
       for (const p of pages) {
         const page = await context.newPage();
         if (p.viewport) await page.setViewportSize(p.viewport);
+        // Sin progreso, Hoy lleva a la bienvenida: salvo en esas pantallas, se da por vista
+        await page.addInitScript(
+          p.firstRun ? "localStorage.removeItem('sign.welcomed')" : "localStorage.setItem('sign.welcomed', '1')",
+        );
         if (p.init) await page.addInitScript(p.init);
         await page.goto(base + p.path, { waitUntil: 'networkidle' });
         if (p.ready) await page.locator(p.ready).waitFor();

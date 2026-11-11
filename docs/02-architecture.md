@@ -25,7 +25,7 @@
 │                       ├─ features.ts    │   21 points → normalised vector
 │                       └─ classifier.ts  │   comparison against templates
 │  content/ (JSON per language)           │
-│  db/ (Dexie → IndexedDB)                │   progress, reviews, templates
+│  db/ (Dexie → IndexedDB)                │   progress, reviews, templates, activity
 └─────────────────────────────────────────┘
 ```
 
@@ -141,13 +141,23 @@ Each sign has `{ ease, interval, repetitions, due }`. After each answer it is gr
 | `progress` | `[lang+lessonId]` | completed lesson, date |
 | `reviews` | `signId` | SM-2 state |
 | `templates` | `++id`, index `signId` | the user's camera calibration vectors |
+| `activity` | `day` (local `YYYY-MM-DD`) | seconds studied that day (schema v2) |
 
-**Backup.** Everything lives only in this browser, so the home screen offers «Descargar copia» /
+**Daily goal and streak** (`src/progress/activity.ts`, `useStudy.ts`). Lessons, quizzes and camera
+sessions run a study clock: every 15 s it credits the elapsed time if the tab is visible and the
+screen was used in the last 90 s (camera practice is hands-free, so it only needs the session
+running); at most 30 s per tick, so a suspended laptop adds nothing. The goal is 5, 10 or 15 minutes
+(`sign.goal`); the streak is the run of consecutive days that met it, and today only breaks it when
+the day ends. First run: with no progress and no `sign.welcomed`, Hoy redirects to `/bienvenida`.
+
+**Backup.** Everything lives only in this browser, so «Tú» offers «Descargar copia» /
 «Importar copia» (`src/db/backup.ts`, `src/components/BackupPanel.tsx`). The copy is a versioned JSON
 (`app: "sign"`, `version: 1`) without the local IndexedDB keys. Importing validates the file, shows a
 summary to confirm and then **merges** instead of replacing, so nothing on this device is lost:
 lessons are joined (the earliest date wins), each sign keeps the most recently reviewed SM-2 state,
-and each letter keeps its most recent calibration.
+each letter keeps its most recent calibration, and each day keeps the larger study time (adding them
+would count the same day twice). `activity` is optional, so copies from before the daily goal still import.
 
 The active language is stored in `localStorage` (`sign.lang`) to avoid a flash on start-up;
-the camera tolerance is stored in `sign.tolerance`.
+the camera tolerance in `sign.tolerance`, camera beeps in `sign.sound`, the daily goal in `sign.goal`
+and the first-run flag in `sign.welcomed`.
