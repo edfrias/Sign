@@ -42,14 +42,23 @@ const PAGES = [
   { name: 'Lección (móvil)', path: '/leccion/alfabeto-1', viewport: MOBILE },
   { name: 'Lección de vocabulario', path: '/leccion/cnse-saludos-y-cortesia-1' },
   { name: 'Lección inexistente', path: '/leccion/no-existe' },
-  { name: 'Quiz (pregunta)', path: '/quiz/alfabeto-1' },
+  { name: 'Quiz «reconocer»', path: '/quiz/alfabeto-1', init: fixedRandom(0.9) },
   {
-    name: 'Quiz (respondido)',
+    name: 'Quiz respondido',
     path: '/quiz/alfabeto-1',
+    init: fixedRandom(0.9),
     prepare: async (page) => {
       await page.locator('.option').first().click();
-      await page.getByText('Siguiente').waitFor();
+      await page.getByRole('button', { name: 'Continuar' }).waitFor();
     },
+  },
+  { name: 'Quiz «recordar»', path: '/quiz/cnse-saludos-y-cortesia-1', init: fixedRandom(0.1), viewport: MOBILE },
+  {
+    name: 'Quiz fallado con «Ver signo» (móvil)',
+    path: '/quiz/cnse-saludos-y-cortesia-1',
+    init: fixedRandom(0.1),
+    viewport: MOBILE,
+    prepare: answerWrongAndShowSign,
   },
   { name: 'Repaso vacío', path: '/repaso' },
   { name: 'Diccionario', path: '/diccionario' },
@@ -59,6 +68,27 @@ const PAGES = [
   // Al final: deja progreso guardado en el contexto y cambiaría las pantallas «vacías» de arriba
   { name: 'Hoy (con progreso y repaso)', path: '/', viewport: MOBILE, prepare: seedProgress },
 ];
+
+/** Math.random fijo: con 0,1 las preguntas con foto son «recordar»; con 0,9, «reconocer». */
+function fixedRandom(value) {
+  return `Math.random = () => ${value};`;
+}
+
+/** Responde opciones distintas en preguntas sucesivas hasta fallar una, y abre «Ver signo». */
+async function answerWrongAndShowSign(page) {
+  for (let i = 0; i < 8; i++) {
+    const options = page.locator('.option');
+    await options.nth(i % (await options.count())).click();
+    const verSigno = page.getByRole('button', { name: 'Ver signo' });
+    if (await verSigno.isVisible()) {
+      await verSigno.click();
+      await page.getByRole('button', { name: 'Ocultar signo' }).waitFor();
+      return;
+    }
+    await page.getByRole('button', { name: 'Continuar' }).click();
+  }
+  throw new Error('No se consiguió fallar ninguna pregunta');
+}
 
 /** Una lección hecha y seis signos pendientes de repaso, escritos directamente en IndexedDB. */
 async function seedProgress(page) {
@@ -123,6 +153,7 @@ async function main() {
       for (const p of pages) {
         const page = await context.newPage();
         if (p.viewport) await page.setViewportSize(p.viewport);
+        if (p.init) await page.addInitScript(p.init);
         await page.goto(base + p.path, { waitUntil: 'networkidle' });
         if (p.ready) await page.locator(p.ready).waitFor();
         await page.locator('main').waitFor();
