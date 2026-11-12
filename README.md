@@ -18,6 +18,7 @@ pnpm test          # unit tests
 pnpm a11y          # accessibility audit with axe (requires Chrome)
 pnpm build         # production build in dist/
 pnpm icons         # regenerate the PNG app icons from public/icon.svg
+pnpm hand-focus    # locate the hands in every sign photo for the hand zoom (requires Chrome)
 ```
 
 The project uses [pnpm](https://pnpm.io/) (the version is pinned in `packageManager` in
@@ -68,7 +69,9 @@ as `"/media/lse/a.mp4"`.
 
 The LSE content (30 alphabet letters + 538 vocabulary signs) comes from Fundación CNSE's
 Banco LSE and can be regenerated with `pnpm import:alphabet` and `pnpm import:vocabulary`.
-Files named `*.bancolse.json` are generated: do not edit them by hand.
+Files named `*.bancolse.json` are generated: do not edit them by hand. After importing new photos,
+run `pnpm hand-focus` to update `hand-focus.json` (where the hands are in each photo, for the
+circular hand zoom; photos where MediaPipe finds no hand are shown without zoom).
 
 Only use your own material or material whose licence allows it, and fill in `credit` and `license`.
 Set `"verified": true` once a reliable dictionary or a signer has confirmed the sign.

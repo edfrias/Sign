@@ -1,0 +1,2822 @@
+{
+  "lse.cnse.adjetivos-aburrido": {
+    "x": 0.458,
+    "y": 0.485,
+    "scale": 1.647
+  },
+  "lse.cnse.adjetivos-agradable": {
+    "x": 0.474,
+    "y": 0.537,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-alegre": {
+    "x": 0.506,
+    "y": 0.552,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-alto": {
+    "x": 0.322,
+    "y": 0.109,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-amargo": {
+    "x": 0.46,
+    "y": 0.371,
+    "scale": 1.885
+  },
+  "lse.cnse.adjetivos-bajo": {
+    "x": 0.365,
+    "y": 0.645,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-bis": {
+    "x": 0.359,
+    "y": 0.658,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-blando": {
+    "x": 0.271,
+    "y": 0.384,
+    "scale": 2.363
+  },
+  "lse.cnse.adjetivos-bueno": {
+    "x": 0.519,
+    "y": 0.381,
+    "scale": 2.55
+  },
+  "lse.cnse.adjetivos-caliente": {
+    "x": 0.47,
+    "y": 0.366,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-castano": {
+    "x": 0.501,
+    "y": 0.565,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-claro": {
+    "x": 0.284,
+    "y": 0.4,
+    "scale": 1.762
+  },
+  "lse.cnse.adjetivos-contento": {
+    "x": 0.56,
+    "y": 0.372,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-delgado": {
+    "x": 0.306,
+    "y": 0.563,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-desagradable": {
+    "x": 0.471,
+    "y": 0.497,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-diferente": {
+    "x": 0.382,
+    "y": 0.492,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-divertido": {
+    "x": 0.511,
+    "y": 0.353,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-dulce": {
+    "x": 0.441,
+    "y": 0.35,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-duro": {
+    "x": 0.514,
+    "y": 0.43,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-enfadado": {
+    "x": 0.496,
+    "y": 0.321,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-enfermo": {
+    "x": 0.678,
+    "y": 0.593,
+    "scale": 2.817
+  },
+  "lse.cnse.adjetivos-feo": {
+    "x": 0.331,
+    "y": 0.296,
+    "scale": 1.688
+  },
+  "lse.cnse.adjetivos-frio": {
+    "x": 0.507,
+    "y": 0.433,
+    "scale": 1.691
+  },
+  "lse.cnse.adjetivos-gordo": {
+    "x": 0.499,
+    "y": 0.283,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-guapo": {
+    "x": 0.435,
+    "y": 0.325,
+    "scale": 1.707
+  },
+  "lse.cnse.adjetivos-igual": {
+    "x": 0.499,
+    "y": 0.665,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-lento": {
+    "x": 0.488,
+    "y": 0.638,
+    "scale": 1.686
+  },
+  "lse.cnse.adjetivos-limpio": {
+    "x": 0.358,
+    "y": 0.325,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-lleno": {
+    "x": 0.48,
+    "y": 0.551,
+    "scale": 2.369
+  },
+  "lse.cnse.adjetivos-malo": {
+    "x": 0.457,
+    "y": 0.557,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-moreno": {
+    "x": 0.531,
+    "y": 0.634,
+    "scale": 2.384
+  },
+  "lse.cnse.adjetivos-mucho": {
+    "x": 0.406,
+    "y": 0.573,
+    "scale": 1.726
+  },
+  "lse.cnse.adjetivos-oscuro": {
+    "x": 0.512,
+    "y": 0.326,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-pelirrojo": {
+    "x": 0.442,
+    "y": 0.262,
+    "scale": 1.829
+  },
+  "lse.cnse.adjetivos-pocos": {
+    "x": 0.366,
+    "y": 0.451,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-primer": {
+    "x": 0.284,
+    "y": 0.343,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-rapido": {
+    "x": 0.743,
+    "y": 0.455,
+    "scale": 1.941
+  },
+  "lse.cnse.adjetivos-rubio": {
+    "x": 0.457,
+    "y": 0.112,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-salado": {
+    "x": 0.42,
+    "y": 0.393,
+    "scale": 2.353
+  },
+  "lse.cnse.adjetivos-sano": {
+    "x": 0.27,
+    "y": 0.44,
+    "scale": 2.111
+  },
+  "lse.cnse.adjetivos-sucio": {
+    "x": 0.403,
+    "y": 0.31,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-templado": {
+    "x": 0.272,
+    "y": 0.536,
+    "scale": 2.266
+  },
+  "lse.cnse.adjetivos-triste": {
+    "x": 0.375,
+    "y": 0.345,
+    "scale": 1.6
+  },
+  "lse.cnse.adjetivos-ultimo": {
+    "x": 0.481,
+    "y": 0.553,
+    "scale": 3.2
+  },
+  "lse.cnse.adjetivos-vacio": {
+    "x": 0.616,
+    "y": 0.519,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-abajo": {
+    "x": 0.416,
+    "y": 0.681,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-arriba": {
+    "x": 0.303,
+    "y": 0.198,
+    "scale": 3.168
+  },
+  "lse.cnse.adverbios-bien": {
+    "x": 0.279,
+    "y": 0.388,
+    "scale": 1.75
+  },
+  "lse.cnse.adverbios-bis": {
+    "x": 0.393,
+    "y": 0.194,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-cerca": {
+    "x": 0.622,
+    "y": 0.524,
+    "scale": 2.699
+  },
+  "lse.cnse.adverbios-debajo": {
+    "x": 0.659,
+    "y": 0.612,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-delante": {
+    "x": 0.308,
+    "y": 0.325,
+    "scale": 2.779
+  },
+  "lse.cnse.adverbios-dentro": {
+    "x": 0.499,
+    "y": 0.497,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-derecha": {
+    "x": 0.341,
+    "y": 0.595,
+    "scale": 2.613
+  },
+  "lse.cnse.adverbios-detras": {
+    "x": 0.386,
+    "y": 0.267,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-encima": {
+    "x": 0.485,
+    "y": 0.55,
+    "scale": 2.833
+  },
+  "lse.cnse.adverbios-fuera": {
+    "x": 0.198,
+    "y": 0.365,
+    "scale": 1.659
+  },
+  "lse.cnse.adverbios-izquierda": {
+    "x": 0.675,
+    "y": 0.582,
+    "scale": 3.2
+  },
+  "lse.cnse.adverbios-lejos": {
+    "x": 0.325,
+    "y": 0.253,
+    "scale": 1.764
+  },
+  "lse.cnse.adverbios-mal": {
+    "x": 0.58,
+    "y": 0.429,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-abeja": {
+    "x": 0.293,
+    "y": 0.387,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-aguila": {
+    "x": 0.341,
+    "y": 0.351,
+    "scale": 1.769
+  },
+  "lse.cnse.animales-ballena": {
+    "x": 0.404,
+    "y": 0.186,
+    "scale": 2.581
+  },
+  "lse.cnse.animales-bis": {
+    "x": 0.495,
+    "y": 0.24,
+    "scale": 1.639
+  },
+  "lse.cnse.animales-burro": {
+    "x": 0.488,
+    "y": 0.16,
+    "scale": 2.142
+  },
+  "lse.cnse.animales-caballo": {
+    "x": 0.28,
+    "y": 0.482,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-cabra": {
+    "x": 0.354,
+    "y": 0.132,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-camello": {
+    "x": 0.239,
+    "y": 0.389,
+    "scale": 1.603
+  },
+  "lse.cnse.animales-cerdo": {
+    "x": 0.393,
+    "y": 0.28,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-cocodrilo": {
+    "x": 0.753,
+    "y": 0.597,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-conejo": {
+    "x": 0.285,
+    "y": 0.187,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-delfin": {
+    "x": 0.428,
+    "y": 0.453,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-elefante": {
+    "x": 0.328,
+    "y": 0.42,
+    "scale": 1.731
+  },
+  "lse.cnse.animales-foca": {
+    "x": 0.472,
+    "y": 0.652,
+    "scale": 1.627
+  },
+  "lse.cnse.animales-gallina": {
+    "x": 0.427,
+    "y": 0.23,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-gato": {
+    "x": 0.483,
+    "y": 0.597,
+    "scale": 3.045
+  },
+  "lse.cnse.animales-granja": {
+    "x": 0.441,
+    "y": 0.281,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-jirafa": {
+    "x": 0.216,
+    "y": 0.227,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-leon": {
+    "x": 0.474,
+    "y": 0.328,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-loro": {
+    "x": 0.654,
+    "y": 0.422,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-mariposa": {
+    "x": 0.505,
+    "y": 0.471,
+    "scale": 1.99
+  },
+  "lse.cnse.animales-mono": {
+    "x": 0.512,
+    "y": 0.59,
+    "scale": 1.645
+  },
+  "lse.cnse.animales-oso": {
+    "x": 0.509,
+    "y": 0.172,
+    "scale": 1.712
+  },
+  "lse.cnse.animales-oveja": {
+    "x": 0.271,
+    "y": 0.5,
+    "scale": 2.202
+  },
+  "lse.cnse.animales-pajaro": {
+    "x": 0.279,
+    "y": 0.369,
+    "scale": 3.025
+  },
+  "lse.cnse.animales-pato": {
+    "x": 0.446,
+    "y": 0.343,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-perro": {
+    "x": 0.374,
+    "y": 0.353,
+    "scale": 1.746
+  },
+  "lse.cnse.animales-tiburon": {
+    "x": 0.176,
+    "y": 0.407,
+    "scale": 3.2
+  },
+  "lse.cnse.animales-tigre": {
+    "x": 0.516,
+    "y": 0.534,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-toro": {
+    "x": 0.417,
+    "y": 0.191,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-tortuga": {
+    "x": 0.492,
+    "y": 0.595,
+    "scale": 2.982
+  },
+  "lse.cnse.animales-vaca": {
+    "x": 0.416,
+    "y": 0.199,
+    "scale": 1.6
+  },
+  "lse.cnse.animales-zoo": {
+    "x": 0.489,
+    "y": 0.513,
+    "scale": 1.956
+  },
+  "lse.cnse.atmosferico-atmosferico": {
+    "x": 0.127,
+    "y": 0.187,
+    "scale": 3.063
+  },
+  "lse.cnse.atmosferico-calor": {
+    "x": 0.404,
+    "y": 0.185,
+    "scale": 2.366
+  },
+  "lse.cnse.atmosferico-frio": {
+    "x": 0.509,
+    "y": 0.565,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-lluvia": {
+    "x": 0.525,
+    "y": 0.469,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-nieve": {
+    "x": 0.49,
+    "y": 0.455,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-nube": {
+    "x": 0.505,
+    "y": 0.149,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-nublado": {
+    "x": 0.481,
+    "y": 0.215,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-sol": {
+    "x": 0.354,
+    "y": 0.206,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-tormenta": {
+    "x": 0.458,
+    "y": 0.474,
+    "scale": 1.6
+  },
+  "lse.cnse.atmosferico-viento": {
+    "x": 0.359,
+    "y": 0.409,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-alfombra": {
+    "x": 0.326,
+    "y": 0.807,
+    "scale": 2.222
+  },
+  "lse.cnse.casa-armario": {
+    "x": 0.504,
+    "y": 0.635,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-bano": {
+    "x": 0.413,
+    "y": 0.448,
+    "scale": 3.168
+  },
+  "lse.cnse.casa-cama": {
+    "x": 0.37,
+    "y": 0.288,
+    "scale": 2.679
+  },
+  "lse.cnse.casa-casa": {
+    "x": 0.518,
+    "y": 0.522,
+    "scale": 1.929
+  },
+  "lse.cnse.casa-cocina": {
+    "x": 0.664,
+    "y": 0.565,
+    "scale": 2.413
+  },
+  "lse.cnse.casa-cristal": {
+    "x": 0.398,
+    "y": 0.439,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-despertador": {
+    "x": 0.635,
+    "y": 0.588,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-dormitorio": {
+    "x": 0.482,
+    "y": 0.735,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-fax": {
+    "x": 0.648,
+    "y": 0.575,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-lampara": {
+    "x": 0.387,
+    "y": 0.206,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-maceta": {
+    "x": 0.496,
+    "y": 0.417,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-manta": {
+    "x": 0.546,
+    "y": 0.522,
+    "scale": 1.633
+  },
+  "lse.cnse.casa-maquina": {
+    "x": 0.493,
+    "y": 0.526,
+    "scale": 2.483
+  },
+  "lse.cnse.casa-mesa": {
+    "x": 0.406,
+    "y": 0.58,
+    "scale": 1.934
+  },
+  "lse.cnse.casa-mesilla": {
+    "x": 0.28,
+    "y": 0.903,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-mueble": {
+    "x": 0.495,
+    "y": 0.532,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-muneco": {
+    "x": 0.496,
+    "y": 0.577,
+    "scale": 1.995
+  },
+  "lse.cnse.casa-objeto": {
+    "x": 0.443,
+    "y": 0.851,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-ordenador": {
+    "x": 0.502,
+    "y": 0.622,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-pelota": {
+    "x": 0.507,
+    "y": 0.447,
+    "scale": 2.399
+  },
+  "lse.cnse.casa-plancha": {
+    "x": 0.419,
+    "y": 0.599,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-puerta": {
+    "x": 0.433,
+    "y": 0.732,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-sabana": {
+    "x": 0.515,
+    "y": 0.695,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-salon": {
+    "x": 0.257,
+    "y": 0.25,
+    "scale": 2.261
+  },
+  "lse.cnse.casa-silla": {
+    "x": 0.374,
+    "y": 0.542,
+    "scale": 2.048
+  },
+  "lse.cnse.casa-telefono": {
+    "x": 0.399,
+    "y": 0.363,
+    "scale": 3.2
+  },
+  "lse.cnse.casa-televisor": {
+    "x": 0.526,
+    "y": 0.629,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-ventana": {
+    "x": 0.48,
+    "y": 0.582,
+    "scale": 1.6
+  },
+  "lse.cnse.casa-video": {
+    "x": 0.185,
+    "y": 0.567,
+    "scale": 2.314
+  },
+  "lse.cnse.ciudad-ciudad-acera": {
+    "x": 0.168,
+    "y": 0.59,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-banco1": {
+    "x": 0.398,
+    "y": 0.338,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-banco2": {
+    "x": 0.579,
+    "y": 0.501,
+    "scale": 1.617
+  },
+  "lse.cnse.ciudad-ciudad-biblioteca": {
+    "x": 0.646,
+    "y": 0.309,
+    "scale": 1.878
+  },
+  "lse.cnse.ciudad-ciudad-buzon": {
+    "x": 0.299,
+    "y": 0.381,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-calle": {
+    "x": 0.555,
+    "y": 0.579,
+    "scale": 2.236
+  },
+  "lse.cnse.ciudad-ciudad-cebra": {
+    "x": 0.436,
+    "y": 0.535,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-cine": {
+    "x": 0.294,
+    "y": 0.58,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-ciudad": {
+    "x": 0.476,
+    "y": 0.553,
+    "scale": 2.657
+  },
+  "lse.cnse.ciudad-ciudad-colegio": {
+    "x": 0.456,
+    "y": 0.448,
+    "scale": 2.871
+  },
+  "lse.cnse.ciudad-ciudad-columpio": {
+    "x": 0.23,
+    "y": 0.565,
+    "scale": 2.369
+  },
+  "lse.cnse.ciudad-ciudad-farola": {
+    "x": 0.394,
+    "y": 0.257,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-fuente": {
+    "x": 0.5,
+    "y": 0.446,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-hospital": {
+    "x": 0.337,
+    "y": 0.47,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-libreria": {
+    "x": 0.797,
+    "y": 0.476,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-luz": {
+    "x": 0.433,
+    "y": 0.251,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-museo": {
+    "x": 0.286,
+    "y": 0.459,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-parque": {
+    "x": 0.531,
+    "y": 0.655,
+    "scale": 2.561
+  },
+  "lse.cnse.ciudad-ciudad-pasteleria": {
+    "x": 0.578,
+    "y": 0.394,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-plaza": {
+    "x": 0.324,
+    "y": 0.584,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-puente": {
+    "x": 0.537,
+    "y": 0.369,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-quiosco": {
+    "x": 0.506,
+    "y": 0.44,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-semaforo": {
+    "x": 0.555,
+    "y": 0.423,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-supermercado": {
+    "x": 0.576,
+    "y": 0.561,
+    "scale": 1.802
+  },
+  "lse.cnse.ciudad-ciudad-teatro": {
+    "x": 0.363,
+    "y": 0.648,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-tienda": {
+    "x": 0.334,
+    "y": 0.577,
+    "scale": 1.6
+  },
+  "lse.cnse.ciudad-ciudad-tobogan": {
+    "x": 0.257,
+    "y": 0.624,
+    "scale": 3.2
+  },
+  "lse.cnse.ciudad-ciudad-zapateria": {
+    "x": 0.303,
+    "y": 0.556,
+    "scale": 2.158
+  },
+  "lse.cnse.colegio-colegio-abecedario": {
+    "x": 0.484,
+    "y": 0.42,
+    "scale": 1.942
+  },
+  "lse.cnse.colegio-colegio-alumno": {
+    "x": 0.258,
+    "y": 0.308,
+    "scale": 3.147
+  },
+  "lse.cnse.colegio-colegio-clase": {
+    "x": 0.51,
+    "y": 0.611,
+    "scale": 3.2
+  },
+  "lse.cnse.colegio-colegio-colegio": {
+    "x": 0.463,
+    "y": 0.453,
+    "scale": 2.867
+  },
+  "lse.cnse.colegio-colegio-dibujo": {
+    "x": 0.209,
+    "y": 0.62,
+    "scale": 3.2
+  },
+  "lse.cnse.colegio-colegio-diferencia": {
+    "x": 0.502,
+    "y": 0.576,
+    "scale": 1.6
+  },
+  "lse.cnse.colegio-colegio-gramo": {
+    "x": 0.51,
+    "y": 0.645,
+    "scale": 1.6
+  },
+  "lse.cnse.colegio-colegio-litro": {
+    "x": 0.223,
+    "y": 0.537,
+    "scale": 2.785
+  },
+  "lse.cnse.colegio-colegio-medida": {
+    "x": 0.527,
+    "y": 0.6,
+    "scale": 3.074
+  },
+  "lse.cnse.colegio-colegio-metro": {
+    "x": 0.532,
+    "y": 0.622,
+    "scale": 2.409
+  },
+  "lse.cnse.colegio-colegio-multiplicar": {
+    "x": 0.518,
+    "y": 0.523,
+    "scale": 2.579
+  },
+  "lse.cnse.colegio-colegio-numero": {
+    "x": 0.245,
+    "y": 0.567,
+    "scale": 2.797
+  },
+  "lse.cnse.colegio-colegio-palabra": {
+    "x": 0.19,
+    "y": 0.471,
+    "scale": 3.2
+  },
+  "lse.cnse.colegio-colegio-patio": {
+    "x": 0.606,
+    "y": 0.545,
+    "scale": 2.012
+  },
+  "lse.cnse.colegio-colegio-resta": {
+    "x": 0.326,
+    "y": 0.589,
+    "scale": 3.021
+  },
+  "lse.cnse.colegio-colegio-servicio": {
+    "x": 0.41,
+    "y": 0.434,
+    "scale": 3.192
+  },
+  "lse.cnse.colegio-colegio-signo": {
+    "x": 0.299,
+    "y": 0.534,
+    "scale": 1.717
+  },
+  "lse.cnse.colegio-colegio-suma": {
+    "x": 0.528,
+    "y": 0.63,
+    "scale": 2.693
+  },
+  "lse.cnse.colores-amarillo": {
+    "x": 0.258,
+    "y": 0.383,
+    "scale": 2.852
+  },
+  "lse.cnse.colores-azul": {
+    "x": 0.287,
+    "y": 0.36,
+    "scale": 3.2
+  },
+  "lse.cnse.colores-bis": {
+    "x": 0.375,
+    "y": 0.29,
+    "scale": 1.6
+  },
+  "lse.cnse.colores-blanco": {
+    "x": 0.49,
+    "y": 0.566,
+    "scale": 2.846
+  },
+  "lse.cnse.colores-marron": {
+    "x": 0.361,
+    "y": 0.409,
+    "scale": 3.2
+  },
+  "lse.cnse.colores-naranja": {
+    "x": 0.506,
+    "y": 0.636,
+    "scale": 2.092
+  },
+  "lse.cnse.colores-negro": {
+    "x": 0.521,
+    "y": 0.631,
+    "scale": 2.329
+  },
+  "lse.cnse.colores-rojo": {
+    "x": 0.356,
+    "y": 0.5,
+    "scale": 2.483
+  },
+  "lse.cnse.colores-rosa": {
+    "x": 0.381,
+    "y": 0.5,
+    "scale": 2.744
+  },
+  "lse.cnse.colores-verde": {
+    "x": 0.461,
+    "y": 0.454,
+    "scale": 2.47
+  },
+  "lse.cnse.comidas-y-bebidas-aceite": {
+    "x": 0.492,
+    "y": 0.795,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-agua": {
+    "x": 0.351,
+    "y": 0.323,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-alimento": {
+    "x": 0.328,
+    "y": 0.385,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-arroz": {
+    "x": 0.678,
+    "y": 0.616,
+    "scale": 2.329
+  },
+  "lse.cnse.comidas-y-bebidas-azucar": {
+    "x": 0.377,
+    "y": 0.803,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-bebida": {
+    "x": 0.332,
+    "y": 0.297,
+    "scale": 3.076
+  },
+  "lse.cnse.comidas-y-bebidas-bocadillo": {
+    "x": 0.347,
+    "y": 0.473,
+    "scale": 2.26
+  },
+  "lse.cnse.comidas-y-bebidas-caramelo": {
+    "x": 0.605,
+    "y": 0.431,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-carne": {
+    "x": 0.503,
+    "y": 0.789,
+    "scale": 2.85
+  },
+  "lse.cnse.comidas-y-bebidas-cebolla": {
+    "x": 0.485,
+    "y": 0.614,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-cena": {
+    "x": 0.603,
+    "y": 0.469,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-chocolate": {
+    "x": 0.354,
+    "y": 0.434,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-comida": {
+    "x": 0.328,
+    "y": 0.385,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-desayuno": {
+    "x": 0.491,
+    "y": 0.359,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-galleta": {
+    "x": 0.473,
+    "y": 0.439,
+    "scale": 3.173
+  },
+  "lse.cnse.comidas-y-bebidas-hambre": {
+    "x": 0.409,
+    "y": 0.896,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-huevo": {
+    "x": 0.577,
+    "y": 0.59,
+    "scale": 2.953
+  },
+  "lse.cnse.comidas-y-bebidas-leche": {
+    "x": 0.518,
+    "y": 0.795,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-lechuga": {
+    "x": 0.415,
+    "y": 0.48,
+    "scale": 2.804
+  },
+  "lse.cnse.comidas-y-bebidas-limon": {
+    "x": 0.442,
+    "y": 0.715,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-macarrones": {
+    "x": 0.521,
+    "y": 0.777,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-merienda": {
+    "x": 0.461,
+    "y": 0.399,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-pan": {
+    "x": 0.495,
+    "y": 0.486,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-patatas": {
+    "x": 0.507,
+    "y": 0.75,
+    "scale": 2.72
+  },
+  "lse.cnse.comidas-y-bebidas-pescado": {
+    "x": 0.383,
+    "y": 0.764,
+    "scale": 2.901
+  },
+  "lse.cnse.comidas-y-bebidas-pollo": {
+    "x": 0.245,
+    "y": 0.417,
+    "scale": 2.723
+  },
+  "lse.cnse.comidas-y-bebidas-pure": {
+    "x": 0.578,
+    "y": 0.816,
+    "scale": 2.154
+  },
+  "lse.cnse.comidas-y-bebidas-queso": {
+    "x": 0.593,
+    "y": 0.752,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-sal": {
+    "x": 0.367,
+    "y": 0.815,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-sed": {
+    "x": 0.524,
+    "y": 0.509,
+    "scale": 2.759
+  },
+  "lse.cnse.comidas-y-bebidas-sopa": {
+    "x": 0.455,
+    "y": 0.596,
+    "scale": 1.6
+  },
+  "lse.cnse.comidas-y-bebidas-tomate": {
+    "x": 0.737,
+    "y": 0.713,
+    "scale": 2.219
+  },
+  "lse.cnse.comidas-y-bebidas-zanahoria": {
+    "x": 0.408,
+    "y": 0.409,
+    "scale": 3.2
+  },
+  "lse.cnse.comidas-y-bebidas-zumo": {
+    "x": 0.425,
+    "y": 0.829,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-bano-banera": {
+    "x": 0.258,
+    "y": 0.463,
+    "scale": 2.336
+  },
+  "lse.cnse.cosas-bano-bano": {
+    "x": 0.413,
+    "y": 0.448,
+    "scale": 3.168
+  },
+  "lse.cnse.cosas-bano-cepillo": {
+    "x": 0.45,
+    "y": 0.395,
+    "scale": 3.106
+  },
+  "lse.cnse.cosas-bano-champu": {
+    "x": 0.512,
+    "y": 0.122,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-bano-colonia": {
+    "x": 0.379,
+    "y": 0.089,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-bano-espejo": {
+    "x": 0.186,
+    "y": 0.264,
+    "scale": 2.045
+  },
+  "lse.cnse.cosas-bano-esponja": {
+    "x": 0.232,
+    "y": 0.541,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-bano-jabon": {
+    "x": 0.357,
+    "y": 0.377,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-bano-lavabo": {
+    "x": 0.687,
+    "y": 0.502,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-bano-objeto": {
+    "x": 0.567,
+    "y": 0.573,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-bano-papel": {
+    "x": 0.436,
+    "y": 0.74,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-bano-pasta-de-dientes": {
+    "x": 0.433,
+    "y": 0.574,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-bano-peine": {
+    "x": 0.338,
+    "y": 0.203,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-bano-toalla": {
+    "x": 0.497,
+    "y": 0.441,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-cocina-cacerola": {
+    "x": 0.534,
+    "y": 0.505,
+    "scale": 2.769
+  },
+  "lse.cnse.cosas-cocina-cocina": {
+    "x": 0.694,
+    "y": 0.594,
+    "scale": 2.271
+  },
+  "lse.cnse.cosas-cocina-cuchara": {
+    "x": 0.501,
+    "y": 0.49,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-cocina-cuchillo": {
+    "x": 0.534,
+    "y": 0.618,
+    "scale": 2.448
+  },
+  "lse.cnse.cosas-cocina-jarra": {
+    "x": 0.382,
+    "y": 0.497,
+    "scale": 2.803
+  },
+  "lse.cnse.cosas-cocina-lavadora": {
+    "x": 0.203,
+    "y": 0.673,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-cocina-nevera": {
+    "x": 0.489,
+    "y": 0.357,
+    "scale": 1.781
+  },
+  "lse.cnse.cosas-cocina-objeto": {
+    "x": 0.51,
+    "y": 0.536,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-cocina-plato": {
+    "x": 0.503,
+    "y": 0.527,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-cocina-sarten": {
+    "x": 0.144,
+    "y": 0.688,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-cocina-servilleta": {
+    "x": 0.352,
+    "y": 0.441,
+    "scale": 2.627
+  },
+  "lse.cnse.cosas-cocina-tenedor": {
+    "x": 0.538,
+    "y": 0.646,
+    "scale": 3.082
+  },
+  "lse.cnse.cosas-cocina-vaso": {
+    "x": 0.474,
+    "y": 0.311,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-bis": {
+    "x": 0.469,
+    "y": 0.402,
+    "scale": 1.707
+  },
+  "lse.cnse.cosas-del-colegio-boligrafo": {
+    "x": 0.394,
+    "y": 0.503,
+    "scale": 1.612
+  },
+  "lse.cnse.cosas-del-colegio-borrador": {
+    "x": 0.255,
+    "y": 0.324,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-cera": {
+    "x": 0.532,
+    "y": 0.474,
+    "scale": 1.854
+  },
+  "lse.cnse.cosas-del-colegio-cosa": {
+    "x": 0.422,
+    "y": 0.503,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-cuaderno": {
+    "x": 0.486,
+    "y": 0.628,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-cuentos": {
+    "x": 0.485,
+    "y": 0.422,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-diccionario": {
+    "x": 0.424,
+    "y": 0.337,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-goma": {
+    "x": 0.525,
+    "y": 0.561,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-hojas": {
+    "x": 0.486,
+    "y": 0.522,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-lapices-de-colores": {
+    "x": 0.14,
+    "y": 0.255,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-lapiz": {
+    "x": 0.406,
+    "y": 0.585,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-libro": {
+    "x": 0.557,
+    "y": 0.618,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-papel": {
+    "x": 0.485,
+    "y": 0.536,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-papelera": {
+    "x": 0.395,
+    "y": 0.42,
+    "scale": 1.834
+  },
+  "lse.cnse.cosas-del-colegio-pegamento": {
+    "x": 0.756,
+    "y": 0.646,
+    "scale": 3.2
+  },
+  "lse.cnse.cosas-del-colegio-pintura": {
+    "x": 0.366,
+    "y": 0.367,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-pizarra": {
+    "x": 0.56,
+    "y": 0.513,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-plastilina": {
+    "x": 0.519,
+    "y": 0.511,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-rotulador": {
+    "x": 0.452,
+    "y": 0.465,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-sacapuntas": {
+    "x": 0.557,
+    "y": 0.64,
+    "scale": 2.754
+  },
+  "lse.cnse.cosas-del-colegio-tijera": {
+    "x": 0.418,
+    "y": 0.47,
+    "scale": 1.6
+  },
+  "lse.cnse.cosas-del-colegio-tiza": {
+    "x": 0.49,
+    "y": 0.494,
+    "scale": 1.6
+  },
+  "lse.cnse.cuerpo-boca": {
+    "x": 0.416,
+    "y": 0.431,
+    "scale": 2.633
+  },
+  "lse.cnse.cuerpo-brazo": {
+    "x": 0.611,
+    "y": 0.532,
+    "scale": 1.949
+  },
+  "lse.cnse.cuerpo-cabeza": {
+    "x": 0.403,
+    "y": 0.129,
+    "scale": 2.617
+  },
+  "lse.cnse.cuerpo-cuerpo": {
+    "x": 0.315,
+    "y": 0.593,
+    "scale": 1.6
+  },
+  "lse.cnse.cuerpo-culo": {
+    "x": 0.595,
+    "y": 0.577,
+    "scale": 3.2
+  },
+  "lse.cnse.cuerpo-dedo": {
+    "x": 0.391,
+    "y": 0.666,
+    "scale": 2.906
+  },
+  "lse.cnse.cuerpo-dientes": {
+    "x": 0.412,
+    "y": 0.405,
+    "scale": 3.134
+  },
+  "lse.cnse.cuerpo-mano": {
+    "x": 0.247,
+    "y": 0.439,
+    "scale": 2.495
+  },
+  "lse.cnse.cuerpo-nariz": {
+    "x": 0.31,
+    "y": 0.404,
+    "scale": 2.97
+  },
+  "lse.cnse.cuerpo-ojo": {
+    "x": 0.353,
+    "y": 0.377,
+    "scale": 2.913
+  },
+  "lse.cnse.cuerpo-oreja": {
+    "x": 0.353,
+    "y": 0.388,
+    "scale": 2.82
+  },
+  "lse.cnse.cuerpo-pelo": {
+    "x": 0.451,
+    "y": 0.126,
+    "scale": 3.2
+  },
+  "lse.cnse.cuerpo-pene": {
+    "x": 0.278,
+    "y": 0.596,
+    "scale": 3.2
+  },
+  "lse.cnse.cuerpo-pie": {
+    "x": 0.282,
+    "y": 0.41,
+    "scale": 2.22
+  },
+  "lse.cnse.cuerpo-pierna": {
+    "x": 0.524,
+    "y": 0.709,
+    "scale": 1.894
+  },
+  "lse.cnse.cuerpo-vulva": {
+    "x": 0.486,
+    "y": 0.643,
+    "scale": 2.846
+  },
+  "lse.cnse.dias-semanas-dia1": {
+    "x": 0.327,
+    "y": 0.425,
+    "scale": 2.104
+  },
+  "lse.cnse.dias-semanas-domingo": {
+    "x": 0.504,
+    "y": 0.211,
+    "scale": 3.2
+  },
+  "lse.cnse.dias-semanas-fin-de-semana": {
+    "x": 0.47,
+    "y": 0.243,
+    "scale": 1.6
+  },
+  "lse.cnse.dias-semanas-jueves": {
+    "x": 0.484,
+    "y": 0.544,
+    "scale": 1.685
+  },
+  "lse.cnse.dias-semanas-lunes": {
+    "x": 0.542,
+    "y": 0.63,
+    "scale": 3.2
+  },
+  "lse.cnse.dias-semanas-martes": {
+    "x": 0.54,
+    "y": 0.591,
+    "scale": 3.2
+  },
+  "lse.cnse.dias-semanas-miercoles": {
+    "x": 0.514,
+    "y": 0.639,
+    "scale": 1.76
+  },
+  "lse.cnse.dias-semanas-sabado": {
+    "x": 0.405,
+    "y": 0.331,
+    "scale": 3.2
+  },
+  "lse.cnse.dias-semanas-semana": {
+    "x": 0.237,
+    "y": 0.63,
+    "scale": 3.134
+  },
+  "lse.cnse.dias-semanas-semanas": {
+    "x": 0.567,
+    "y": 0.476,
+    "scale": 3.2
+  },
+  "lse.cnse.dias-semanas-viernes": {
+    "x": 0.342,
+    "y": 0.237,
+    "scale": 1.6
+  },
+  "lse.cnse.estaciones-bis": {
+    "x": 0.496,
+    "y": 0.565,
+    "scale": 1.723
+  },
+  "lse.cnse.estaciones-invierno": {
+    "x": 0.493,
+    "y": 0.47,
+    "scale": 1.6
+  },
+  "lse.cnse.estaciones-otono": {
+    "x": 0.512,
+    "y": 0.637,
+    "scale": 1.953
+  },
+  "lse.cnse.estaciones-primavera": {
+    "x": 0.81,
+    "y": 0.474,
+    "scale": 2.241
+  },
+  "lse.cnse.estaciones-verano": {
+    "x": 0.38,
+    "y": 0.16,
+    "scale": 3.035
+  },
+  "lse.cnse.familia-abuelo": {
+    "x": 0.465,
+    "y": 0.481,
+    "scale": 3.2
+  },
+  "lse.cnse.familia-amigo": {
+    "x": 0.497,
+    "y": 0.731,
+    "scale": 3.2
+  },
+  "lse.cnse.familia-bebe": {
+    "x": 0.468,
+    "y": 0.781,
+    "scale": 1.6
+  },
+  "lse.cnse.familia-ciego": {
+    "x": 0.583,
+    "y": 0.415,
+    "scale": 3.148
+  },
+  "lse.cnse.familia-familia": {
+    "x": 0.281,
+    "y": 0.537,
+    "scale": 2.979
+  },
+  "lse.cnse.familia-hermano": {
+    "x": 0.503,
+    "y": 0.857,
+    "scale": 1.6
+  },
+  "lse.cnse.familia-mama": {
+    "x": 0.451,
+    "y": 0.437,
+    "scale": 3.2
+  },
+  "lse.cnse.familia-nina": {
+    "x": 0.361,
+    "y": 0.553,
+    "scale": 1.6
+  },
+  "lse.cnse.familia-nino": {
+    "x": 0.4,
+    "y": 0.491,
+    "scale": 1.6
+  },
+  "lse.cnse.familia-papa": {
+    "x": 0.53,
+    "y": 0.175,
+    "scale": 2.401
+  },
+  "lse.cnse.familia-persona": {
+    "x": 0.142,
+    "y": 0.563,
+    "scale": 3.2
+  },
+  "lse.cnse.familia-primo": {
+    "x": 0.598,
+    "y": 0.786,
+    "scale": 2.427
+  },
+  "lse.cnse.familia-sordo": {
+    "x": 0.422,
+    "y": 0.435,
+    "scale": 1.6
+  },
+  "lse.cnse.familia-sordociego": {
+    "x": 0.42,
+    "y": 0.395,
+    "scale": 1.797
+  },
+  "lse.cnse.familia-tio": {
+    "x": 0.507,
+    "y": 0.636,
+    "scale": 1.6
+  },
+  "lse.cnse.fiesta-bis": {
+    "x": 0.385,
+    "y": 0.487,
+    "scale": 1.6
+  },
+  "lse.cnse.fiesta-cumpleanos": {
+    "x": 0.508,
+    "y": 0.412,
+    "scale": 1.6
+  },
+  "lse.cnse.fiesta-navidad": {
+    "x": 0.532,
+    "y": 0.556,
+    "scale": 1.746
+  },
+  "lse.cnse.fiesta-papa-noel": {
+    "x": 0.278,
+    "y": 0.325,
+    "scale": 1.6
+  },
+  "lse.cnse.fiesta-reyes-magos": {
+    "x": 0.519,
+    "y": 0.475,
+    "scale": 1.954
+  },
+  "lse.cnse.formas-y-tamanos-bis": {
+    "x": 0.522,
+    "y": 0.413,
+    "scale": 2.063
+  },
+  "lse.cnse.formas-y-tamanos-circulo": {
+    "x": 0.538,
+    "y": 0.473,
+    "scale": 2.078
+  },
+  "lse.cnse.formas-y-tamanos-cuadrado": {
+    "x": 0.495,
+    "y": 0.66,
+    "scale": 3.2
+  },
+  "lse.cnse.formas-y-tamanos-forma": {
+    "x": 0.498,
+    "y": 0.681,
+    "scale": 1.6
+  },
+  "lse.cnse.formas-y-tamanos-grande": {
+    "x": 0.469,
+    "y": 0.589,
+    "scale": 1.6
+  },
+  "lse.cnse.formas-y-tamanos-mediano": {
+    "x": 0.539,
+    "y": 0.589,
+    "scale": 1.981
+  },
+  "lse.cnse.formas-y-tamanos-pequeno": {
+    "x": 0.49,
+    "y": 0.497,
+    "scale": 2.164
+  },
+  "lse.cnse.formas-y-tamanos-rectangulo": {
+    "x": 0.398,
+    "y": 0.633,
+    "scale": 3.2
+  },
+  "lse.cnse.formas-y-tamanos-tamano": {
+    "x": 0.501,
+    "y": 0.543,
+    "scale": 1.6
+  },
+  "lse.cnse.formas-y-tamanos-triangulo": {
+    "x": 0.5,
+    "y": 0.603,
+    "scale": 1.784
+  },
+  "lse.cnse.meses-de-ano-abril": {
+    "x": 0.482,
+    "y": 0.337,
+    "scale": 2.017
+  },
+  "lse.cnse.meses-de-ano-agosto": {
+    "x": 0.477,
+    "y": 0.57,
+    "scale": 2.254
+  },
+  "lse.cnse.meses-de-ano-ano": {
+    "x": 0.347,
+    "y": 0.569,
+    "scale": 3.2
+  },
+  "lse.cnse.meses-de-ano-bis": {
+    "x": 0.363,
+    "y": 0.434,
+    "scale": 1.684
+  },
+  "lse.cnse.meses-de-ano-calendario": {
+    "x": 0.696,
+    "y": 0.545,
+    "scale": 3.2
+  },
+  "lse.cnse.meses-de-ano-diciembre": {
+    "x": 0.506,
+    "y": 0.565,
+    "scale": 1.723
+  },
+  "lse.cnse.meses-de-ano-enero": {
+    "x": 0.513,
+    "y": 0.581,
+    "scale": 3.2
+  },
+  "lse.cnse.meses-de-ano-febrero": {
+    "x": 0.377,
+    "y": 0.319,
+    "scale": 2.265
+  },
+  "lse.cnse.meses-de-ano-julio": {
+    "x": 0.373,
+    "y": 0.394,
+    "scale": 3.2
+  },
+  "lse.cnse.meses-de-ano-junio": {
+    "x": 0.413,
+    "y": 0.382,
+    "scale": 3.066
+  },
+  "lse.cnse.meses-de-ano-marzo": {
+    "x": 0.479,
+    "y": 0.597,
+    "scale": 1.6
+  },
+  "lse.cnse.meses-de-ano-mayo": {
+    "x": 0.508,
+    "y": 0.582,
+    "scale": 2.309
+  },
+  "lse.cnse.meses-de-ano-mes": {
+    "x": 0.172,
+    "y": 0.496,
+    "scale": 1.6
+  },
+  "lse.cnse.meses-de-ano-noviembre": {
+    "x": 0.514,
+    "y": 0.623,
+    "scale": 1.6
+  },
+  "lse.cnse.meses-de-ano-octubre": {
+    "x": 0.464,
+    "y": 0.436,
+    "scale": 2.396
+  },
+  "lse.cnse.meses-de-ano-septiembre": {
+    "x": 0.185,
+    "y": 0.486,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-abeto": {
+    "x": 0.509,
+    "y": 0.461,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-arbol": {
+    "x": 0.346,
+    "y": 0.221,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-arco-iris": {
+    "x": 0.431,
+    "y": 0.512,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-arena": {
+    "x": 0.337,
+    "y": 0.583,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-estrella": {
+    "x": 0.3,
+    "y": 0.326,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-faro": {
+    "x": 0.344,
+    "y": 0.249,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-flor": {
+    "x": 0.319,
+    "y": 0.404,
+    "scale": 3.091
+  },
+  "lse.cnse.naturaleza-flotador": {
+    "x": 0.391,
+    "y": 0.643,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-fuego": {
+    "x": 0.578,
+    "y": 0.449,
+    "scale": 2.037
+  },
+  "lse.cnse.naturaleza-hierba": {
+    "x": 0.357,
+    "y": 0.502,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-hoja": {
+    "x": 0.493,
+    "y": 0.674,
+    "scale": 2.325
+  },
+  "lse.cnse.naturaleza-lago": {
+    "x": 0.667,
+    "y": 0.692,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-luna": {
+    "x": 0.396,
+    "y": 0.263,
+    "scale": 2.862
+  },
+  "lse.cnse.naturaleza-mar": {
+    "x": 0.34,
+    "y": 0.575,
+    "scale": 1.722
+  },
+  "lse.cnse.naturaleza-margarita": {
+    "x": 0.777,
+    "y": 0.472,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-montana": {
+    "x": 0.491,
+    "y": 0.586,
+    "scale": 3.142
+  },
+  "lse.cnse.naturaleza-naturaleza": {
+    "x": 0.83,
+    "y": 0.445,
+    "scale": 2.596
+  },
+  "lse.cnse.naturaleza-palmera": {
+    "x": 0.158,
+    "y": 0.19,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-piedra": {
+    "x": 0.516,
+    "y": 0.498,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-playa": {
+    "x": 0.491,
+    "y": 0.575,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-pozo": {
+    "x": 0.557,
+    "y": 0.406,
+    "scale": 1.784
+  },
+  "lse.cnse.naturaleza-rio": {
+    "x": 0.512,
+    "y": 0.638,
+    "scale": 2.344
+  },
+  "lse.cnse.naturaleza-saco-de-dormir": {
+    "x": 0.43,
+    "y": 0.31,
+    "scale": 1.6
+  },
+  "lse.cnse.naturaleza-sombrilla": {
+    "x": 0.643,
+    "y": 0.5,
+    "scale": 3.2
+  },
+  "lse.cnse.naturaleza-tienda-de-campana": {
+    "x": 0.52,
+    "y": 0.492,
+    "scale": 3.161
+  },
+  "lse.cnse.postres-dulce": {
+    "x": 0.445,
+    "y": 0.437,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-flan": {
+    "x": 0.419,
+    "y": 0.661,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-fresa": {
+    "x": 0.381,
+    "y": 0.629,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-fruta": {
+    "x": 0.357,
+    "y": 0.401,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-helado": {
+    "x": 0.383,
+    "y": 0.532,
+    "scale": 1.6
+  },
+  "lse.cnse.postres-manzana": {
+    "x": 0.357,
+    "y": 0.401,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-naranja": {
+    "x": 0.51,
+    "y": 0.659,
+    "scale": 2.034
+  },
+  "lse.cnse.postres-pera": {
+    "x": 0.309,
+    "y": 0.491,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-platano": {
+    "x": 0.505,
+    "y": 0.729,
+    "scale": 1.6
+  },
+  "lse.cnse.postres-postre": {
+    "x": 0.357,
+    "y": 0.401,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-sandia": {
+    "x": 0.847,
+    "y": 0.433,
+    "scale": 3.2
+  },
+  "lse.cnse.postres-tarta": {
+    "x": 0.299,
+    "y": 0.617,
+    "scale": 1.6
+  },
+  "lse.cnse.postres-uva": {
+    "x": 0.533,
+    "y": 0.678,
+    "scale": 1.899
+  },
+  "lse.cnse.postres-yogur": {
+    "x": 0.549,
+    "y": 0.515,
+    "scale": 1.6
+  },
+  "lse.cnse.preguntas-como": {
+    "x": 0.463,
+    "y": 0.475,
+    "scale": 3.2
+  },
+  "lse.cnse.preguntas-como-se-dice": {
+    "x": 0.424,
+    "y": 0.516,
+    "scale": 1.6
+  },
+  "lse.cnse.preguntas-como-se-signa": {
+    "x": 0.602,
+    "y": 0.636,
+    "scale": 1.6
+  },
+  "lse.cnse.preguntas-cual": {
+    "x": 0.506,
+    "y": 0.852,
+    "scale": 1.6
+  },
+  "lse.cnse.preguntas-cuando": {
+    "x": 0.226,
+    "y": 0.457,
+    "scale": 3.2
+  },
+  "lse.cnse.preguntas-cuando-futuro": {
+    "x": 0.084,
+    "y": 0.651,
+    "scale": 3.2
+  },
+  "lse.cnse.preguntas-cuanto": {
+    "x": 0.388,
+    "y": 0.618,
+    "scale": 2.861
+  },
+  "lse.cnse.preguntas-donde": {
+    "x": 0.384,
+    "y": 0.752,
+    "scale": 2.597
+  },
+  "lse.cnse.preguntas-para-que": {
+    "x": 0.314,
+    "y": 0.647,
+    "scale": 1.643
+  },
+  "lse.cnse.preguntas-por-que": {
+    "x": 0.551,
+    "y": 0.785,
+    "scale": 2.197
+  },
+  "lse.cnse.preguntas-preguntar": {
+    "x": 0.055,
+    "y": 0.4,
+    "scale": 3.2
+  },
+  "lse.cnse.preguntas-que": {
+    "x": 0.333,
+    "y": 0.575,
+    "scale": 2.954
+  },
+  "lse.cnse.preguntas-que-dia-es": {
+    "x": 0.595,
+    "y": 0.776,
+    "scale": 2.444
+  },
+  "lse.cnse.preguntas-que-dice": {
+    "x": 0.461,
+    "y": 0.51,
+    "scale": 3.2
+  },
+  "lse.cnse.preguntas-que-tal": {
+    "x": 0.305,
+    "y": 0.525,
+    "scale": 1.6
+  },
+  "lse.cnse.preguntas-quien": {
+    "x": 0.111,
+    "y": 0.866,
+    "scale": 2.44
+  },
+  "lse.cnse.preguntas-si-no": {
+    "x": 0.218,
+    "y": 0.566,
+    "scale": 1.831
+  },
+  "lse.cnse.profesiones-bombero": {
+    "x": 0.149,
+    "y": 0.353,
+    "scale": 3.2
+  },
+  "lse.cnse.profesiones-medico": {
+    "x": 0.565,
+    "y": 0.609,
+    "scale": 2.903
+  },
+  "lse.cnse.profesiones-pastelero": {
+    "x": 0.5,
+    "y": 0.396,
+    "scale": 1.6
+  },
+  "lse.cnse.profesiones-pescador": {
+    "x": 0.209,
+    "y": 0.302,
+    "scale": 2.456
+  },
+  "lse.cnse.profesiones-policia": {
+    "x": 0.53,
+    "y": 0.429,
+    "scale": 1.6
+  },
+  "lse.cnse.profesiones-profesiones": {
+    "x": 0.47,
+    "y": 0.619,
+    "scale": 3.2
+  },
+  "lse.cnse.profesiones-profesor": {
+    "x": 0.315,
+    "y": 0.223,
+    "scale": 3.2
+  },
+  "lse.cnse.ropa-abrigo": {
+    "x": 0.513,
+    "y": 0.566,
+    "scale": 3.2
+  },
+  "lse.cnse.ropa-babi": {
+    "x": 0.557,
+    "y": 0.72,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-banador1": {
+    "x": 0.603,
+    "y": 0.688,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-banador2": {
+    "x": 0.486,
+    "y": 0.697,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-braga": {
+    "x": 0.457,
+    "y": 0.855,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-bufanda": {
+    "x": 0.511,
+    "y": 0.458,
+    "scale": 2.014
+  },
+  "lse.cnse.ropa-calzoncillo": {
+    "x": 0.495,
+    "y": 0.7,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-camisa": {
+    "x": 0.497,
+    "y": 0.636,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-chandal": {
+    "x": 0.534,
+    "y": 0.514,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-disfraz": {
+    "x": 0.514,
+    "y": 0.54,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-gafas": {
+    "x": 0.483,
+    "y": 0.279,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-gorra": {
+    "x": 0.38,
+    "y": 0.182,
+    "scale": 3.2
+  },
+  "lse.cnse.ropa-jersey": {
+    "x": 0.475,
+    "y": 0.431,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-mochila": {
+    "x": 0.507,
+    "y": 0.673,
+    "scale": 1.613
+  },
+  "lse.cnse.ropa-pantalon": {
+    "x": 0.465,
+    "y": 0.631,
+    "scale": 2.311
+  },
+  "lse.cnse.ropa-pijama": {
+    "x": 0.592,
+    "y": 0.442,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-reloj": {
+    "x": 0.543,
+    "y": 0.651,
+    "scale": 3.2
+  },
+  "lse.cnse.ropa-ropa": {
+    "x": 0.483,
+    "y": 0.564,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-zapatilla": {
+    "x": 0.47,
+    "y": 0.8,
+    "scale": 1.6
+  },
+  "lse.cnse.ropa-zapato": {
+    "x": 0.387,
+    "y": 0.392,
+    "scale": 3.2
+  },
+  "lse.cnse.saludos-y-cortesia-adios": {
+    "x": 0.167,
+    "y": 0.417,
+    "scale": 2.551
+  },
+  "lse.cnse.saludos-y-cortesia-buenas-noches": {
+    "x": 0.651,
+    "y": 0.277,
+    "scale": 1.6
+  },
+  "lse.cnse.saludos-y-cortesia-buenas-tardes": {
+    "x": 0.173,
+    "y": 0.324,
+    "scale": 2.674
+  },
+  "lse.cnse.saludos-y-cortesia-buenos-dias": {
+    "x": 0.356,
+    "y": 0.32,
+    "scale": 1.6
+  },
+  "lse.cnse.saludos-y-cortesia-cortesia": {
+    "x": 0.744,
+    "y": 0.572,
+    "scale": 3.2
+  },
+  "lse.cnse.saludos-y-cortesia-cuidado": {
+    "x": 0.449,
+    "y": 0.388,
+    "scale": 2.049
+  },
+  "lse.cnse.saludos-y-cortesia-de-nada": {
+    "x": 0.335,
+    "y": 0.493,
+    "scale": 3.2
+  },
+  "lse.cnse.saludos-y-cortesia-gracias": {
+    "x": 0.686,
+    "y": 0.432,
+    "scale": 1.61
+  },
+  "lse.cnse.saludos-y-cortesia-hola": {
+    "x": 0.183,
+    "y": 0.299,
+    "scale": 2.507
+  },
+  "lse.cnse.saludos-y-cortesia-no": {
+    "x": 0.309,
+    "y": 0.712,
+    "scale": 2.97
+  },
+  "lse.cnse.saludos-y-cortesia-nombre": {
+    "x": 0.533,
+    "y": 0.505,
+    "scale": 1.63
+  },
+  "lse.cnse.saludos-y-cortesia-por-favor": {
+    "x": 0.333,
+    "y": 0.511,
+    "scale": 3.2
+  },
+  "lse.cnse.saludos-y-cortesia-saludo": {
+    "x": 0.212,
+    "y": 0.242,
+    "scale": 1.6
+  },
+  "lse.cnse.saludos-y-cortesia-si": {
+    "x": 0.226,
+    "y": 0.576,
+    "scale": 2.951
+  },
+  "lse.cnse.saludos-y-cortesia-signo": {
+    "x": 0.52,
+    "y": 0.433,
+    "scale": 2.512
+  },
+  "lse.cnse.sentidos-gusto": {
+    "x": 0.33,
+    "y": 0.553,
+    "scale": 1.6
+  },
+  "lse.cnse.sentidos-oido": {
+    "x": 0.435,
+    "y": 0.403,
+    "scale": 2.766
+  },
+  "lse.cnse.sentidos-olfato": {
+    "x": 0.509,
+    "y": 0.459,
+    "scale": 1.6
+  },
+  "lse.cnse.sentidos-sentidos": {
+    "x": 0.392,
+    "y": 0.151,
+    "scale": 2.687
+  },
+  "lse.cnse.sentidos-tacto": {
+    "x": 0.287,
+    "y": 0.56,
+    "scale": 1.6
+  },
+  "lse.cnse.sentidos-vista": {
+    "x": 0.431,
+    "y": 0.507,
+    "scale": 1.6
+  },
+  "lse.cnse.tiempo-ayer": {
+    "x": 0.261,
+    "y": 0.515,
+    "scale": 3.2
+  },
+  "lse.cnse.tiempo-bis": {
+    "x": 0.481,
+    "y": 0.629,
+    "scale": 3.2
+  },
+  "lse.cnse.tiempo-en-punto": {
+    "x": 0.547,
+    "y": 0.61,
+    "scale": 3.2
+  },
+  "lse.cnse.tiempo-hoy": {
+    "x": 0.448,
+    "y": 0.557,
+    "scale": 3.2
+  },
+  "lse.cnse.tiempo-la-hora-de": {
+    "x": 0.505,
+    "y": 0.578,
+    "scale": 3.2
+  },
+  "lse.cnse.tiempo-manana": {
+    "x": 0.558,
+    "y": 0.442,
+    "scale": 1.6
+  },
+  "lse.cnse.tiempo-menos-cuarto": {
+    "x": 0.397,
+    "y": 0.509,
+    "scale": 1.6
+  },
+  "lse.cnse.tiempo-por-la-noche": {
+    "x": 0.316,
+    "y": 0.492,
+    "scale": 1.6
+  },
+  "lse.cnse.tiempo-por-la-tarde": {
+    "x": 0.539,
+    "y": 0.481,
+    "scale": 2.674
+  },
+  "lse.cnse.tiempo-que-hora-es": {
+    "x": 0.459,
+    "y": 0.629,
+    "scale": 3.143
+  },
+  "lse.cnse.tiempo-y-cuarto": {
+    "x": 0.232,
+    "y": 0.438,
+    "scale": 2.417
+  },
+  "lse.cnse.tiempo-y-media": {
+    "x": 0.552,
+    "y": 0.58,
+    "scale": 1.942
+  },
+  "lse.cnse.transporte-ambulancia": {
+    "x": 0.734,
+    "y": 0.216,
+    "scale": 1.895
+  },
+  "lse.cnse.transporte-autobus": {
+    "x": 0.514,
+    "y": 0.5,
+    "scale": 1.6
+  },
+  "lse.cnse.transporte-barca": {
+    "x": 0.686,
+    "y": 0.528,
+    "scale": 1.6
+  },
+  "lse.cnse.transporte-bicicleta": {
+    "x": 0.329,
+    "y": 0.546,
+    "scale": 2.164
+  },
+  "lse.cnse.transporte-camion": {
+    "x": 0.555,
+    "y": 0.416,
+    "scale": 2.667
+  },
+  "lse.cnse.transporte-coche": {
+    "x": 0.488,
+    "y": 0.502,
+    "scale": 1.6
+  },
+  "lse.cnse.transporte-moto": {
+    "x": 0.526,
+    "y": 0.61,
+    "scale": 1.6
+  },
+  "lse.cnse.transporte-transporte-bis": {
+    "x": 0.418,
+    "y": 0.512,
+    "scale": 1.6
+  },
+  "lse.cnse.transporte-vehiculo": {
+    "x": 0.269,
+    "y": 0.449,
+    "scale": 2.477
+  },
+  "lse.cnse.verbo-abrazar": {
+    "x": 0.496,
+    "y": 0.413,
+    "scale": 1.667
+  },
+  "lse.cnse.verbo-amar": {
+    "x": 0.478,
+    "y": 0.409,
+    "scale": 1.814
+  },
+  "lse.cnse.verbo-andar": {
+    "x": 0.448,
+    "y": 0.597,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-aprender": {
+    "x": 0.509,
+    "y": 0.487,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-ayudar": {
+    "x": 0.462,
+    "y": 0.637,
+    "scale": 1.921
+  },
+  "lse.cnse.verbo-beber": {
+    "x": 0.398,
+    "y": 0.218,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-besar": {
+    "x": 0.428,
+    "y": 0.373,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-bis": {
+    "x": 0.441,
+    "y": 0.342,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-comer": {
+    "x": 0.343,
+    "y": 0.294,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-comprar": {
+    "x": 0.527,
+    "y": 0.623,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-conocer": {
+    "x": 0.385,
+    "y": 0.326,
+    "scale": 1.656
+  },
+  "lse.cnse.verbo-contar": {
+    "x": 0.5,
+    "y": 0.409,
+    "scale": 1.722
+  },
+  "lse.cnse.verbo-correr": {
+    "x": 0.4,
+    "y": 0.542,
+    "scale": 1.96
+  },
+  "lse.cnse.verbo-cortar": {
+    "x": 0.646,
+    "y": 0.596,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-crecer1": {
+    "x": 0.375,
+    "y": 0.371,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-crecer2": {
+    "x": 0.359,
+    "y": 0.393,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-descansar": {
+    "x": 0.5,
+    "y": 0.597,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-dormir": {
+    "x": 0.419,
+    "y": 0.237,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-ducharse": {
+    "x": 0.396,
+    "y": 0.132,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-entender": {
+    "x": 0.229,
+    "y": 0.178,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-escribir": {
+    "x": 0.399,
+    "y": 0.634,
+    "scale": 2.553
+  },
+  "lse.cnse.verbo-esperar": {
+    "x": 0.633,
+    "y": 0.441,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-explicar": {
+    "x": 0.554,
+    "y": 0.539,
+    "scale": 2.112
+  },
+  "lse.cnse.verbo-gritar": {
+    "x": 0.183,
+    "y": 0.205,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-gustar": {
+    "x": 0.465,
+    "y": 0.407,
+    "scale": 1.871
+  },
+  "lse.cnse.verbo-hablar1": {
+    "x": 0.316,
+    "y": 0.518,
+    "scale": 1.786
+  },
+  "lse.cnse.verbo-hablar2": {
+    "x": 0.479,
+    "y": 0.317,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-jugar": {
+    "x": 0.512,
+    "y": 0.585,
+    "scale": 2.494
+  },
+  "lse.cnse.verbo-lavar1": {
+    "x": 0.519,
+    "y": 0.549,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-lavar2": {
+    "x": 0.481,
+    "y": 0.156,
+    "scale": 1.66
+  },
+  "lse.cnse.verbo-lavar3": {
+    "x": 0.429,
+    "y": 0.318,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-leer": {
+    "x": 0.584,
+    "y": 0.599,
+    "scale": 2.718
+  },
+  "lse.cnse.verbo-levantarse": {
+    "x": 0.545,
+    "y": 0.613,
+    "scale": 2.351
+  },
+  "lse.cnse.verbo-llorar": {
+    "x": 0.48,
+    "y": 0.327,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-montarse": {
+    "x": 0.4,
+    "y": 0.527,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-nacer": {
+    "x": 0.594,
+    "y": 0.588,
+    "scale": 2.878
+  },
+  "lse.cnse.verbo-no-conocer": {
+    "x": 0.345,
+    "y": 0.387,
+    "scale": 2.2
+  },
+  "lse.cnse.verbo-no-gustar": {
+    "x": 0.613,
+    "y": 0.461,
+    "scale": 2.062
+  },
+  "lse.cnse.verbo-no-tener": {
+    "x": 0.409,
+    "y": 0.341,
+    "scale": 2.068
+  },
+  "lse.cnse.verbo-oir": {
+    "x": 0.307,
+    "y": 0.257,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-oler": {
+    "x": 0.508,
+    "y": 0.346,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-pasear": {
+    "x": 0.489,
+    "y": 0.379,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-patinar": {
+    "x": 0.513,
+    "y": 0.522,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-pegar": {
+    "x": 0.529,
+    "y": 0.598,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-peinarse": {
+    "x": 0.364,
+    "y": 0.182,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-ponerse": {
+    "x": 0.647,
+    "y": 0.469,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-quitarse": {
+    "x": 0.385,
+    "y": 0.464,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-regalar": {
+    "x": 0.476,
+    "y": 0.526,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-reir": {
+    "x": 0.48,
+    "y": 0.598,
+    "scale": 1.823
+  },
+  "lse.cnse.verbo-saborear": {
+    "x": 0.37,
+    "y": 0.438,
+    "scale": 1.811
+  },
+  "lse.cnse.verbo-saltar": {
+    "x": 0.42,
+    "y": 0.453,
+    "scale": 3.2
+  },
+  "lse.cnse.verbo-sentarse": {
+    "x": 0.491,
+    "y": 0.544,
+    "scale": 2.503
+  },
+  "lse.cnse.verbo-tener": {
+    "x": 0.232,
+    "y": 0.538,
+    "scale": 2.507
+  },
+  "lse.cnse.verbo-tocar": {
+    "x": 0.506,
+    "y": 0.403,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-vamos": {
+    "x": 0.442,
+    "y": 0.358,
+    "scale": 1.6
+  },
+  "lse.cnse.verbo-ver": {
+    "x": 0.281,
+    "y": 0.317,
+    "scale": 2.153
+  },
+  "lse.cnse.verbo-vestirse": {
+    "x": 0.501,
+    "y": 0.536,
+    "scale": 1.648
+  },
+  "lse.cnse.verbo-vivir": {
+    "x": 0.485,
+    "y": 0.524,
+    "scale": 2.321
+  },
+  "lse.letra.a": {
+    "x": 0.329,
+    "y": 0.587,
+    "scale": 3.2
+  },
+  "lse.letra.b": {
+    "x": 0.493,
+    "y": 0.621,
+    "scale": 2.594
+  },
+  "lse.letra.c": {
+    "x": 0.288,
+    "y": 0.485,
+    "scale": 3.2
+  },
+  "lse.letra.ch": {
+    "x": 0.479,
+    "y": 0.689,
+    "scale": 2.83
+  },
+  "lse.letra.d": {
+    "x": 0.297,
+    "y": 0.478,
+    "scale": 2.637
+  },
+  "lse.letra.e": {
+    "x": 0.227,
+    "y": 0.398,
+    "scale": 3.2
+  },
+  "lse.letra.enie": {
+    "x": 0.288,
+    "y": 0.478,
+    "scale": 2.897
+  },
+  "lse.letra.f": {
+    "x": 0.24,
+    "y": 0.37,
+    "scale": 2.544
+  },
+  "lse.letra.g": {
+    "x": 0.304,
+    "y": 0.613,
+    "scale": 2.677
+  },
+  "lse.letra.h": {
+    "x": 0.336,
+    "y": 0.465,
+    "scale": 2.749
+  },
+  "lse.letra.i": {
+    "x": 0.305,
+    "y": 0.598,
+    "scale": 3.185
+  },
+  "lse.letra.j": {
+    "x": 0.156,
+    "y": 0.452,
+    "scale": 3.2
+  },
+  "lse.letra.k": {
+    "x": 0.489,
+    "y": 0.662,
+    "scale": 2.877
+  },
+  "lse.letra.l": {
+    "x": 0.235,
+    "y": 0.54,
+    "scale": 2.761
+  },
+  "lse.letra.ll": {
+    "x": 0.236,
+    "y": 0.539,
+    "scale": 2.752
+  },
+  "lse.letra.m": {
+    "x": 0.219,
+    "y": 0.588,
+    "scale": 2.379
+  },
+  "lse.letra.n": {
+    "x": 0.288,
+    "y": 0.478,
+    "scale": 2.92
+  },
+  "lse.letra.o": {
+    "x": 0.198,
+    "y": 0.442,
+    "scale": 2.842
+  },
+  "lse.letra.p": {
+    "x": 0.21,
+    "y": 0.48,
+    "scale": 2.564
+  },
+  "lse.letra.q": {
+    "x": 0.137,
+    "y": 0.673,
+    "scale": 3.2
+  },
+  "lse.letra.r": {
+    "x": 0.304,
+    "y": 0.505,
+    "scale": 2.838
+  },
+  "lse.letra.rr": {
+    "x": 0.304,
+    "y": 0.504,
+    "scale": 2.812
+  },
+  "lse.letra.s": {
+    "x": 0.299,
+    "y": 0.452,
+    "scale": 2.297
+  },
+  "lse.letra.t": {
+    "x": 0.186,
+    "y": 0.441,
+    "scale": 2.611
+  },
+  "lse.letra.u": {
+    "x": 0.162,
+    "y": 0.523,
+    "scale": 2.633
+  },
+  "lse.letra.v": {
+    "x": 0.182,
+    "y": 0.506,
+    "scale": 2.417
+  },
+  "lse.letra.w": {
+    "x": 0.112,
+    "y": 0.562,
+    "scale": 2.487
+  },
+  "lse.letra.x": {
+    "x": 0.215,
+    "y": 0.626,
+    "scale": 3.2
+  },
+  "lse.letra.y": {
+    "x": 0.201,
+    "y": 0.534,
+    "scale": 3.2
+  },
+  "lse.letra.z": {
+    "x": 0.428,
+    "y": 0.65,
+    "scale": 3.2
+  }
+}
