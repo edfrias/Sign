@@ -1,13 +1,14 @@
-import { Link, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
 import { languages } from '../content/loader';
 import { useLanguage } from '../state/LanguageContext';
 import { nextLesson, reviewMinutes } from '../progress/today';
-import { CameraIcon, ReviewIcon } from '../components/icons';
+import { CameraIcon, HandIcon, ReviewIcon } from '../components/icons';
 import { HandZoom } from '../components/HandZoom';
 import { GoalRing, StreakChip } from '../components/GoalRing';
-import { useDailyProgress, useGoal, useWelcomed } from '../progress/useStudy';
+import { markWelcomed, useDailyProgress, useGoal, useWelcomed } from '../progress/useStudy';
 
 /** Hoy: la portada. Una acción principal (seguir con la lección) y, al lado, repaso y cámara. */
 export function TodayPage() {
@@ -24,9 +25,9 @@ export function TodayPage() {
   const [goal] = useGoal();
   const daily = useDailyProgress(goal);
   const welcomed = useWelcomed();
-
-  // Primera vez (sin progreso guardado): elegir lengua y ritmo antes de nada
-  if (welcomed === false) return <Navigate to="/bienvenida" replace />;
+  const [introDismissed, setIntroDismissed] = useState(false);
+  // Primera vez (sin progreso guardado): la app se ve entera y, arriba, la invitación a configurarla
+  const showIntro = welcomed === false && !introDismissed;
 
   return (
     <>
@@ -43,6 +44,15 @@ export function TodayPage() {
           </select>
         </label>
       </header>
+
+      {showIntro && (
+        <StartIntro
+          onDismiss={() => {
+            markWelcomed();
+            setIntroDismissed(true);
+          }}
+        />
+      )}
 
       {daily && (
         <section className="goal" aria-labelledby="hoy-meta">
@@ -92,6 +102,26 @@ export function TodayPage() {
         )}
       </div>
     </>
+  );
+}
+
+/** Primera visita: invita a elegir lengua y ritmo sin cerrar el paso al resto de la app. */
+function StartIntro({ onDismiss }: { onDismiss: () => void }) {
+  return (
+    <section className="intro" aria-labelledby="hoy-intro">
+      <span className="intro-icon" aria-hidden="true"><HandIcon /></span>
+      <div className="intro-body">
+        <h2 id="hoy-intro" className="intro-title">Aprende lengua de signos a tu ritmo</h2>
+        <p className="muted">
+          Elige la lengua y cuánto tiempo al día, y empieza por el alfabeto. Sin cuenta: tu progreso vive en este
+          dispositivo.
+        </p>
+      </div>
+      <div className="intro-actions">
+        <Link to="/bienvenida" className="button primary">Elegir lengua y ritmo</Link>
+        <button type="button" className="intro-dismiss" onClick={onDismiss}>Ahora no</button>
+      </div>
+    </section>
   );
 }
 

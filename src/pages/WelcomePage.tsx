@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getContent, languages } from '../content/loader';
 import { languageSummary } from '../content/summary';
 import { useLanguage } from '../state/LanguageContext';
@@ -7,7 +7,7 @@ import { markWelcomed, useGoal } from '../progress/useStudy';
 import { GoalChoice } from '../components/GoalChoice';
 import { isAlphabetUnit } from '../components/UnitRow';
 
-/** Primera vez: elegir lengua y ritmo diario, y empezar por la primera lección. Sin cuenta. */
+/** Empezar: elegir lengua y ritmo diario, y entrar en la primera lección. Se llega desde Hoy; sin cuenta. */
 export function WelcomePage() {
   const { lang, setLang } = useLanguage();
   const [goal, setGoal] = useGoal();
@@ -29,7 +29,7 @@ export function WelcomePage() {
     <section className="welcome">
       <header className="welcome-head">
         <img src="/icon.svg" alt="" width={56} height={56} />
-        <h1>Aprende lengua de signos a tu ritmo</h1>
+        <h1>Elige lengua y ritmo</h1>
         <p className="muted">
           Lecciones cortas, repaso para no olvidar y práctica del alfabeto con la cámara. Sin cuenta: tu progreso
           vive en este dispositivo.
@@ -65,17 +65,6 @@ export function WelcomePage() {
             {startsWithAlphabet ? 'Empezar con el alfabeto' : 'Empezar la primera lección'}
           </button>
         )}
-        <Link
-          to="/"
-          replace
-          className="welcome-skip"
-          onClick={() => {
-            setLang(chosen);
-            markWelcomed();
-          }}
-        >
-          Ver la app primero
-        </Link>
       </div>
     </section>
   );

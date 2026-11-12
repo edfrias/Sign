@@ -53,8 +53,6 @@ export function App() {
         {/* La lección pinta su propia barra: progreso junto al ✕, que vuelve a su unidad */}
         <Route element={<FocusLayout />}>
           <Route path="/leccion/:lessonId" element={<LessonPage />} />
-          {/* Primera vez: sin pestañas ni ✕, una sola decisión */}
-          <Route path="/bienvenida" element={<WelcomePage />} />
         </Route>
         <Route element={<FocusLayout exitTo="/aprender" exitLabel="Salir a Aprender" />}>
           <Route path="/quiz/:lessonId" element={<QuizPage />} />
@@ -62,6 +60,8 @@ export function App() {
         </Route>
         <Route element={<FocusLayout exitTo="/" exitLabel="Salir a Hoy" />}>
           <Route path="/repaso" element={<QuizPage />} />
+          {/* Empezar (desde la invitación de Hoy): elegir lengua y ritmo, con ✕ para volver */}
+          <Route path="/bienvenida" element={<WelcomePage />} />
         </Route>
       </Routes>
     </>

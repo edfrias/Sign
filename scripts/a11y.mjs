@@ -18,7 +18,9 @@ const REPORT_DIR = new URL('../a11y-report/', import.meta.url);
 const MOBILE = { width: 375, height: 812 };
 const PAGES = [
   // Primero: `firstRun` borra la marca de bienvenida vista; el resto de pantallas la tienen puesta
-  { name: 'Bienvenida (primera vez)', path: '/', firstRun: true, ready: 'text=¿Qué lengua quieres aprender?' },
+  { name: 'Hoy (primera vez)', path: '/', firstRun: true, ready: 'text=Elegir lengua y ritmo' },
+  { name: 'Hoy (primera vez, móvil)', path: '/', firstRun: true, viewport: MOBILE, ready: 'text=Elegir lengua y ritmo' },
+  { name: 'Bienvenida', path: '/bienvenida', firstRun: true },
   { name: 'Bienvenida (móvil)', path: '/bienvenida', firstRun: true, viewport: MOBILE },
   { name: 'Hoy', path: '/' },
   { name: 'Hoy (móvil)', path: '/', viewport: MOBILE },
@@ -174,7 +176,7 @@ async function main() {
       for (const p of pages) {
         const page = await context.newPage();
         if (p.viewport) await page.setViewportSize(p.viewport);
-        // Sin progreso, Hoy lleva a la bienvenida: salvo en esas pantallas, se da por vista
+        // Sin progreso, Hoy muestra la invitación a empezar: salvo en esas pantallas, se da por vista
         await page.addInitScript(
           p.firstRun ? "localStorage.removeItem('sign.welcomed')" : "localStorage.setItem('sign.welcomed', '1')",
         );

@@ -201,7 +201,24 @@ main:focus { outline: none; }
 .welcome .choice-list > p { margin: 4px 0 0; }
 .welcome-actions { display: grid; gap: 8px; justify-items: center; }
 .welcome-start { width: 100%; min-height: 52px; font-size: 1.0625rem; }
-.welcome-skip { display: inline-grid; place-items: center; min-height: 44px; color: var(--accent); font-weight: 600; }
+
+/* Primera visita en Hoy: invitación a elegir lengua y ritmo, descartable */
+.intro {
+  display: grid; grid-template-columns: auto 1fr; gap: 12px 16px; align-items: start; margin-bottom: 12px; padding: 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+}
+.intro-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius); background: var(--accent-soft); color: var(--accent); }
+.intro-icon .icon { width: 28px; height: 28px; }
+.intro-body { display: grid; gap: 4px; min-width: 0; }
+.intro-body p { margin: 0; max-width: 60ch; }
+.intro-title { margin: 0; font-size: 1.25rem; line-height: 1.75rem; text-wrap: balance; }
+.intro-actions { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.intro-actions .button { min-height: 44px; }
+.intro-dismiss {
+  min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer;
+}
+.intro-dismiss:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 479px) { .intro-actions { grid-column: 1 / -1; } }
 
 /* «Continúa»: la acción principal de la portada */
 .continue {

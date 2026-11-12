@@ -148,7 +148,7 @@ sessions run a study clock: every 15 s it credits the elapsed time if the tab is
 screen was used in the last 90 s (camera practice is hands-free, so it only needs the session
 running); at most 30 s per tick, so a suspended laptop adds nothing. The goal is 5, 10 or 15 minutes
 (`sign.goal`); the streak is the run of consecutive days that met it, and today only breaks it when
-the day ends. First run: with no progress and no `sign.welcomed`, Hoy redirects to `/bienvenida`.
+the day ends. First run: with no progress and no `sign.welcomed`, Hoy shows a dismissible invitation at the top that opens `/bienvenida` (language + daily goal); the app is never blocked behind it.
 
 **Backup.** Everything lives only in this browser, so «Tú» offers «Descargar copia» /
 «Importar copia» (`src/db/backup.ts`, `src/components/BackupPanel.tsx`). The copy is a versioned JSON
