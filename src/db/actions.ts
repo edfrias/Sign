@@ -1,6 +1,7 @@
 import { db } from './db';
 import { newReview, review, type Quality } from '../srs/sm2';
 import { mergeBackup, type BackupData } from './backup';
+import { dayKey } from '../progress/activity';
 
 /** Marca la lección como hecha y mete sus signos en la cola de repaso. */
 export async function completeLesson(lang: string, lessonId: string, signIds: string[]) {
@@ -40,18 +41,34 @@ export async function clearTemplates(signId?: string) {
   else await db.templates.clear();
 }
 
+/** Suma tiempo de estudio al día de hoy. */
+export async function addStudySeconds(seconds: number, now = Date.now()) {
+  if (seconds <= 0) return;
+  const day = dayKey(now);
+  await db.transaction('rw', db.activity, async () => {
+    const current = await db.activity.get(day);
+    await db.activity.put({ day, seconds: (current?.seconds ?? 0) + seconds });
+  });
+}
+
 /** Todo el progreso de este navegador, listo para guardarlo como copia. */
 export async function readAllProgress(): Promise<BackupData> {
-  const [progress, reviews, templates] = await Promise.all([db.progress.toArray(), db.reviews.toArray(), db.templates.toArray()]);
-  return { progress, reviews, templates };
+  const [progress, reviews, templates, activity] = await Promise.all([
+    db.progress.toArray(),
+    db.reviews.toArray(),
+    db.templates.toArray(),
+    db.activity.toArray(),
+  ]);
+  return { progress, reviews, templates, activity };
 }
 
 /** Combina una copia con lo que hay en este navegador, en una sola transacción. */
 export async function importProgress(incoming: BackupData) {
-  await db.transaction('rw', db.progress, db.reviews, db.templates, async () => {
+  await db.transaction('rw', [db.progress, db.reviews, db.templates, db.activity], async () => {
     const merged = mergeBackup(await readAllProgress(), incoming);
     await db.progress.bulkPut(merged.progress);
     await db.reviews.bulkPut(merged.reviews);
+    await db.activity.bulkPut(merged.activity ?? []);
     await db.templates.clear();
     await db.templates.bulkAdd(merged.templates.map(({ signId, vector, createdAt }) => ({ signId, vector, createdAt })));
   });

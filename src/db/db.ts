@@ -1,5 +1,6 @@
 import Dexie, { type Table } from 'dexie';
 import type { ReviewState } from '../srs/sm2';
+import type { DayActivity } from '../progress/activity';
 
 export interface LessonProgress {
   lang: string;
@@ -18,6 +19,7 @@ class SignDB extends Dexie {
   progress!: Table<LessonProgress, [string, string]>;
   reviews!: Table<ReviewState, string>;
   templates!: Table<StoredTemplate, number>;
+  activity!: Table<DayActivity, string>;
 
   constructor() {
     super('sign');
@@ -26,6 +28,8 @@ class SignDB extends Dexie {
       reviews: 'signId, lang, due',
       templates: '++id, signId',
     });
+    // v2: tiempo de estudio por día (meta diaria y racha)
+    this.version(2).stores({ activity: 'day' });
   }
 }
 

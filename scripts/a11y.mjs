@@ -13,27 +13,128 @@ import { AxeBuilder } from '@axe-core/playwright';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 const REPORT_DIR = new URL('../a11y-report/', import.meta.url);
 
-/** Pantallas y estados a revisar. `prepare` deja la página en el estado que interesa. */
+/** Pantallas y estados a revisar. `prepare` deja la página en el estado que interesa;
+ *  `viewport` la mide en otro tamaño (móvil: pestañas abajo en lugar de barra lateral). */
+const MOBILE = { width: 375, height: 812 };
 const PAGES = [
-  { name: 'Inicio', path: '/' },
+  // Primero: `firstRun` borra la marca de bienvenida vista; el resto de pantallas la tienen puesta
+  { name: 'Hoy (primera vez)', path: '/', firstRun: true, ready: 'text=Elegir lengua y ritmo' },
+  { name: 'Hoy (primera vez, móvil)', path: '/', firstRun: true, viewport: MOBILE, ready: 'text=Elegir lengua y ritmo' },
+  { name: 'Bienvenida', path: '/bienvenida', firstRun: true },
+  { name: 'Bienvenida (móvil)', path: '/bienvenida', firstRun: true, viewport: MOBILE },
+  { name: 'Hoy', path: '/' },
+  { name: 'Hoy (móvil)', path: '/', viewport: MOBILE },
+  { name: 'Aprender', path: '/aprender' },
+  { name: 'Aprender (móvil)', path: '/aprender', viewport: MOBILE },
+  { name: 'Alfabeto', path: '/aprender/alfabeto' },
+  {
+    name: 'Alfabeto (filtro, móvil)',
+    path: '/aprender/alfabeto',
+    viewport: MOBILE,
+    prepare: (page) => page.getByRole('button', { name: 'Con movimiento' }).click(),
+  },
+  { name: 'Unidad', path: '/aprender/cnse-familia' },
+  { name: 'Unidad inexistente', path: '/aprender/no-existe' },
+  {
+    name: 'Lección (solo la mano)',
+    path: '/leccion/alfabeto-1',
+    prepare: (page) => page.getByRole('button', { name: 'Solo la mano' }).click(),
+  },
+  { name: 'Repaso de unidad', path: '/quiz/unidad/alfabeto' },
+  { name: 'Tú', path: '/tu' },
+  { name: 'Tú (móvil)', path: '/tu', viewport: MOBILE },
   { name: 'Lección', path: '/leccion/alfabeto-1' },
+  { name: 'Lección (móvil)', path: '/leccion/alfabeto-1', viewport: MOBILE },
   { name: 'Lección de vocabulario', path: '/leccion/cnse-saludos-y-cortesia-1' },
   { name: 'Lección inexistente', path: '/leccion/no-existe' },
-  { name: 'Quiz (pregunta)', path: '/quiz/alfabeto-1' },
+  { name: 'Quiz «reconocer»', path: '/quiz/alfabeto-1', init: fixedRandom(0.9) },
   {
-    name: 'Quiz (respondido)',
+    name: 'Quiz respondido',
     path: '/quiz/alfabeto-1',
+    init: fixedRandom(0.9),
     prepare: async (page) => {
       await page.locator('.option').first().click();
-      await page.getByText('Siguiente').waitFor();
+      await page.getByRole('button', { name: 'Continuar' }).waitFor();
     },
+  },
+  { name: 'Quiz «recordar»', path: '/quiz/cnse-saludos-y-cortesia-1', init: fixedRandom(0.1), viewport: MOBILE },
+  {
+    name: 'Quiz fallado con «Ver signo» (móvil)',
+    path: '/quiz/cnse-saludos-y-cortesia-1',
+    init: fixedRandom(0.1),
+    viewport: MOBILE,
+    prepare: answerWrongAndShowSign,
   },
   { name: 'Repaso vacío', path: '/repaso' },
   { name: 'Diccionario', path: '/diccionario' },
+  {
+    name: 'Diccionario (categoría y búsqueda, móvil)',
+    path: '/diccionario',
+    viewport: MOBILE,
+    prepare: async (page) => {
+      await page.getByRole('button', { name: 'Animales' }).click();
+      await page.getByRole('searchbox', { name: 'Buscar palabra' }).fill('ga');
+    },
+  },
+  {
+    name: 'Diccionario sin resultados',
+    path: '/diccionario',
+    prepare: (page) => page.getByRole('searchbox', { name: 'Buscar palabra' }).fill('zzzz'),
+  },
   { name: 'Práctica con cámara', path: '/practica', ready: 'role=button[name=/^Empezar práctica/]' },
   { name: 'Créditos', path: '/creditos', prepare: (page) => page.locator('details summary').first().click() },
   { name: 'Página no encontrada', path: '/no-existe' },
+  // Al final: deja progreso guardado en el contexto y cambiaría las pantallas «vacías» de arriba
+  { name: 'Hoy (con progreso y repaso)', path: '/', viewport: MOBILE, prepare: seedProgress },
 ];
+
+/** Math.random fijo: con 0,1 las preguntas con foto son «recordar»; con 0,9, «reconocer». */
+function fixedRandom(value) {
+  return `Math.random = () => ${value};`;
+}
+
+/** Responde opciones distintas en preguntas sucesivas hasta fallar una, y abre «Ver signo». */
+async function answerWrongAndShowSign(page) {
+  for (let i = 0; i < 8; i++) {
+    const options = page.locator('.option');
+    await options.nth(i % (await options.count())).click();
+    const verSigno = page.getByRole('button', { name: 'Ver signo' });
+    if (await verSigno.isVisible()) {
+      await verSigno.click();
+      await page.getByRole('button', { name: 'Ocultar signo' }).waitFor();
+      return;
+    }
+    await page.getByRole('button', { name: 'Continuar' }).click();
+  }
+  throw new Error('No se consiguió fallar ninguna pregunta');
+}
+
+/** Una lección hecha, seis signos pendientes de repaso y 7 min de estudio hoy, escritos en IndexedDB. */
+async function seedProgress(page) {
+  await page.evaluate(
+    () =>
+      new Promise((resolve, reject) => {
+        const req = indexedDB.open('sign');
+        req.onerror = reject;
+        req.onsuccess = () => {
+          const tx = req.result.transaction(['progress', 'reviews', 'activity'], 'readwrite');
+          const d = new Date();
+          const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+          tx.objectStore('activity').put({ day, seconds: 7 * 60 }); // 7 de 10 min: el anillo a medias
+          tx.objectStore('progress').put({ lang: 'lse', lessonId: 'alfabeto-1', completedAt: Date.now() });
+          for (const id of ['lse-a', 'lse-b', 'lse-c', 'lse-ch', 'lse-d', 'lse-e']) {
+            tx.objectStore('reviews').put({ signId: id, lang: 'lse', ease: 2.5, interval: 0, repetitions: 0, due: Date.now() - 1000 });
+          }
+          tx.oncomplete = () => resolve();
+          tx.onerror = reject;
+        };
+      }),
+  );
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.getByText('Seguir aprendiendo').waitFor();
+  await page.getByText('6 signos pendientes').waitFor();
+  await page.getByText('7 de 10 min').waitFor();
+}
 
 const SCHEMES = ['light', 'dark'];
 
@@ -74,6 +175,12 @@ async function main() {
       const context = await browser.newContext({ colorScheme: scheme, locale: 'es-ES', viewport: { width: 1280, height: 900 } });
       for (const p of pages) {
         const page = await context.newPage();
+        if (p.viewport) await page.setViewportSize(p.viewport);
+        // Sin progreso, Hoy muestra la invitación a empezar: salvo en esas pantallas, se da por vista
+        await page.addInitScript(
+          p.firstRun ? "localStorage.removeItem('sign.welcomed')" : "localStorage.setItem('sign.welcomed', '1')",
+        );
+        if (p.init) await page.addInitScript(p.init);
         await page.goto(base + p.path, { waitUntil: 'networkidle' });
         if (p.ready) await page.locator(p.ready).waitFor();
         await page.locator('main').waitFor();

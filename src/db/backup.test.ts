@@ -63,3 +63,29 @@ describe('copia de seguridad', () => {
     );
   });
 });
+
+describe('copia de seguridad: tiempo de estudio', () => {
+  it('una copia anterior a la meta diaria (sin «activity») sigue siendo válida', () => {
+    const old = '{"app":"sign","version":1,"exportedAt":1,"progress":[],"reviews":[],"templates":[]}';
+    expect(parseBackup(old).activity).toEqual([]);
+  });
+
+  it('rechaza días con formato raro', () => {
+    const bad = '{"app":"sign","version":1,"progress":[],"reviews":[],"templates":[],"activity":[{"day":"ayer","seconds":5}]}';
+    expect(() => parseBackup(bad)).toThrow('dañada');
+  });
+
+  it('al combinar, de cada día se queda el mayor tiempo (no la suma)', () => {
+    const merged = mergeBackup(
+      { ...empty, activity: [{ day: '2026-11-10', seconds: 300 }, { day: '2026-11-11', seconds: 900 }] },
+      { ...empty, activity: [{ day: '2026-11-10', seconds: 600 }, { day: '2026-11-09', seconds: 60 }] },
+    );
+    expect(new Map(merged.activity?.map((a) => [a.day, a.seconds]))).toEqual(
+      new Map([['2026-11-09', 60], ['2026-11-10', 600], ['2026-11-11', 900]]),
+    );
+  });
+
+  it('el resumen menciona los días de estudio si los hay', () => {
+    expect(describeBackup({ ...empty, activity: [{ day: '2026-11-11', seconds: 60 }] })).toContain('1 día de estudio');
+  });
+});

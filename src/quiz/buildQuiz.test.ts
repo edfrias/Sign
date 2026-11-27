@@ -51,3 +51,31 @@ describe('buildQuiz', () => {
     expect(q!.options).toHaveLength(2);
   });
 });
+
+describe('preguntas «recordar»', () => {
+  const photo = (id: string, category = 'x'): Sign => ({ ...sign(id, category), media: { image: `/m/${id}.webp` } });
+  const photos = ['a', 'b', 'c', 'd', 'e'].map((id) => photo(id));
+
+  it('con recallShare 1 y fotos suficientes, todas son «recordar» y todas las opciones tienen foto', () => {
+    for (const q of buildQuiz(photos, photos, { recallShare: 1 })) {
+      expect(q.kind).toBe('recall');
+      expect(q.options).toHaveLength(4);
+      expect(q.options.every((o) => o.media?.image)).toBe(true);
+    }
+  });
+
+  it('sin foto, la pregunta es siempre «reconocer»', () => {
+    for (const q of buildQuiz(pool, pool, { recallShare: 1 })) expect(q.kind).toBe('recognize');
+  });
+
+  it('si no hay tres distractores con foto, cae a «reconocer» con todas las opciones', () => {
+    const mixed = [photo('a'), photo('b'), sign('c', 'x'), sign('d', 'x'), sign('e', 'x')];
+    const [q] = buildQuiz([mixed[0]!], mixed, { recallShare: 1 });
+    expect(q!.kind).toBe('recognize');
+    expect(q!.options).toHaveLength(4);
+  });
+
+  it('con recallShare 0 no hay ninguna', () => {
+    for (const q of buildQuiz(photos, photos, { recallShare: 0 })) expect(q.kind).toBe('recognize');
+  });
+});
